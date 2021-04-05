@@ -1,0 +1,286 @@
+.min-100 {
+	min-height: 100vh;
+}
+.loader-spinner {
+    position: initial !important;
+    width: 0;
+}
+.login-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+	img {
+		margin-top: 60px;
+	}
+	.form-outer {
+		width: 100%;
+		margin: auto;
+		margin-top: 15%;
+		form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			.btn {
+				width: 83%;
+				margin-left: auto;
+				background: #005e92 !important;
+				text-transform: uppercase;
+				margin-top: 30px;
+				padding: 10px 30px !important;
+				font-size: 18px !important;
+				font-weight: 500;
+				border-radius: 10px;
+				border-color: #005e92;
+				color: #fff;
+			}
+		}
+	}
+}
+
+.table-row-outer {
+  max-height: calc(100vh - 163px);
+  overflow-y: scroll;
+  .table {
+    thead{
+      th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #eceeef;
+        white-space: nowrap;
+        font-size: 12px;
+    }
+    }
+  }
+}
+
+
+.sidebar {
+	width: 25% !important;
+	float: left;
+}
+
+// .dashboard-container {
+// 	width: 75% !important;
+// }
+
+.sidemenu ul li {
+	list-style: none;
+}
+
+.sidebar-logo {
+	text-align: center;
+}
+
+// .temp_button {
+// 	float: right !important;
+// 	margin-right: -35% !important;
+// 	margin-top: 35px !important;
+// }
+
+// .dealer_name {
+// 	float: right;
+// }
+
+.dashboard-container .buttons-row .btn {
+	background: #005e92 !important;
+	border-color: #005e92 !important;
+	border-radius: 0;
+	max-width: 300px;
+	margin-top: 10px;
+	color: white;
+}
+
+// .dealer_name {
+// 	float: right;
+// }
+
+.sidenav {
+	height: 100%;
+  width: 300px;
+	// position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: white;
+	// overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.sidenav a {
+	padding: 6px 6px 6px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+// .main {
+// 	margin-left: 200px;
+// 	/* Same as the width of the sidenav */
+// }
+
+// @media screen and (max-height: 450px) {
+// 	.sidenav {
+// 		padding-top: 15px;
+// 	}
+// 	.sidenav a {
+// 		font-size: 18px;
+// 	}
+// }
+
+// .App {
+// 	text-align: center;
+// }
+
+.form-control {
+	display: inline-block !important;
+}
+
+// .App-logo {
+// 	height: 40vmin;
+// 	pointer-events: none;
+// }
+
+// @media (prefers-reduced-motion: no-preference) {
+// 	.App-logo {
+// 		animation: App-logo-spin infinite 20s linear;
+// 	}
+// }
+
+// .App-header {
+// 	background-color: #282c34;
+// 	min-height: 100vh;
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	justify-content: center;
+// 	font-size: calc(10px + 2vmin);
+// 	color: white;
+// }
+
+// .App-link {
+// 	color: #61dafb;
+// }
+
+// @keyframes App-logo-spin {
+// 	from {
+// 		transform: rotate(0deg);
+// 	}
+// 	to {
+// 		transform: rotate(360deg);
+// 	}
+// }
+
+// #main-container {
+// 	min-height: 100vh
+// }
+
+#main-container .main-container {
+	min-height: 100vh;
+	display: flex;
+  align-items: self-start;
+}
+
+#main-container .main-container .wrapper form {
+	max-width: 540px;
+	margin: 0 auto;
+	text-align: center
+}
+
+#main-container .main-container .wrapper form img {
+	margin-bottom: 70px;
+}
+
+#main-container .main-container .wrapper form .form-group {
+	text-align: left
+}
+
+// #main-container .main-container .wrapper form .btn{width: 83%; margin-left: 77px; background:#005e92 !important; text-transform:uppercase; margin-top: 30px;     
+//     padding: 10px 30px !important; font-size: 18px !important; font-weight: 500; border-radius: 10px; border-color:#005e92}
+#main-container .main-container .wrapper form label {
+	font-weight: 500
+}
+
+#main-container .main-container .wrapper form input {
+	border: 2px solid #c3b18b;
+}
+
+#main-container .main-container .wrapper form input:focus {
+	border: 2px solid #754d05 !important;
+	box-shadow: none !important
+}
+
+.sidenav {
+	padding-left: 20px;
+}
+
+.sidenav ul.sidemenu li {
+	list-style: none
+}
+
+.sidenav a {
+	font-size: 16px
+}
+
+.sidenav a:hover {
+	color: #202020 !important;
+	text-decoration: none
+}
+
+.main-container .container .row .col {
+	text-align: right
+}
+
+.container.col-md-5 {
+	position: absolute;
+	right: 0;
+	top: 0;
+	max-width: 100% !important;
+}
+
+.buttons-row {
+	background: #eff3f6;
+	padding: 30px;
+}
+
+.sidenav .sidemenu li:marker {
+	display: none !important
+}
+
+.buttons-row .col {
+	// text-align: left !important;
+	font-weight: 500;
+}
+
+// .buttons-row .col:last-child {
+// 	text-align: center !important
+// }
+
+.buttons-row {
+	background: #eff3f6;
+	padding: 20px;
+}
+
+.buttons-row .btn {
+	background: #005e92 !important;
+	border-color: #005e92 !important;
+	border-radius: 0;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.sidemenu li {
+	list-style: none
+}
+
+.sidemenu {
+	padding-left: 0 !important
+}
+
+.sidenav .sidemenu li a {
+	padding-left: 0 !important
+}
