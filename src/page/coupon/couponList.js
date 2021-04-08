@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 // import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import { Button, Container, Row, Col, Table, Input } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router"
-import { getcoupon } from "../store/coupon/couponSlice"
-import { loadingStatus } from "../store/global/globalSlice"
+import { getcoupon } from "../../store/coupon/couponSlice"
+import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
-const Dashboard = (props) => {
+const CouponList = (props) => {
  const [search, setSearch] = useState("")
  const [couponList, setCouponList] = useState([])
   let history = useHistory()
@@ -98,7 +99,11 @@ const Dashboard = (props) => {
                 <td>{ moment(iteam.effective_from_date).format('MM/DD/YYYY')}</td>
                 <td>{ moment(iteam.effective_to_date).format('MM/DD/YYYY')}</td>
                 <td>{iteam.dlrid}</td>
-                <td><FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i></td>
+                <td>
+                    <Link to={`/update-coupon/${iteam?.coupon_code_id}`}>
+                        <FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i>
+                        </Link>
+                </td>
               
               </tr>
 
@@ -117,4 +122,4 @@ const Dashboard = (props) => {
   )
 }
 	
-export default Dashboard
+export default CouponList

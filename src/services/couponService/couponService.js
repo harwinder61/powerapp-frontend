@@ -3,18 +3,31 @@ import axios from 'axios';
 class CouponService {
 	sdk = { auth0Manage: null };
 
-	getCouponList = () => {
-		const url = `${process.env.REACT_APP_API}api/coupon`;
+	getCouponList = (dealGroupID, dealerNumber) => {
+		const url = `${process.env.REACT_APP_API}api/Coupon/GetCurrentCoupons?dealGroupID=${dealGroupID}&dealerNumber=${dealerNumber}`;
 		return axios
-			.post(url)
+			.get(url)
 
 	};
 	
-	addCoupon = ( param) => {
-
+	getCouponById = (coupnCodeID) => {
+		const url = `${process.env.REACT_APP_API}api/Coupon/GetCouponByID?coupnCodeID=${coupnCodeID}`;
 		return axios
-			.post(`${process.env.REACT_APP_API}api/coupon`, param)
+			.get(url)
+
+	};
+	
+
+	addCoupon = ( param) => {
+		return axios
+			.post(`${process.env.REACT_APP_API}api/Coupon/AddCoupon`, param)
 	}
+
+	updateCoupon = ( param) => {
+		return axios
+			.post(`${process.env.REACT_APP_API}api/Coupon/UpdateCoupon`, param)
+	}
+
 
 }
 

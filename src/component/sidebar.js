@@ -21,7 +21,7 @@ import { useHistory } from "react-router"
 				<img alt="logo" src = {sitelogo} />
 			</div>
 			<ul className = "sidemenu">
-				<li><Link to="/dashboard">Membership Types</Link></li>
+				<li><Link to="/member">Membership Types</Link></li>
 				<li><Link to="/members">Members</Link></li>
 				<li><Link to="/offers">Offers,Coupons and Promo</Link></li>
 				<li><Link to="/coupons">Offers,Coupons and Promo History</Link></li>

@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 
 import './App.scss';
 import Routers  from './route.js';
@@ -9,12 +10,21 @@ import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from "redux-persist/integration/react";
+import axios from 'axios';
 
 import { store, persistor } from "./store";
 
 library.add(fab, far, fas);
 
-function App() {
+const App = () => {
+  const token = localStorage.getItem('access_token');
+
+	useEffect(() => {
+		if (token) {
+			axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("access_token")}`
+		}
+	}, [token]);
+
   return (
     <div className="main-container">
       <Provider store={store}>

@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import couponService from '../../services/couponService';
 import { loadingStatus } from '../global/globalSlice';
+import { toast } from 'react-toastify';
 
-export const getcoupon = () => async dispatch => {
+export const getcoupon = (dealGroupID, dealerNumber) => async dispatch => {
 	return couponService
-		.getcoupon()
+		.getCouponList(dealGroupID, dealerNumber)
 		.then(res => {
 			dispatch(loadingStatus(false))
+			dispatch(couponDetailSuccess(null))
 			return dispatch(couponSuccess(res?.data));
 		})
 		.catch(error => {
@@ -15,10 +17,39 @@ export const getcoupon = () => async dispatch => {
 		});
 };
 
+export const getcouponById = (id) => async dispatch => {
+	return couponService
+		.getCouponById(id)
+		.then(res => {
+			dispatch(loadingStatus(false))
+			return dispatch(couponDetailSuccess(res?.data?.Data));
+		})
+		.catch(error => {
+			dispatch(loadingStatus(false))
+			return dispatch(couponDetailError(error));
+		});
+};
+
 export const addCoupon = (param) => async dispatch => {
 
 	return couponService
 		.addCoupon(param)
+		.then(res => {
+			if(!res.data.Status) {
+				toast.error(res.data.Message)
+			} 
+			dispatch(getcoupon())
+		})
+		.catch(error => {
+			dispatch(loadingStatus(false))
+			// return dispatch(userProfileError(error));
+		});
+};
+
+export const updateCoupon = (param) => async dispatch => {
+
+	return couponService
+		.updateCoupon(param)
 		.then(res => {
 			dispatch(getcoupon())
 		})
@@ -28,9 +59,11 @@ export const addCoupon = (param) => async dispatch => {
 		});
 };
 
+
 const initialState = {
 	success: false,
 	coupon: null,
+	couponDetail: null,
 };
 
 const couponSlice = createSlice({
@@ -46,10 +79,18 @@ const couponSlice = createSlice({
 			state.success = false;
 			state.coupon = null;
 		},
+		couponDetailSuccess: (state, action) => {
+			state.success = true;
+			state.couponDetail = action.payload
+		},
+		couponDetailError: (state, action) => {
+			state.success = false;
+			state.couponDetail = null;
+		},
 	},
 	extraReducers: {}
 });
 
-export const {  couponSuccess, couponError } = couponSlice.actions;
+export const {  couponSuccess, couponError, couponDetailSuccess, couponDetailError } = couponSlice.actions;
 
 export default couponSlice.reducer;
