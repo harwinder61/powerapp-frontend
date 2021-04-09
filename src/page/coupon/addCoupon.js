@@ -131,7 +131,7 @@ const AddCoupon = (props) => {
                 <FormGroup row>
                     <Label for="name" sm={2}>* Dealer Group</Label>
                     <Col sm={10}>
-                        <AvField name="dealerGroup"  value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" required />
+                        <AvField name="dealerGroup"  value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
                     </Col>
                 </FormGroup>
 

@@ -77,14 +77,14 @@ const CouponList = (props) => {
          <Table borderless>
           <thead>
             <tr>
-              <th>Member Types</th>
-              <th>Minimum Points</th>
-              <th>Discount Value</th>
-              <th>Discount Unit</th>
-              <th>Points Multiplier</th>
-              <th>Membership   Benefits</th>
-              <th>Created Date</th>
-              <th>Valid   Until</th>
+              <th>Offers/Coupons/Promos</th>
+              <th>Coupon Description</th>
+              <th>Terms and conditions</th>
+              <th>Reward Type</th>
+              <th>AI Recommendation Number</th>
+              <th>Effective From</th>
+              <th>Effective   To</th>
+              <th>Dealer Number</th>
               <th>Action</th>
             </tr>
           </thead>
