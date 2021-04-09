@@ -30,14 +30,17 @@ export const getcouponById = (id) => async dispatch => {
 		});
 };
 
-export const addCoupon = (param) => async dispatch => {
+export const addCoupon = (param, history) => async dispatch => {
 
 	return couponService
 		.addCoupon(param)
 		.then(res => {
 			if(!res.data.Status) {
 				toast.error(res.data.Message)
-			} 
+			} else {
+				toast.info(res.data.Message)
+				history.push("/coupons")
+			}
 			dispatch(getcoupon())
 		})
 		.catch(error => {
@@ -46,11 +49,17 @@ export const addCoupon = (param) => async dispatch => {
 		});
 };
 
-export const updateCoupon = (param) => async dispatch => {
+export const updateCoupon = (param, history) => async dispatch => {
 
 	return couponService
 		.updateCoupon(param)
 		.then(res => {
+			if(!res.data.Status) {
+				toast.error(res.data.Message)
+			} else {
+				toast.info(res.data.Message)
+				history.push("/coupons")
+			}
 			dispatch(getcoupon())
 		})
 		.catch(error => {

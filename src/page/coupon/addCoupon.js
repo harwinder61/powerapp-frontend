@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCoupon, getcouponById, updateCoupon } from "../../store/coupon/couponSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
+import { useHistory } from "react-router"
+
 
 const serviceOrder = [{
     name: "Service Order",
@@ -28,14 +30,13 @@ const serviceOrder = [{
 
 const AddCoupon = (props) => {
     const { match: { params } } = props
+    let history = useHistory()
     const dispatch = useDispatch();
     const loading = useSelector(({ global }) => global.loading);
     const [couponId] = React.useState(params?.id);
     const couponDetail = useSelector(({ coupon }) => coupon.couponDetail);
 
     const handleValidSubmit = (event, values) => {
-        console.log('ssssssssssss', values)
-
         dispatch(loadingStatus(true));
         if(couponId) {
             dispatch(updateCoupon({
@@ -50,7 +51,7 @@ const AddCoupon = (props) => {
                 "DealGroupID": values?.dealerGroup,
                 "DealerNumber": values?.DealerNumber,
                 "image_location": values?.imageLocation
-            }));
+            }, history));
             } else {
             dispatch(addCoupon({
                 "coupon_code": values?.couponCode,
@@ -60,10 +61,10 @@ const AddCoupon = (props) => {
                 "coupon_recommendations": values?.couponRecommedations,
                 "effective_from_date": values?.effectiveFrom,
                 "effective_to_date": values?.effectiveto,
-                "DealGroupID": values?.dealerGroup,
+                "DealGroupID": 1,
                 "DealerNumber": values?.DealerNumber,
                 "image_location": values?.imageLocation
-                }));
+                }, history));
         }
     }
 

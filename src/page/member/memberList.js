@@ -5,32 +5,32 @@ import { Link } from 'react-router-dom';
 import { Button, Container, Row, Col, Table, Input } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router"
-import { getcoupon } from "../../store/coupon/couponSlice"
+import { getmember } from "../../store/member/memberSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
-const CouponList = (props) => {
+const MemberList = (props) => {
  const [search, setSearch] = useState("")
- const [couponList, setCouponList] = useState([])
+ const [memberList, setMemberList] = useState([])
   let history = useHistory()
   const dispatch = useDispatch();
-  const coupon = useSelector(({ coupon }) => coupon.coupon);
+  const member = useSelector(({ member }) => member.member);
 
 	useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getcoupon(1, "DLR0001"));
+    dispatch(getmember(3, "DLR0001"));
 	}, [dispatch]);
 
   useEffect(() => {
-    setCouponList(coupon?.Data?.Items)
-  }, [coupon]);
+    setMemberList(member?.Data?.Items)
+  }, [member]);
 
   const handleSubmit = () => { 
     if(search !== "") {
-      setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(search.toUpperCase())))
+      setMemberList(member?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(search.toUpperCase())))
     } else {
-      setCouponList(coupon?.Data?.Items)
+      setMemberList(member?.Data?.Items)
 
     }
   }
@@ -48,12 +48,12 @@ const CouponList = (props) => {
       <Row >
         <Col>
         
-        Coupon Code
+        Members
         <div>
         <Input name="search" onChange={async (e) => {
             await setSearch(e.target.value)
 
-           setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(e.target.value.toUpperCase())))
+           setMemberList(member?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(e.target.value.toUpperCase())))
         } } placeholder="Search" />
         <Button className="temp_button"
             type="button"
@@ -69,10 +69,10 @@ const CouponList = (props) => {
        
           <Button className="temp_button"
             type="button"
-            onClick={() => history.push("/add-coupon")} 
+            onClick={() => history.push("/add-member")} 
             >
-            Add Coupon
-            </Button>
+            Add Member
+          </Button>
         </Col>
       
       </Row>
@@ -82,37 +82,38 @@ const CouponList = (props) => {
          <Table borderless>
           <thead>
             <tr>
-              <th>Offers/Coupons/Promos</th>
-              <th>Coupon Description</th>
-              <th>Terms and conditions</th>
-              <th>Reward Type</th>
-              <th>AI Recommendation Number</th>
-              <th>Effective From</th>
-              <th>Effective   To</th>
-              <th>Dealer Number</th>
+              <th>Customer ID</th>
+              <th>Customer Name</th>
+              <th>Social Media ID</th>
+              <th>Member Since</th>
+              <th>Membership Level</th>
+              <th>Points YTD</th>
+              <th>Points Lifetime</th>
+              <th>Member Status</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-          {couponList?.map((iteam, index) => (
+          {member.Status ? memberList?.map((iteam, index) => (
               <tr key={index}>
-                <td>{iteam.coupon_code}</td>
-                <td>{iteam.coupon_description}</td>
-                <td>{iteam.coupon_terms_conditions}</td>
-                <td>{iteam.field_description}</td>
-                <td>{iteam.pointsMultiplier}</td>
-                <td>{ moment(iteam.effective_from_date).format('MM/DD/YYYY')}</td>
-                <td>{ moment(iteam.effective_to_date).format('MM/DD/YYYY')}</td>
-                <td>{iteam.dlrid}</td>
+                <td>{iteam.CustomerID}</td>
+                <td>{iteam.Contact_FullName}</td>
+                <td>{iteam.social_media_id}</td>
+                <td>{ moment(iteam.create_date).format('MM/DD/YYYY')}</td>
+                <td>{iteam.membership_type1}</td>
+                <td>{iteam.points_ytd}</td>
+                <td>{iteam.points_lifetime}</td>
+
+                <td>{ iteam.field_description }</td>
                 <td>
-                    <Link to={`/update-coupon/${iteam?.coupon_code_id}`}>
+                    <Link to={`/update-member/${iteam?.member_customer_id}`}>
                         <FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i>
                         </Link>
                 </td>
               
               </tr>
 
-            ))}
+            )) : (<tr><td colSpan={9}>No records found.</td></tr>)}
 
             
           </tbody>
@@ -127,4 +128,4 @@ const CouponList = (props) => {
   )
 }
 	
-export default CouponList
+export default MemberList
