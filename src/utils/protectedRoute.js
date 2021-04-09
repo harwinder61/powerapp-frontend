@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ Component, user, ...rest }) => {
-    const auth = useSelector(({ auth }) => auth);
+  const auth = useSelector(({ auth }) => auth);
   return (
     <Route {...rest} render={
       props => {

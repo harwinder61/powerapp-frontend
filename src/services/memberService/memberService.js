@@ -9,20 +9,20 @@ class MemberService {
 			.get(url)
 
 	};
-	
+
 	getMemberById = (memberCustomerID, dealGroupID) => {
 		const url = `${process.env.REACT_APP_API}api/Coupon/GetMember?memberCustomerID=${memberCustomerID}&dealGroupID=${dealGroupID}`;
 		return axios
 			.get(url)
 
 	};
-	
-	addMember = ( param) => {
+
+	addMember = (param) => {
 		return axios
 			.post(`${process.env.REACT_APP_API}api/Coupon/AddMember`, param)
 	}
 
-	updateMember = ( param) => {
+	updateMember = (param) => {
 		return axios
 			.post(`${process.env.REACT_APP_API}api/Coupon/UpdateMember`, param)
 	}

@@ -35,7 +35,7 @@ export const addCoupon = (param, history) => async dispatch => {
 	return couponService
 		.addCoupon(param)
 		.then(res => {
-			if(!res.data.Status) {
+			if (!res.data.Status) {
 				toast.error(res.data.Message)
 			} else {
 				toast.info(res.data.Message)
@@ -54,7 +54,7 @@ export const updateCoupon = (param, history) => async dispatch => {
 	return couponService
 		.updateCoupon(param)
 		.then(res => {
-			if(!res.data.Status) {
+			if (!res.data.Status) {
 				toast.error(res.data.Message)
 			} else {
 				toast.info(res.data.Message)
@@ -79,7 +79,7 @@ const couponSlice = createSlice({
 	name: 'coupon',
 	initialState,
 	reducers: {
-		
+
 		couponSuccess: (state, action) => {
 			state.success = true;
 			state.coupon = action.payload
@@ -100,6 +100,6 @@ const couponSlice = createSlice({
 	extraReducers: {}
 });
 
-export const {  couponSuccess, couponError, couponDetailSuccess, couponDetailError } = couponSlice.actions;
+export const { couponSuccess, couponError, couponDetailSuccess, couponDetailError } = couponSlice.actions;
 
 export default couponSlice.reducer;

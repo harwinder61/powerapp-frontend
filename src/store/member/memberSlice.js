@@ -37,7 +37,7 @@ export const addMember = (param, history) => async dispatch => {
 	return memberService
 		.addMember(param)
 		.then(res => {
-			if(!res.data.Status) {
+			if (!res.data.Status) {
 				toast.error(res.data.Message)
 			} else {
 				toast.info(res.data.Message)
@@ -56,7 +56,7 @@ export const updateMember = (param, history) => async dispatch => {
 	return memberService
 		.updateMember(param)
 		.then(res => {
-			if(!res.data.Status) {
+			if (!res.data.Status) {
 				toast.error(res.data.Message)
 			} else {
 				toast.info(res.data.Message)
@@ -81,7 +81,7 @@ const memberSlice = createSlice({
 	name: 'member',
 	initialState,
 	reducers: {
-		
+
 		memberSuccess: (state, action) => {
 			state.success = true;
 			state.member = action.payload
@@ -102,6 +102,6 @@ const memberSlice = createSlice({
 	extraReducers: {}
 });
 
-export const {  memberSuccess, memberError, memberDetailSuccess, memberDetailError } = memberSlice.actions;
+export const { memberSuccess, memberError, memberDetailSuccess, memberDetailError } = memberSlice.actions;
 
 export default memberSlice.reducer;

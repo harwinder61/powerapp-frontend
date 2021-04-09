@@ -20,19 +20,19 @@ export const setSession = access_token => {
 
 export const authLogin = (param, history) => async dispatch => {
 	dispatch(loadingStatus(true))
-    return authService
+	return authService
 		.authLogin(param)
 		.then(res => {
-			if(res.data.ExceptionError) {
+			if (res.data.ExceptionError) {
 				setSession(null)
 				toast.error(res.data.Message)
 			} else {
 				setSession(res?.data?.Data?.id_token)
 				dispatch(authEmailSuccess(param?.username))
 				dispatch(authSuccess(res?.data));
-				 history.push("/member")
+				history.push("/members")
 			}
-			
+
 			return dispatch(loadingStatus(false))
 		})
 		.catch(error => {
@@ -62,11 +62,11 @@ const authSlice = createSlice({
 	name: 'auth/register',
 	initialState,
 	reducers: {
-		
+
 		authSuccess: (state, action) => {
 			state.success = true;
 			state.userData = action.payload;
-		
+
 		},
 		authEmailSuccess: (state, action) => {
 			state.email = action.payload
@@ -79,6 +79,6 @@ const authSlice = createSlice({
 	extraReducers: {}
 });
 
-export const {  authSuccess, authError, authEmailSuccess } = authSlice.actions;
+export const { authSuccess, authError, authEmailSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

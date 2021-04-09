@@ -17,7 +17,7 @@ const serviceOrder = [{
 }, {
     name: "Vehicle Purchase",
     value: "VP"
-},{
+}, {
     name: "Affiliate Marketing",
     value: "AF"
 }, {
@@ -38,7 +38,7 @@ const AddCoupon = (props) => {
 
     const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
-        if(couponId) {
+        if (couponId) {
             dispatch(updateCoupon({
                 "coupon_code_id": couponId,
                 "coupon_code": values?.couponCode,
@@ -52,7 +52,7 @@ const AddCoupon = (props) => {
                 "DealerNumber": values?.DealerNumber,
                 "image_location": values?.imageLocation
             }, history));
-            } else {
+        } else {
             dispatch(addCoupon({
                 "coupon_code": values?.couponCode,
                 "coupon_description": values?.couponDescription,
@@ -64,129 +64,129 @@ const AddCoupon = (props) => {
                 "DealGroupID": 1,
                 "DealerNumber": values?.DealerNumber,
                 "image_location": values?.imageLocation
-                }, history));
+            }, history));
         }
     }
 
-      useEffect(() => {
-		if (couponId) {
-            dispatch(getcouponById(Number.parseInt( couponId)));
-		} else {
+    useEffect(() => {
+        if (couponId) {
+            dispatch(getcouponById(Number.parseInt(couponId)));
+        } else {
             dispatch(getcouponById(""));
         }
-	}, [dispatch, couponId]);
+    }, [dispatch, couponId]);
 
 
-    
- return (
-  <>
-  <div className =" dashboard-container w-100">
-		<Container fluid={true}>
-      <Row>
-        <Col className="text-right py-2">Aclaro PowerApp</Col>
-      </Row>
-      <div className ="buttons-row">
-      <Row >
-        <Col>
-        
-        {props?.title}
-        
-        </Col>
-        <Col className=" text-md-right left-col-sec">
-            <div className="dealer_name">Dealer Group : Jones Group </div>
-        </Col>
-      
-      </Row>
-      </div>
-       <Row className="table-row-outer">
-         <Col>
-            <AvForm onValidSubmit={handleValidSubmit} >
-                <FormGroup row>
-                    <Label for="couponCode" sm={2}>* Coupon Code</Label>
-                    <Col sm={10}>
-                        <AvField name="couponCode" value={couponDetail?.coupon_code} type="text" required />
-                    </Col>
-                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Coupon Description</Label>
-                    <Col sm={10}>
-                        <AvField name="couponDescription"  value={couponDetail?.coupon_description} type="text" />
-                    </Col>
-                </FormGroup>
+    return (
+        <>
+            <div className=" dashboard-container w-100">
+                <Container fluid={true}>
+                    <Row>
+                        <Col className="text-right py-2">Aclaro PowerApp</Col>
+                    </Row>
+                    <div className="buttons-row">
+                        <Row >
+                            <Col>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Coupon Recommedations</Label>
-                    <Col sm={10}>
-                        <AvField name="couponRecommedations"  value={couponDetail?.coupon_recommendations} type="text" />
-                    </Col>
-                </FormGroup>
+                                {props?.title}
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Coupon terms conditions</Label>
-                    <Col sm={10}>
-                        <AvField name="couponTermsCondituins"  value={couponDetail?.coupon_terms_conditions} type="text"  />
-                    </Col>
-                </FormGroup>
+                            </Col>
+                            <Col className=" text-md-right left-col-sec">
+                                <div className="dealer_name">Dealer Group : Jones Group </div>
+                            </Col>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>* Dealer Group</Label>
-                    <Col sm={10}>
-                        <AvField name="dealerGroup"  value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
-                    </Col>
-                </FormGroup>
+                        </Row>
+                    </div>
+                    <Row className="table-row-outer">
+                        <Col>
+                            <AvForm onValidSubmit={handleValidSubmit} >
+                                <FormGroup row>
+                                    <Label for="couponCode" sm={2}>* Coupon Code</Label>
+                                    <Col sm={10}>
+                                        <AvField name="couponCode" value={couponDetail?.coupon_code} type="text" required />
+                                    </Col>
+                                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Dealer Number</Label>
-                    <Col sm={10}>
-                        <AvField name="DealerNumber"  value={couponDetail?.dlrid} type="text"  />
-                    </Col>
-                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Coupon Description</Label>
+                                    <Col sm={10}>
+                                        <AvField name="couponDescription" value={couponDetail?.coupon_description} type="text" />
+                                    </Col>
+                                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Effective From</Label>
-                    <Col sm={10}>
-                        <AvField name="effectiveFrom"  value={couponId ? moment(couponDetail?.effective_from_date).format('YYYY-MM-DD') : ''} type="date"  />
-                    </Col>
-                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Coupon Recommedations</Label>
+                                    <Col sm={10}>
+                                        <AvField name="couponRecommedations" value={couponDetail?.coupon_recommendations} type="text" />
+                                    </Col>
+                                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Effective To</Label>
-                    <Col sm={10}>
-                        <AvField name="effectiveto"  value={couponId ? moment(couponDetail?.effective_to_date).format('YYYY-MM-DD') : ''} type="date"  />
-                    </Col>
-                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Coupon terms conditions</Label>
+                                    <Col sm={10}>
+                                        <AvField name="couponTermsCondituins" value={couponDetail?.coupon_terms_conditions} type="text" />
+                                    </Col>
+                                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Image Location</Label>
-                    <Col sm={10}>
-                        <AvField name="imageLocation"  value={couponDetail?.image_location} type="text"  />
-                    </Col>
-                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>* Dealer Group</Label>
+                                    <Col sm={10}>
+                                        <AvField name="dealerGroup" value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
+                                    </Col>
+                                </FormGroup>
 
-                <FormGroup row>
-                    <Label for="name" sm={2}>Reward type</Label>
-                    <Col sm={10}>
-                        <AvField name="rewardType"  value={couponDetail?.reward_type} type="select"  >
-                            {serviceOrder.map((iteam) => (
-                                <option key={iteam.value} value={iteam.value}>{iteam.name}</option>
-                            ))}
-                        </AvField>
-                    </Col>
-                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Dealer Number</Label>
+                                    <Col sm={10}>
+                                        <AvField name="DealerNumber" value={couponDetail?.dlrid} type="text" />
+                                    </Col>
+                                </FormGroup>
 
-                <Button color="primary" disabled={loading}>Submit</Button>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Effective From</Label>
+                                    <Col sm={10}>
+                                        <AvField name="effectiveFrom" value={couponId ? moment(couponDetail?.effective_from_date).format('YYYY-MM-DD') : ''} type="date" />
+                                    </Col>
+                                </FormGroup>
 
-            </AvForm>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Effective To</Label>
+                                    <Col sm={10}>
+                                        <AvField name="effectiveto" value={couponId ? moment(couponDetail?.effective_to_date).format('YYYY-MM-DD') : ''} type="date" />
+                                    </Col>
+                                </FormGroup>
 
-         </Col>
-      
-         </Row>      
-      </Container>
-    </div>
-    
-	</>
-  )
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Image Location</Label>
+                                    <Col sm={10}>
+                                        <AvField name="imageLocation" value={couponDetail?.image_location} type="text" />
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Reward type</Label>
+                                    <Col sm={10}>
+                                        <AvField name="rewardType" value={couponDetail?.reward_type} type="select"  >
+                                            {serviceOrder.map((iteam) => (
+                                                <option key={iteam.value} value={iteam.value}>{iteam.name}</option>
+                                            ))}
+                                        </AvField>
+                                    </Col>
+                                </FormGroup>
+
+                                <Button color="primary" disabled={loading}>Submit</Button>
+
+                            </AvForm>
+
+                        </Col>
+
+                    </Row>
+                </Container>
+            </div>
+
+        </>
+    )
 }
-	
+
 export default AddCoupon

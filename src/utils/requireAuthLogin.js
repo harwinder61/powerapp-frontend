@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
- const RequireAuthLogin = (ComposedComponent) => {
+const RequireAuthLogin = (ComposedComponent) => {
   class RequireAuthLogin extends Component {
     static propTypes = {
       user: PropTypes.any,
@@ -12,8 +12,8 @@ import { PropTypes } from "prop-types";
     componentDidMount() {
       const { auth, history } = this.props;
       if (auth?.userData?.Data?.access_token) {
-        history.push("/member");
-      } 
+        history.push("/members");
+      }
     }
 
     render() {
@@ -26,7 +26,7 @@ import { PropTypes } from "prop-types";
       auth: state.auth,
     };
   };
-  
+
   return connect(mapState, null)(RequireAuthLogin);
 }
 

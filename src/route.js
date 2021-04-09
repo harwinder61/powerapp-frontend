@@ -13,46 +13,46 @@ import { useSelector } from 'react-redux';
 import RequireAuthLogin from "./utils/requireAuthLogin";
 import ProtectedRoute from './utils/protectedRoute';
 
-   const DefaultContainer = () => (
-      <>
-      <SideBar/>
-        <ProtectedRoute exact path="/members"  Component={MemberList}/>
+const DefaultContainer = () => (
+    <>
+        <SideBar />
+        <ProtectedRoute exact path="/members" Component={MemberList} />
 
-        <ProtectedRoute exact path="/add-member" title="Member" Component={AddMemberShip}/>
-        <ProtectedRoute exact path="/update-member/:id" title="Member" Component={AddMemberShip}/>
+        <ProtectedRoute exact path="/add-member" title="Member" Component={AddMemberShip} />
+        <ProtectedRoute exact path="/update-member/:id" title="Member" Component={AddMemberShip} />
 
-        <ProtectedRoute exact path="/coupons" title="Coupon" Component={CouponList}/>
-        <ProtectedRoute exact path="/add-coupon" title="Coupon" Component={AddCoupon}/>
-        <ProtectedRoute exact path="/update-coupon/:id" title="Coupon" Component={AddCoupon}/>
-        {/* <Route exact path="/members" render={(props) => <Dashboard title="Members" {...props} />}/> */}
-        <Route exact path="/offers" render={(props) => <Dashboard title="Offers,Coupons and Promo" {...props} />}/>
-        <Route exact path="/reward" render={(props) => <Dashboard title="Reward Transaction History" {...props} />}/>
-        <Route exact path="/dealer" render={(props) => <Dashboard title="Add Dealer Options (New Options)" {...props} />}/>
-        <Route exact path="/user" render={(props) => <Dashboard title="Users" {...props} />}/>
-     
-      </>
-   )
-   
+        <ProtectedRoute exact path="/coupons" title="Coupon" Component={CouponList} />
+        <ProtectedRoute exact path="/add-coupon" title="Coupon" Component={AddCoupon} />
+        <ProtectedRoute exact path="/update-coupon/:id" title="Coupon" Component={AddCoupon} />
+        <Route exact path="/membership" render={(props) => <Dashboard title="Membership" {...props} />} />
+        <Route exact path="/offers" render={(props) => <Dashboard title="Offers,Coupons and Promo" {...props} />} />
+        <Route exact path="/reward" render={(props) => <Dashboard title="Reward Transaction History" {...props} />} />
+        <Route exact path="/dealer" render={(props) => <Dashboard title="Add Dealer Options (New Options)" {...props} />} />
+        <Route exact path="/user" render={(props) => <Dashboard title="Users" {...props} />} />
 
-const Routers =() =>  {
+    </>
+)
+
+
+const Routers = () => {
     const loading = useSelector(({ global }) => global.loading);
     return (
-            <>
-                <LoadingOverlay
-                    className ="loader-spinner"
-                    active={loading}
-                    spinner
-                    text=''
-                    >
-                </LoadingOverlay>
+        <>
+            <LoadingOverlay
+                className="loader-spinner"
+                active={loading}
+                spinner
+                text=''
+            >
+            </LoadingOverlay>
 
             <Router basename="/powerapp">
-            <Switch>
-                <Route exact path="/" component={RequireAuthLogin(Login)} />
-                <Route exact component={DefaultContainer}/>
-            </Switch>
+                <Switch>
+                    <Route exact path="/" component={RequireAuthLogin(Login)} />
+                    <Route exact component={DefaultContainer} />
+                </Switch>
             </Router>
         </>
-        )
-    }      
+    )
+}
 export default Routers

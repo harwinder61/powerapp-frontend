@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import './App.scss';
-import Routers  from './route.js';
+import Routers from './route.js';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -19,11 +19,11 @@ library.add(fab, far, fas);
 const App = () => {
   const token = localStorage.getItem('access_token');
 
-	useEffect(() => {
-		if (token) {
-			axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("access_token")}`
-		}
-	}, [token]);
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem("access_token")}`
+    }
+  }, [token]);
 
   return (
     <div className="main-container">

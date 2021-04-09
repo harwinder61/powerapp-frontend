@@ -9,8 +9,8 @@ import {
 	PERSIST,
 	PURGE,
 	REGISTER,
-  } from 'redux-persist'
-  import storage from 'redux-persist/lib/storage'
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 //   import { PersistGate } from 'redux-persist/integration/react'
 
 
@@ -22,7 +22,7 @@ const persistConfig = {
 	key: 'root',
 	version: 1,
 	storage,
-  }
+}
 
 
 middlewares.push(logger);
@@ -37,10 +37,10 @@ const store = configureStore({
 			immutableCheck: false,
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-			  },
+			},
 		}).concat(middlewares),
 });
 
 const persistor = persistStore(store);
 
-export { store, persistor};
+export { store, persistor };

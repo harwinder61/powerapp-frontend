@@ -9,21 +9,21 @@ class CouponService {
 			.get(url)
 
 	};
-	
+
 	getCouponById = (coupnCodeID) => {
 		const url = `${process.env.REACT_APP_API}api/Coupon/GetCouponByID?coupnCodeID=${coupnCodeID}`;
 		return axios
 			.get(url)
 
 	};
-	
 
-	addCoupon = ( param) => {
+
+	addCoupon = (param) => {
 		return axios
 			.post(`${process.env.REACT_APP_API}api/Coupon/AddCoupon`, param)
 	}
 
-	updateCoupon = ( param) => {
+	updateCoupon = (param) => {
 		return axios
 			.post(`${process.env.REACT_APP_API}api/Coupon/UpdateCoupon`, param)
 	}
