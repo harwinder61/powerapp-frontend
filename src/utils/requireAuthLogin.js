@@ -12,7 +12,7 @@ const RequireAuthLogin = (ComposedComponent) => {
     componentDidMount() {
       const { auth, history } = this.props;
       if (auth?.userData?.Data?.access_token) {
-        history.push("/members");
+        history.push("/coupons");
       }
     }
 

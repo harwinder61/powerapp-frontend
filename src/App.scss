@@ -5,25 +5,29 @@
     position: initial !important;
     width: 0;
 }
+
+td.left_align {text-align: right;}
+
 .login-wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	flex-direction: column;
 	img {
-		margin-top: 60px;
+		margin-top: 100px;
 	}
 	.form-outer {
 		width: 100%;
 		margin: auto;
-		margin-top: 15%;
+		margin-top: 8%;
+		padding-left: 80px;
 		form {
 			width: 100%;
 			display: flex;
 			flex-direction: column;
 			.btn {
 				width: 83%;
-				margin-left: auto;
+				
 				background: #005e92 !important;
 				text-transform: uppercase;
 				margin-top: 30px;
@@ -33,13 +37,14 @@
 				border-radius: 10px;
 				border-color: #005e92;
 				color: #fff;
+				max-width: 285px;
 			}
 		}
 	}
 }
 
 .table-row-outer {
-  max-height: calc(100vh - 163px);
+  max-height: calc(100vh - 180px);
   overflow-y: scroll;
   .table {
     thead{
@@ -96,7 +101,7 @@
 
 .sidenav {
 	height: 100%;
-  width: 300px;
+     width: 350px;
 	// position: fixed;
 	z-index: 1;
 	top: 0;
@@ -206,7 +211,8 @@
 }
 
 #main-container .main-container .wrapper form input {
-	border: 2px solid #c3b18b;
+	border: 2px solid rgb(119, 77, 3);
+	max-width: 285px;
 }
 
 #main-container .main-container .wrapper form input:focus {
@@ -215,11 +221,12 @@
 }
 
 .sidenav {
-	padding-left: 20px;
+	padding-left: 0px;
 }
 
 .sidenav ul.sidemenu li {
-	list-style: none
+	list-style: none;
+	padding-left: 20px;
 }
 
 .sidenav a {
@@ -283,4 +290,73 @@
 
 .sidenav .sidemenu li a {
 	padding-left: 0 !important
+}
+
+
+ul.sidemenu {
+    min-height: 50vh;
+    display: flex;
+	flex-direction: column;
+	li:last-child {
+		margin-top: auto;
+		display: flex;
+		justify-content: space-between;
+		border-top: 2px solid rgba(0, 0, 0, 0.427);
+		padding-top: 15px;
+		padding-left: 10px;
+		padding-right: 5px;
+		font-size: 13px;
+	}
+}
+
+.button.btn.btn-primary.log-out{
+	font-size: 10px
+}
+
+.serch-outer{
+	display: flex;
+	margin-top: 15px;
+	position: relative;
+	 input {
+    max-width: 290px;
+    padding-left: 30px;
+    margin-right: 24px;
+}
+	button.temp_button.btn.btn-secondary{
+               margin: 0 !important;
+               max-width:100px !important;
+	}
+	button.temp_button.btn.btn-primary{
+	 margin: 0 !important;
+               max-width:100px !important;
+	}
+	i.fa.fa-search {
+    position: absolute;
+    left: 15px;
+    top: 11px;
+   }
+}
+
+button.btn.btn-primary.log-out{
+	font-size:10px;
+}
+.bg-main, .dashboard-container.w-100{
+	background: #eff3f6 !important;
+}
+.table-row-outer.row{
+	 table{
+	 background: #fff;
+	 margin-left: 15px;
+	 }
+}
+.main-header {
+    background: #fff;
+    height: 60px;
+    align-items: center;
+    font-size: 22px;
+}
+.edit-bg {
+    background: #fff;
+	padding-top:15px;
+   
 }

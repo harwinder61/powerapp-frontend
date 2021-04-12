@@ -45,7 +45,6 @@ export const addCoupon = (param, history) => async dispatch => {
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
-			// return dispatch(userProfileError(error));
 		});
 };
 
@@ -64,7 +63,6 @@ export const updateCoupon = (param, history) => async dispatch => {
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
-			// return dispatch(userProfileError(error));
 		});
 };
 

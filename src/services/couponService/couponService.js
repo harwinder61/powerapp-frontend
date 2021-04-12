@@ -4,7 +4,7 @@ class CouponService {
 	sdk = { auth0Manage: null };
 
 	getCouponList = (dealGroupID, dealerNumber) => {
-		const url = `${process.env.REACT_APP_API}api/Coupon/GetCurrentCoupons?dealGroupID=${dealGroupID}&dealerNumber=${dealerNumber}`;
+		const url = `${process.env.REACT_APP_API}api/Coupon/GetCouponsByEffectiiveDates?dealGroupID=${dealGroupID}&dealerNumber=${dealerNumber}`;
 		return axios
 			.get(url)
 

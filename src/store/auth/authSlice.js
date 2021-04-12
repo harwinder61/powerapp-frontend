@@ -22,15 +22,15 @@ export const authLogin = (param, history) => async dispatch => {
 	dispatch(loadingStatus(true))
 	return authService
 		.authLogin(param)
-		.then(res => {
+		.then(async res => {
 			if (res.data.ExceptionError) {
 				setSession(null)
 				toast.error(res.data.Message)
 			} else {
-				setSession(res?.data?.Data?.id_token)
+				await setSession(res?.data?.Data?.id_token)
 				dispatch(authEmailSuccess(param?.username))
 				dispatch(authSuccess(res?.data));
-				history.push("/members")
+				await history.push("/coupons")
 			}
 
 			return dispatch(loadingStatus(false))

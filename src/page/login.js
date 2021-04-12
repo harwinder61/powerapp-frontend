@@ -35,16 +35,20 @@ const Login = () => {
 
 								<Label sm={2} >Email</Label>
 								<Col sm={10}>
-									<AvField required className=" col-md-10 form-control" type="email" name="email" placeholder="Username" />
+									<AvField required className=" col-md-10 form-control" type="email" name="email" placeholder="Username" 
+										validate={{
+											required: { value: true, errorMessage: 'Please enter a email' },
+										}}
+									/>
 								</Col>
-								{/* <Input  required className=" col-md-10 form-control" type="email" name="email" value={inputData.email || ''} id="email" placeholder="Username" /> */}
 							</FormGroup>
 							<FormGroup row>
 								<Label sm={2}  >Password</Label>
 								<Col sm={10}>
-									<AvField required className=" col-md-10 form-control" type="password" name="password" placeholder="Password" />
+									<AvField required className=" col-md-10 form-control" type="password" name="password" placeholder="Password" validate={{
+											required: { value: true, errorMessage: 'Please enter a password' },
+										}}/>
 								</Col>
-								{/* <Input  className=" col-md-10 form-control" type="password" name="password" value={inputData.password  || ''} id="password" placeholder="password" /> */}
 							</FormGroup>
 
 							<div className="row">

@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-// import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormGroup, Label, Button, Container, Row, Col } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-// import { useState } from 'react';
+import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
+import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCoupon, getcouponById, updateCoupon } from "../../store/coupon/couponSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
+import InputText from "../../component/input"
+import InputButton from "../../component/button"
+import Header from "../../component/header";
 
 
 const serviceOrder = [{
@@ -35,8 +36,8 @@ const AddCoupon = (props) => {
     const loading = useSelector(({ global }) => global.loading);
     const [couponId] = React.useState(params?.id);
     const couponDetail = useSelector(({ coupon }) => coupon.couponDetail);
-
-    const handleValidSubmit = (event, values) => {
+	
+	const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
         if (couponId) {
             dispatch(updateCoupon({
@@ -63,7 +64,7 @@ const AddCoupon = (props) => {
                 "effective_to_date": values?.effectiveto,
                 "DealGroupID": 1,
                 "DealerNumber": values?.DealerNumber,
-                "image_location": values?.imageLocation
+				"image_location": values?.imageLocation
             }, history));
         }
     }
@@ -82,100 +83,86 @@ const AddCoupon = (props) => {
         <>
             <div className=" dashboard-container w-100">
                 <Container fluid={true}>
-                    <Row>
-                        <Col className="text-right py-2">Aclaro PowerApp</Col>
-                    </Row>
-                    <div className="buttons-row">
-                        <Row >
-                            <Col>
-
-                                {props?.title}
-
-                            </Col>
-                            <Col className=" text-md-right left-col-sec">
-                                <div className="dealer_name">Dealer Group : Jones Group </div>
-                            </Col>
-
-                        </Row>
-                    </div>
-                    <Row className="table-row-outer">
+					
+					<Header
+                        headerLabel={couponId ? "Edit Coupon" : "Add Coupon"}
+                        enableSearch={false}
+                    />
+                    <Row className="table-row-outer edit-bg ">
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
                                 <FormGroup row>
                                     <Label for="couponCode" sm={2}>* Coupon Code</Label>
                                     <Col sm={10}>
-                                        <AvField name="couponCode" value={couponDetail?.coupon_code} type="text" required />
+                                        <InputText name="couponCode" value={couponDetail?.coupon_code} type="text" required />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon Description</Label>
                                     <Col sm={10}>
-                                        <AvField name="couponDescription" value={couponDetail?.coupon_description} type="text" />
+                                        <InputText name="couponDescription" value={couponDetail?.coupon_description} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon Recommedations</Label>
                                     <Col sm={10}>
-                                        <AvField name="couponRecommedations" value={couponDetail?.coupon_recommendations} type="text" />
+                                        <InputText name="couponRecommedations" value={couponDetail?.coupon_recommendations} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon terms conditions</Label>
                                     <Col sm={10}>
-                                        <AvField name="couponTermsCondituins" value={couponDetail?.coupon_terms_conditions} type="text" />
+                                        <InputText name="couponTermsCondituins" value={couponDetail?.coupon_terms_conditions} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Dealer Group</Label>
                                     <Col sm={10}>
-                                        <AvField name="dealerGroup" value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
+                                        <InputText name="dealerGroup" value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Dealer Number</Label>
                                     <Col sm={10}>
-                                        <AvField name="DealerNumber" value={couponDetail?.dlrid} type="text" />
+                                        <InputText name="DealerNumber" value={couponDetail?.dlrid} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Effective From</Label>
                                     <Col sm={10}>
-                                        <AvField name="effectiveFrom" value={couponId ? moment(couponDetail?.effective_from_date).format('YYYY-MM-DD') : ''} type="date" />
+                                        <InputText name="effectiveFrom" value={couponId ? moment(couponDetail?.effective_from_date).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Effective To</Label>
                                     <Col sm={10}>
-                                        <AvField name="effectiveto" value={couponId ? moment(couponDetail?.effective_to_date).format('YYYY-MM-DD') : ''} type="date" />
+                                        <InputText name="effectiveto" value={couponId ? moment(couponDetail?.effective_to_date).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Image Location</Label>
                                     <Col sm={10}>
-                                        <AvField name="imageLocation" value={couponDetail?.image_location} type="text" />
+                                        <InputText name="imageLocation" value={couponDetail?.image_location} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Reward type</Label>
                                     <Col sm={10}>
-                                        <AvField name="rewardType" value={couponDetail?.reward_type} type="select"  >
-                                            {serviceOrder.map((iteam) => (
-                                                <option key={iteam.value} value={iteam.value}>{iteam.name}</option>
-                                            ))}
-                                        </AvField>
+                                        <InputText name="rewardType" value={couponDetail?.reward_type} type="select" option={serviceOrder} />
+
                                     </Col>
                                 </FormGroup>
 
-                                <Button color="primary" disabled={loading}>Submit</Button>
+                                <InputButton color="primary" disabled={loading} name="Submit" />
 
                             </AvForm>
 

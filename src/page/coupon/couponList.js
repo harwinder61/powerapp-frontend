@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Button, Container, Row, Col, Table, Input } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useHistory } from "react-router"
 import { getcoupon } from "../../store/coupon/couponSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import Header from "../../component/header";
 
+/**
+ * Component for dispaly the coupon list
+ * @param {*} props 
+ * @returns 
+ */
 const CouponList = (props) => {
   const [search, setSearch] = useState("")
   const [couponList, setCouponList] = useState([])
-  let history = useHistory()
   const dispatch = useDispatch();
   const coupon = useSelector(({ coupon }) => coupon.coupon);
+
 
   useEffect(() => {
     dispatch(loadingStatus(true));
@@ -41,42 +45,16 @@ const CouponList = (props) => {
 
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
-          <Row>
-            <Col className="text-right py-2">Aclaro PowerApp</Col>
-          </Row>
-          <div className="buttons-row">
-            <Row >
-              <Col>
-
-                Coupon Code
-        <div>
-                  <Input name="search" onChange={async (e) => {
-                    await setSearch(e.target.value)
-
-                    setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(e.target.value.toUpperCase())))
-                  }} placeholder="Search" />
-                  <Button className="temp_button"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Search
-            </Button>
-                </div>
-              </Col>
-              <Col className=" text-md-right left-col-sec">
-                <div className="dealer_name">Dealer Group : Jones Group
-         </div>
-
-                <Button className="temp_button"
-                  type="button"
-                  onClick={() => history.push("/add-coupon")}
-                >
-                  Add Coupon
-            </Button>
-              </Col>
-
-            </Row>
-          </div>
+          <Header
+            headerLabel="Coupon Codes"
+            path="/add-coupon"
+            pathName="Add Coupon"
+            handleSubmit={handleSubmit}
+            handleSearch={async (e) => {
+              await setSearch(e.target.value)
+              setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(e.target.value.toUpperCase())))
+            }}
+          />
           <Row className="table-row-outer">
             <Col>
               <Table borderless>

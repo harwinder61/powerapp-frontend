@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-// import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormGroup, Label, Button, Container, Row, Col } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
-// import { useState } from 'react';
+import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
+import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getmemberById, addMember, updateMember } from "../../store/member/memberSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
+import InputText from "../../component/input"
+import InputButton from "../../component/button"
+import Header from "../../component/header";
 
 
 const memberStatus = [{
@@ -93,51 +94,31 @@ const AddMemberShip = (props) => {
         <>
             <div className=" dashboard-container w-100">
                 <Container fluid={true}>
-                    <Row>
-                        <Col className="text-right py-2">Aclaro PowerApp</Col>
-                    </Row>
-                    <div className="buttons-row">
-                        <Row >
-                            <Col>
-
-                                {props?.title}
-
-                            </Col>
-                            <Col className=" text-md-right left-col-sec">
-                                <div className="dealer_name">Dealer Group : Jones Group </div>
-                            </Col>
-
-                        </Row>
-                    </div>
+                    <Header
+                        headerLabel="Members"
+                        enableSearch={false}
+                    />
                     <Row className="table-row-outer">
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
                                 <FormGroup row>
                                     <Label for="member_status" sm={2}>Member Status</Label>
                                     <Col sm={10}>
-                                        <AvField name="member_status" value={memberDetail?.member_status} type="select"  >
-                                            {memberStatus.map((iteam) => (
-                                                <option key={iteam.value} value={iteam.value}>{iteam.name}</option>
-                                            ))}
-                                        </AvField>
+                                        <InputText name="member_status" value={memberDetail?.member_status} type="select" option={memberStatus} />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="membership_type_id" sm={2}>* Member Type</Label>
                                     <Col sm={10}>
-                                        <AvField name="membership_type_id" value={memberDetail?.membership_type_id} type="select"  >
-                                            {membershipType.map((iteam) => (
-                                                <option key={iteam.value} value={iteam.value}>{iteam.name}</option>
-                                            ))}
-                                        </AvField>
+                                        <InputText name="membership_type_id" value={memberDetail?.membership_type_id} type="select" option={membershipType} />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="registration_date" sm={2}>Registration Date</Label>
                                     <Col sm={10}>
-                                        <AvField name="registration_date" value={memberId ? moment(memberDetail?.registration_date).format('YYYY-MM-DD') : ''} type="date" />
+                                        <InputText name="registration_date" value={memberId ? moment(memberDetail?.registration_date).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
 
@@ -145,39 +126,39 @@ const AddMemberShip = (props) => {
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Schedule Dealer Number</Label>
                                     <Col sm={10}>
-                                        <AvField name="couponRecommedations" value={memberDetail?.coupon_recommendations} type="text" />
+                                        <InputText name="couponRecommedations" value={memberDetail?.coupon_recommendations} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="social_media_id" sm={2}>Schedule Customer Number</Label>
                                     <Col sm={10}>
-                                        <AvField name="social_media_id" value={memberDetail?.social_media_id} type="text" />
+                                        <InputText name="social_media_id" value={memberDetail?.social_media_id} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="social_media_id" sm={2}>Social Media Id</Label>
                                     <Col sm={10}>
-                                        <AvField name="social_media_id" value={memberDetail?.social_media_id} type="text" />
+                                        <InputText name="social_media_id" value={memberDetail?.social_media_id} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Member Customer Id</Label>
                                     <Col sm={10}>
-                                        <AvField name="dealerGroup" value={memberId ? memberDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
+                                        <InputText name="dealerGroup" value={memberId ? memberDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Dealer Group</Label>
                                     <Col sm={10}>
-                                        <AvField name="dealerGroup" value={memberId ? memberDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
+                                        <InputText name="dealerGroup" value={memberId ? memberDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
                                     </Col>
                                 </FormGroup>
 
-                                <Button color="primary" disabled={loading}>Submit</Button>
+                                <InputButton color="primary" disabled={loading}>Submit</InputButton>
 
                             </AvForm>
 

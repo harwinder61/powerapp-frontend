@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import { Button, Container, Row, Col, Table, Input } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useHistory } from "react-router"
 import { getmember } from "../../store/member/memberSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import Header from "../../component/header";
 
+/**
+ * Component for dispaly the member list
+ * @param {*} props 
+ * @returns 
+ */
 const MemberList = (props) => {
+
+  // const variable decare
   const [search, setSearch] = useState("")
   const [memberList, setMemberList] = useState([])
-  let history = useHistory()
   const dispatch = useDispatch();
   const member = useSelector(({ member }) => member.member);
 
@@ -41,42 +46,17 @@ const MemberList = (props) => {
 
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
-          <Row>
-            <Col className="text-right py-2">Aclaro PowerApp</Col>
-          </Row>
-          <div className="buttons-row">
-            <Row >
-              <Col>
+          <Header
+            headerLabel="Members"
+            path="/add-member"
+            pathName="Add Member"
+            handleSubmit={handleSubmit}
+            handleSearch={async (e) => {
+              await setSearch(e.target.value)
+              setMemberList(member?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(e.target.value.toUpperCase())))
+            }}
+          />
 
-                Members
-        <div>
-                  <Input name="search" onChange={async (e) => {
-                    await setSearch(e.target.value)
-
-                    setMemberList(member?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(e.target.value.toUpperCase())))
-                  }} placeholder="Search" />
-                  <Button className="temp_button"
-                    type="button"
-                    onClick={handleSubmit}
-                  >
-                    Search
-            </Button>
-                </div>
-              </Col>
-              <Col className=" text-md-right left-col-sec">
-                <div className="dealer_name">Dealer Group : Jones Group
-         </div>
-
-                <Button className="temp_button"
-                  type="button"
-                  onClick={() => history.push("/add-member")}
-                >
-                  Add Member
-          </Button>
-              </Col>
-
-            </Row>
-          </div>
           <Row className="table-row-outer">
             <Col>
               <Table borderless>
@@ -94,7 +74,7 @@ const MemberList = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {member.Status ? memberList?.map((iteam, index) => (
+                  {member?.Status ? memberList?.map((iteam, index) => (
                     <tr key={index}>
                       <td>{iteam.CustomerID}</td>
                       <td>{iteam.Contact_FullName}</td>

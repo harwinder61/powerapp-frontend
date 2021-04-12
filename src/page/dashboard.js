@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from "react-router"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Container, Row, Col, Table, Input } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -37,17 +36,17 @@ const Dashboard = (props) => {
   return (
     <>
 
-      <div className=" dashboard-container w-100">
+      <div className=" dashboard-container w-100 bg-main">
         <Container fluid={true}>
           <Row>
-            <Col className="text-right py-2">Aclaro PowerApp</Col>
+            <Col className="text-right py-2 main-header">Aclaro PowerApp</Col>
           </Row>
           <div className="buttons-row">
             <Row >
               <Col>
 
                 {props?.title}
-                <div>
+                <div className="serch-outer">
                   <Input name="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search" />
                   <Button className="temp_button"
                     type="button"

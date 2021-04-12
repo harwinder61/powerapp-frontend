@@ -3,6 +3,7 @@ import coupon from './coupon/couponSlice';
 import global from './global/globalSlice';
 import auth from './auth/authSlice';
 import member from './member/memberSlice';
+import memberShip from './membership/membershipSlice'
 
 const createReducer = asyncReducers => (state, action) => {
 	const combinedReducer = combineReducers({
@@ -10,6 +11,7 @@ const createReducer = asyncReducers => (state, action) => {
 		coupon,
 		global,
 		member,
+		memberShip
 	});
 
 	/*

@@ -4,8 +4,6 @@ import { loadingStatus } from '../global/globalSlice';
 import { toast } from 'react-toastify';
 
 export const getmember = (dealGroupID, dealerNumber) => async dispatch => {
-	console.log("ssssssssssssssssssss")
-
 	return memberService
 		.getMemberList(dealGroupID, dealerNumber)
 		.then(res => {
@@ -47,7 +45,7 @@ export const addMember = (param, history) => async dispatch => {
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
-			// return dispatch(userProfileError(error));
+
 		});
 };
 
@@ -66,7 +64,6 @@ export const updateMember = (param, history) => async dispatch => {
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
-			// return dispatch(userProfileError(error));
 		});
 };
 
