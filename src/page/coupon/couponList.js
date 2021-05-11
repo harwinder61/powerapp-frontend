@@ -7,6 +7,9 @@ import { getcoupon } from "../../store/coupon/couponSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import PaginationComponent from "react-reactstrap-pagination";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Header from "../../component/header";
 
 /**
@@ -15,30 +18,36 @@ import Header from "../../component/header";
  * @returns 
  */
 const CouponList = (props) => {
-  const [search, setSearch] = useState("")
   const [couponList, setCouponList] = useState([])
+  const [selectedPage, setSelectPage] = useState(1)
+  const [searchText, setSearchText] = useState("")
+  const [sortObject, setSortObject] = useState({
+    SortColumn: "EffectiveFromDate",
+    SortDirection: true
+  })
+
   const dispatch = useDispatch();
   const coupon = useSelector(({ coupon }) => coupon.coupon);
+  const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getcoupon(1, "DLR0001"));
-  }, [dispatch]);
+    // console.log('sortObject', sortObject)
+    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, "DLR0001", selectedPage, searchText, sortObject));
+  }, [dispatch, selectedPage, searchText, dealerGroupObject, sortObject]);
 
   useEffect(() => {
     setCouponList(coupon?.Data?.Items)
   }, [coupon]);
 
   const handleSubmit = () => {
-    if (search !== "") {
-      setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(search.toUpperCase())))
-    } else {
-      setCouponList(coupon?.Data?.Items)
-
-    }
+    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, "DLR0001", selectedPage, searchText));
   }
 
+  const handleSelected = (selectedPage) => {
+    setSelectPage(selectedPage)
+  }
 
   return (
     <>
@@ -51,8 +60,8 @@ const CouponList = (props) => {
             pathName="Add Coupon"
             handleSubmit={handleSubmit}
             handleSearch={async (e) => {
-              await setSearch(e.target.value)
-              setCouponList(coupon?.Data?.Items.filter(iteam => iteam.coupon_code.includes(e.target.value.toUpperCase())))
+              await setSelectPage(1)
+              await setSearchText(e.target.value)
             }}
           />
           <Row className="table-row-outer">
@@ -65,36 +74,48 @@ const CouponList = (props) => {
                     <th>Terms and conditions</th>
                     <th>Reward Type</th>
                     <th>AI Recommendation Number</th>
-                    <th>Effective From</th>
-                    <th>Effective   To</th>
+                    <th>Effective From <i onClick={() => setSortObject({
+                      SortColumn: "EffectiveFromDate",
+                      SortDirection: sortObject.SortColumn !== "EffectiveFromDate"  ? true : !sortObject.SortDirection
+                    })} className="fa fa-sort float-right" /></th>
+                    <th>Effective   To <i onClick={() => setSortObject({
+                      SortColumn: "EffectiveToDate",
+                      SortDirection: sortObject.SortColumn !== "EffectiveToDate"  ? true : !sortObject.SortDirection
+                    })} className="fa fa-sort float-right" /></th>
                     <th>Dealer Number</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {couponList?.map((iteam, index) => (
+                {coupon?.Status ? couponList?.map((iteam, index) => (
                     <tr key={index}>
-                      <td>{iteam.coupon_code}</td>
-                      <td>{iteam.coupon_description}</td>
-                      <td>{iteam.coupon_terms_conditions}</td>
-                      <td>{iteam.field_description}</td>
+                      <td>{iteam.CouponCode}</td>
+                      <td>{iteam.CouponDescription}</td>
+                      <td>{iteam.CouponTermsConditions}</td>
+                      <td>{iteam.FieldDescription}</td>
                       <td>{iteam.pointsMultiplier}</td>
-                      <td>{moment(iteam.effective_from_date).format('MM/DD/YYYY')}</td>
-                      <td>{moment(iteam.effective_to_date).format('MM/DD/YYYY')}</td>
-                      <td>{iteam.dlrid}</td>
+                      <td>{moment(iteam.EffectiveFromDate).format('MM/DD/YYYY')}</td>
+                      <td>{moment(iteam.EffectiveToDate).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.DealerId}</td>
                       <td>
-                        <Link to={`/update-coupon/${iteam?.coupon_code_id}`}>
+                        <Link to={`/update-coupon/${iteam?.CouponCodeId}`}>
                           <FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i>
                         </Link>
                       </td>
 
                     </tr>
 
-                  ))}
+                  )): (<tr><td colSpan={9}>No records found.</td></tr>)}
 
 
                 </tbody>
               </Table>
+              <PaginationComponent
+                totalItems={coupon?.Data?.TotalSize}
+                defaultActivePage={selectedPage}
+                pageSize={10}
+                onSelect={handleSelected}
+              />
             </Col>
 
           </Row>

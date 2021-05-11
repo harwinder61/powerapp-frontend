@@ -13,8 +13,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import axios from 'axios';
 
 import { store, persistor } from "./store";
-
+import Interceptor from "./utils/interceptors"
 library.add(fab, far, fas);
+Interceptor.setupInterceptors(store);
 
 const App = () => {
   const token = localStorage.getItem('access_token');

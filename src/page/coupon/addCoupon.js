@@ -4,6 +4,7 @@ import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCoupon, getcouponById, updateCoupon } from "../../store/coupon/couponSlice"
+import { getrewardlist } from "../../store/common/commonSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
@@ -12,23 +13,6 @@ import InputButton from "../../component/button"
 import Header from "../../component/header";
 
 
-const serviceOrder = [{
-    name: "Service Order",
-    value: "SO"
-}, {
-    name: "Vehicle Purchase",
-    value: "VP"
-}, {
-    name: "Affiliate Marketing",
-    value: "AF"
-}, {
-    name: "Vehicle Lease",
-    value: "VL"
-}, {
-    name: "Parts Purchase",
-    value: "PP"
-}]
-
 const AddCoupon = (props) => {
     const { match: { params } } = props
     let history = useHistory()
@@ -36,35 +20,38 @@ const AddCoupon = (props) => {
     const loading = useSelector(({ global }) => global.loading);
     const [couponId] = React.useState(params?.id);
     const couponDetail = useSelector(({ coupon }) => coupon.couponDetail);
-	
-	const handleValidSubmit = (event, values) => {
+    const commonDetail = useSelector(({ common }) => common.commonDetail);
+    const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
+
+
+    const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
         if (couponId) {
             dispatch(updateCoupon({
-                "coupon_code_id": couponId,
-                "coupon_code": values?.couponCode,
-                "coupon_description": values?.couponDescription,
-                "coupon_terms": values?.couponTermsCondituins,
-                "reward_type": values?.rewardType,
-                "coupon_recommendations": values?.couponRecommedations,
-                "effective_from_date": values?.effectiveFrom,
-                "effective_to_date": values?.effectiveto,
-                "DealGroupID": values?.dealerGroup,
-                "DealerNumber": values?.DealerNumber,
-                "image_location": values?.imageLocation
+                "couponCodeId": couponId,
+                "couponCode": values?.couponCode,
+                "couponDescription": values?.couponDescription,
+                "couponTermsConditions": values?.couponTermsCondituins,
+                "rewardType": values?.rewardType,
+                "couponRecommendations": values?.couponRecommedations,
+                "EffectiveFromDate": values?.effectiveFrom,
+                "effectiveToDate": values?.effectiveto,
+                "dealGroupID": dealerGroupObject?.dealerGroupId ? dealerGroupObject?.dealerGroupId :  couponDetail?.DealGroupID,
+                "dealerNumber": 'DLR0001',
+                "imageLocation": values?.imageLocation
             }, history));
         } else {
             dispatch(addCoupon({
-                "coupon_code": values?.couponCode,
-                "coupon_description": values?.couponDescription,
-                "coupon_terms": values?.couponTermsCondituins,
-                "reward_type": values?.rewardType,
-                "coupon_recommendations": values?.couponRecommedations,
-                "effective_from_date": values?.effectiveFrom,
-                "effective_to_date": values?.effectiveto,
-                "DealGroupID": 1,
-                "DealerNumber": values?.DealerNumber,
-				"image_location": values?.imageLocation
+                "couponCode": values?.couponCode,
+                "couponDescription": values?.couponDescription,
+                "couponTermsConditions": values?.couponTermsCondituins,
+                "rewardType": values?.rewardType,
+                "couponRecommendations": values?.couponRecommedations,
+                "EffectiveFromDate": values?.effectiveFrom,
+                "effectiveToDate": values?.effectiveto,
+                "dealGroupID": dealerGroupObject?.dealerGroupId ? dealerGroupObject?.dealerGroupId :  1,
+                "dealerNumber": 'DLR0001',
+                "imageLocation": values?.imageLocation
             }, history));
         }
     }
@@ -77,16 +64,20 @@ const AddCoupon = (props) => {
         }
     }, [dispatch, couponId]);
 
+    useEffect(() => {
+        dispatch(getrewardlist("reward_type"));
 
+    }, [dispatch]);
 
     return (
         <>
             <div className=" dashboard-container w-100">
                 <Container fluid={true}>
-					
-					<Header
+
+                    <Header
                         headerLabel={couponId ? "Edit Coupon" : "Add Coupon"}
                         enableSearch={false}
+                        showId={couponId}
                     />
                     <Row className="table-row-outer edit-bg ">
                         <Col>
@@ -94,70 +85,66 @@ const AddCoupon = (props) => {
                                 <FormGroup row>
                                     <Label for="couponCode" sm={2}>* Coupon Code</Label>
                                     <Col sm={10}>
-                                        <InputText name="couponCode" value={couponDetail?.coupon_code} type="text" required />
+                                        <InputText name="couponCode" value={couponDetail?.CouponCode} type="text" required />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon Description</Label>
                                     <Col sm={10}>
-                                        <InputText name="couponDescription" value={couponDetail?.coupon_description} type="text" />
+                                        <InputText name="couponDescription" value={couponDetail?.CouponDescription} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon Recommedations</Label>
                                     <Col sm={10}>
-                                        <InputText name="couponRecommedations" value={couponDetail?.coupon_recommendations} type="text" />
+                                        <InputText name="couponRecommedations" value={couponDetail?.CouponRecommendations} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Coupon terms conditions</Label>
                                     <Col sm={10}>
-                                        <InputText name="couponTermsCondituins" value={couponDetail?.coupon_terms_conditions} type="text" />
+                                        <InputText name="couponTermsCondituins" value={couponDetail?.CouponTermsConditions} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Dealer Group</Label>
                                     <Col sm={10}>
-                                        <InputText name="dealerGroup" value={couponId ? couponDetail?.deal_group_id : 'Jones Group'} disabled type="text" />
+                                        <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
+                                        <InputText name="DealerNumber" value={couponDetail?.DealGroupID} type="hidden" />
+                                        <InputText name="dealerGroup" value={couponDetail?.DealGroupID} type="hidden" />
                                     </Col>
                                 </FormGroup>
 
-                                <FormGroup row>
-                                    <Label for="name" sm={2}>Dealer Number</Label>
-                                    <Col sm={10}>
-                                        <InputText name="DealerNumber" value={couponDetail?.dlrid} type="text" />
-                                    </Col>
-                                </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Effective From</Label>
                                     <Col sm={10}>
-                                        <InputText name="effectiveFrom" value={couponId ? moment(couponDetail?.effective_from_date).format('YYYY-MM-DD') : ''} type="date" />
+                                        <InputText name="effectiveFrom" value={couponId ? moment(couponDetail?.EffectiveFromDate).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Effective To</Label>
                                     <Col sm={10}>
-                                        <InputText name="effectiveto" value={couponId ? moment(couponDetail?.effective_to_date).format('YYYY-MM-DD') : ''} type="date" />
+                                        <InputText name="effectiveto" value={couponId ? moment(couponDetail?.EffectiveToDate).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Image Location</Label>
                                     <Col sm={10}>
-                                        <InputText name="imageLocation" value={couponDetail?.image_location} type="text" />
+                                        <InputText name="imageLocation" value={couponDetail?.ImageLocation} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>Reward type</Label>
                                     <Col sm={10}>
-                                        <InputText name="rewardType" value={couponDetail?.reward_type} type="select" option={serviceOrder} />
+                                        <InputText name="rewardType" value={couponDetail?.RewardType} type="select" option={commonDetail.Data} optionValue="FieldValue" optionName="FieldDescription" />
 
                                     </Col>
                                 </FormGroup>

@@ -5,19 +5,14 @@ import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getmemberShipById, addMemberShip, updateMemberShip } from "../../store/membership/membershipSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
+import { getrewardlist } from "../../store/common/commonSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
-const DiscountUnitList = [{
-    name: "Amount",
-    value: "Amount"
-}, {
-    name: "Percentage",
-    value: "Percentage"
-}]
+
 
 const AddMemberShip = (props) => {
     const { match: { params } } = props
@@ -26,6 +21,7 @@ const AddMemberShip = (props) => {
     const loading = useSelector(({ global }) => global.loading);
     const [memberId] = React.useState(params?.id);
     const memberDetail = useSelector(({ memberShip }) => memberShip.memberShipDetail);
+    const commonDetail = useSelector(({ common }) => common.commonDetail);
 
     const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
@@ -40,8 +36,8 @@ const AddMemberShip = (props) => {
                 "ValidUntilDate": values?.ValidUntilDate,
                 "MinimumPoints": values?.MinimumPoints,
                 "PointsMultipler": values?.PointsMultipler,
-                "MembershipBenefits": values?.MembershipBenefits
-              }, history));
+                "membershipBenefits": values?.MembershipBenefits
+            }, history));
         } else {
             dispatch(addMemberShip({
                 "MembershipTypeId": 0,
@@ -52,17 +48,23 @@ const AddMemberShip = (props) => {
                 "ValidUntilDate": values?.ValidUntilDate,
                 "MinimumPoints": values?.MinimumPoints,
                 "PointsMultipler": values?.PointsMultipler,
-                "MembershipBenefits": values?.MembershipBenefits
-             }, history));
+                "membershipBenefits": values?.MembershipBenefits
+            }, history));
         }
     }
 
     useEffect(() => {
+        // const discount_unit = dispatch(getrewardlist("discount_unit"));
         if (memberId) {
             dispatch(getmemberShipById(Number.parseInt(memberId)));
         } else {
             dispatch(getmemberShipById(""));
         }
+    }, [dispatch, memberId]);
+
+
+    useEffect(() => {
+        dispatch(getrewardlist("discount_unit"))
     }, [dispatch, memberId]);
 
 
@@ -74,6 +76,7 @@ const AddMemberShip = (props) => {
                     <Header
                         headerLabel="Members Type"
                         enableSearch={false}
+                        showId={memberId}
                     />
                     <Row className="table-row-outer edit-bg">
                         <Col>
@@ -81,8 +84,8 @@ const AddMemberShip = (props) => {
                                 <FormGroup row>
                                     <Label for="member_status" sm={2}>* Membership Type</Label>
                                     <Col sm={10}>
-                                    <InputText name="MembershipType" value={memberDetail?.MembershipType} type="text" required/>
-                                  
+                                        <InputText name="MembershipType" value={memberDetail?.MembershipType} type="text" required />
+
                                     </Col>
                                 </FormGroup>
 
@@ -104,9 +107,10 @@ const AddMemberShip = (props) => {
                                 <FormGroup row>
                                     <Label for="DiscountUnit" sm={2}>* Discount Unit</Label>
                                     <Col sm={10}>
-                                        <InputText name="DiscountUnit" required value={memberDetail?.DiscountUnit} type="select" option={DiscountUnitList} />
+                                        <InputText name="DiscountUnit" required value={memberDetail?.DiscountUnit} type="select" option={commonDetail?.Data ? commonDetail?.Data : []} optionValue="FieldValue" optionName="FieldDescription" />
                                     </Col>
                                 </FormGroup>
+
 
                                 <FormGroup row>
                                     <Label for="PointsMultipler" sm={2}>Points Multipler</Label>
@@ -128,6 +132,7 @@ const AddMemberShip = (props) => {
                                         <InputText name="ValidUntilDate" required value={memberId ? moment(memberDetail?.ValidUntilDate).format('YYYY-MM-DD') : ''} type="date" />
                                     </Col>
                                 </FormGroup>
+
 
                                 <InputButton color="primary" disabled={loading}>Submit</InputButton>
 

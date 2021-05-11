@@ -1,11 +1,13 @@
 import { Row, Col, Input } from 'reactstrap';
 import InputButton from "./button"
 import { useHistory } from "react-router"
+import { useSelector } from 'react-redux';
 
 // import 
 
-const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch }) => {
+const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId }) => {
     let history = useHistory()
+    const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     return (
         <>
@@ -18,7 +20,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                         <Col>
 
                             {headerLabel}
-                            <div className="serch-outer">
+                            {!disabledSearch && <div className="serch-outer">
                                 <i className="fa fa-search" aria-hidden="true"></i>
                                 <Input name="search"
                                     onChange={handleSearch}
@@ -26,13 +28,13 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                 <InputButton className="temp_button"
                                     type="button"
                                     onClick={handleSubmit}
-                                >
-                                    Filter
-                    </InputButton>
-                            </div>
+                                    name="Filter"
+                                />
+
+                            </div>}
                         </Col>
                         <Col className=" text-md-right left-col-sec">
-                            <div className="dealer_name">Dealer Group : Jones Group
+                            <div className="dealer_name">Dealer Group : {dealerGroupObject?.dealerGroupName}
          </div>
 
                             <InputButton className="temp_button"
@@ -48,11 +50,11 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                     <Row >
                         <Col>
 
-                            {headerLabel}
+                            {headerLabel} {showId ? `#${showId}` : ''}
 
                         </Col>
                         <Col className=" text-md-right left-col-sec">
-                            <div className="dealer_name">Dealer Group : Jones Group </div>
+                            <div className="dealer_name">Dealer Group : {dealerGroupObject?.dealerGroupName} </div>
                         </Col>
 
                     </Row>
@@ -64,7 +66,9 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
 }
 
 Header.defaultProps = {
-    enableSearch: true
+    enableSearch: true,
+    disabledSearch: false,
+    showId: null
 }
 
 export default Header

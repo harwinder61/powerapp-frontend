@@ -3,12 +3,12 @@ import memberService from '../../services/memberService';
 import { loadingStatus } from '../global/globalSlice';
 import { toast } from 'react-toastify';
 
-export const getmember = (dealGroupID, dealerNumber) => async dispatch => {
+export const getmember = (dealGroupID, selectedPage, searchText) => async dispatch => {
 	return memberService
-		.getMemberList(dealGroupID, dealerNumber)
+		.getMemberList(dealGroupID, selectedPage, searchText)
 		.then(res => {
 			dispatch(loadingStatus(false))
-			dispatch(memberDetailSuccess(null))
+			// dispatch(memberDetailSuccess(null))
 			return dispatch(memberSuccess(res?.data));
 		})
 		.catch(error => {
@@ -30,37 +30,44 @@ export const getmemberById = (memberCustomerID, dealGroupID) => async dispatch =
 		});
 };
 
-export const addMember = (param, history) => async dispatch => {
+export const addMember = (param, history, id, value) => async dispatch => {
 
 	return memberService
 		.addMember(param)
 		.then(res => {
 			if (!res.data.Status) {
 				toast.error(res.data.Message)
+				dispatch(loadingStatus(false))
+
 			} else {
 				toast.info(res.data.Message)
+				dispatch(memberDetailSuccess(null))
 				history.push("/members")
 			}
-			dispatch(getmember())
 		})
 		.catch(error => {
+			console.log(error?.response)
+			// toast.info(res.data.Message)
 			dispatch(loadingStatus(false))
 
 		});
 };
 
-export const updateMember = (param, history) => async dispatch => {
+export const updateMember = (param, history, id, value) => async dispatch => {
 
 	return memberService
 		.updateMember(param)
 		.then(res => {
 			if (!res.data.Status) {
 				toast.error(res.data.Message)
+				dispatch(loadingStatus(false))
+
 			} else {
+				dispatch(memberDetailSuccess(null))
+
 				toast.info(res.data.Message)
 				history.push("/members")
 			}
-			dispatch(getmember())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))

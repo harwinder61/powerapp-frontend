@@ -21,17 +21,17 @@ const MembershipList = (props) => {
   const [membershipList, setMemberShipList] = useState([])
   const dispatch = useDispatch();
   const memberShip = useSelector(({ memberShip }) => memberShip.memberShip);
+  const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getmemberShip(3));
-  }, [dispatch]);
+    dispatch(getmemberShip(dealerGroupObject?.dealerGroupId));
+  }, [dispatch, dealerGroupObject]);
 
   useEffect(() => {
     setMemberShipList(memberShip?.Data)
   }, [memberShip]);
 
-  console.log("membershipList", membershipList, memberShip)
   const handleSubmit = () => {
     if (search !== "") {
       setMemberShipList(memberShip?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(search.toUpperCase())))
@@ -48,6 +48,8 @@ const MembershipList = (props) => {
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
           <Header
+            disabledSearch={true}
+
             headerLabel="Member Types"
             path="/add-membership"
             pathName="Add Membership Type"
@@ -79,13 +81,13 @@ const MembershipList = (props) => {
                   {memberShip?.Status ? membershipList?.map((iteam, index) => (
                     <tr key={index}>
                       <td>{iteam.MembershipType}</td>
-                      <td className = "left_align">{iteam.MinimumPoints}</td>
-                      <td className = "left_align">{iteam.DiscountValue}</td>
+                      <td className="left_align">{iteam.MinimumPoints}</td>
+                      <td className="left_align">{iteam.DiscountValue}</td>
                       <td >{iteam.DiscountUnit}</td>
-                      <td className = "left_align">{iteam.PointsMultipler}</td>
+                      <td className="left_align">{iteam.PointsMultipler}</td>
                       <td >{iteam.MembershipBenefits}</td>
-                      <td className = "left_align">{moment(iteam.CreatedDate).format('MM/DD/YYYY')}</td>
-                      <td className = "left_align">{moment(iteam.ValidUntilDate).format('MM/DD/YYYY')}</td>
+                      <td className="left_align">{moment(iteam.CreatedDate).format('MM/DD/YYYY')}</td>
+                      <td className="left_align">{moment(iteam.ValidUntilDate).format('MM/DD/YYYY')}</td>
 
                       <td>
                         <Link to={`/update-membership/${iteam?.MembershipTypeID}`}>

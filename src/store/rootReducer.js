@@ -3,7 +3,11 @@ import coupon from './coupon/couponSlice';
 import global from './global/globalSlice';
 import auth from './auth/authSlice';
 import member from './member/memberSlice';
-import memberShip from './membership/membershipSlice'
+import common from './common/commonSlice';
+import memberShip from './membership/membershipSlice';
+import offerhistory from './offerhistory/offerhistorySlice';
+import rewardTransactionHistory from './rewardTransactionHistory/rewardTransactionHistorySlice'
+import rewardType from './rewardType/rewardTypeSlice'
 
 const createReducer = asyncReducers => (state, action) => {
 	const combinedReducer = combineReducers({
@@ -11,7 +15,11 @@ const createReducer = asyncReducers => (state, action) => {
 		coupon,
 		global,
 		member,
-		memberShip
+		common,
+		memberShip,
+		offerhistory,
+		rewardTransactionHistory,
+		rewardType
 	});
 
 	/*

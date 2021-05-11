@@ -26,8 +26,9 @@ const SideBar = () => {
 				<li><Link to="/coupons">Offers,Coupons and Promo</Link></li>
 				<li><Link to="/offers">Offers,Coupons and Promo History</Link></li>
 				<li><Link to="/reward">Reward Transaction History</Link></li>
-				<li><Link to="/dealer">Add Dealer Options (New Options)</Link></li>
+				<li><Link to="/reward-type">Reward Type</Link></li>
 				<li><Link to="/user">Users</Link></li>
+				<li><Link to="/setting">Setting</Link></li>
 				<li > {auth?.email}
 					<Button
 						color="primary log-out"

@@ -3,9 +3,9 @@ import couponService from '../../services/couponService';
 import { loadingStatus } from '../global/globalSlice';
 import { toast } from 'react-toastify';
 
-export const getcoupon = (dealGroupID, dealerNumber) => async dispatch => {
+export const getcoupon = (dealGroupID, dealerNumber, selectedPage, searchText, sortObject) => async dispatch => {
 	return couponService
-		.getCouponList(dealGroupID, dealerNumber)
+		.getCouponList(dealGroupID, dealerNumber, selectedPage, searchText, sortObject)
 		.then(res => {
 			dispatch(loadingStatus(false))
 			dispatch(couponDetailSuccess(null))
@@ -18,6 +18,8 @@ export const getcoupon = (dealGroupID, dealerNumber) => async dispatch => {
 };
 
 export const getcouponById = (id) => async dispatch => {
+	dispatch(loadingStatus(true))
+
 	return couponService
 		.getCouponById(id)
 		.then(res => {

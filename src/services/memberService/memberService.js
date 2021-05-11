@@ -3,15 +3,15 @@ import axios from 'axios';
 class MemberService {
 	sdk = { auth0Manage: null };
 
-	getMemberList = (dealGroupID, dealerNumber) => {
-		const url = `${process.env.REACT_APP_API}api/Coupon/GetMembers?dealGroupID=${dealGroupID}`;
+	getMemberList = (dealGroupID, selectedPage, searchText) => {
+		const url = `${process.env.REACT_APP_API}api/Coupon/get-members?dealGroupID=${dealGroupID}&CustomerName=${searchText ? searchText : ""}&page=${selectedPage}`;
 		return axios
 			.get(url)
 
 	};
 
 	getMemberById = (memberCustomerID, dealGroupID) => {
-		const url = `${process.env.REACT_APP_API}api/Coupon/GetMember?memberCustomerID=${memberCustomerID}&dealGroupID=${dealGroupID}`;
+		const url = `${process.env.REACT_APP_API}api/Coupon/get-member?memberCustomerID=${memberCustomerID}&dealGroupID=${dealGroupID}`;
 		return axios
 			.get(url)
 
@@ -19,12 +19,12 @@ class MemberService {
 
 	addMember = (param) => {
 		return axios
-			.post(`${process.env.REACT_APP_API}api/Coupon/AddMember`, param)
+			.post(`${process.env.REACT_APP_API}api/Coupon/add-member`, param)
 	}
 
 	updateMember = (param) => {
 		return axios
-			.post(`${process.env.REACT_APP_API}api/Coupon/UpdateMember`, param)
+			.post(`${process.env.REACT_APP_API}api/Coupon/update-member`, param)
 	}
 
 
