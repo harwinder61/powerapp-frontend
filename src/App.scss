@@ -320,7 +320,12 @@ ul.sidemenu {
 	margin-top: 15px;
 	position: relative;
 	input {
-		max-width: 290px;
+		width: 300px;
+		padding-left: 30px;
+		margin-right: 24px;
+	}
+	select {
+		width: 300px;
 		padding-left: 30px;
 		margin-right: 24px;
 	}

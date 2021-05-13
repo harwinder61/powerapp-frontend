@@ -8,6 +8,11 @@ class RewardTransactionHistory {
 		if(searchObject?.CustomerID?.value !== "") {
 			url = url.concat(`&CustomerID=${Number.parseInt(searchObject?.CustomerID?.value)}`)
 	   }
+	   if(searchObject?.TransactionDate?.value !== "") {
+		url = url.concat(`&TransactionDate=${searchObject?.TransactionDate?.value}`)
+   		}
+
+		
 		return axios
 			.get(url)
 

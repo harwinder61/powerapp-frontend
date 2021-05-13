@@ -24,6 +24,9 @@ const OfferhistoryList = (props) => {
   const [searchObject, setSearchObject] = useState({
     CouponCode: {type: "text", placeholder: "Coupon Code", value: "", },
     CustomerID: {type: "text", placeholder: "CustomerID", value: "", },
+    "TransactionFromDate": {type: "date", placeholder: "Transaction From Date", value: "" },
+    "TransactionToDate": {type: "date", placeholder: "Transaction To Date", value: "" },
+  
   })
 
 

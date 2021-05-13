@@ -8,6 +8,13 @@ class offerhistoryService {
 		if(searchText?.CustomerID?.value !== "") {
 			 url = url.concat(`&CustomerID=${Number.parseInt(searchText?.CustomerID?.value)}`)
 		}
+		if(searchText?.TransactionFromDate?.value !== "") {
+			url = url.concat(`&TransactionFromDate=${searchText?.TransactionFromDate?.value}`)
+		}
+
+		if(searchText?.TransactionToDate?.value !== "") {
+			url = url.concat(`&TransactionToDate=${searchText?.TransactionToDate?.value}`)
+		}
 		
 		return axios
 			.get(url)

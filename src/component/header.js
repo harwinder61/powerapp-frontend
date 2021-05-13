@@ -17,12 +17,12 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
             {enableSearch ? (
                 <div className="buttons-row">
                     <Row >
-                        <Col>
+                        <Col xs="8">
 
                             {headerLabel}
-                            {!disabledSearch && <div className="serch-outer">
+                            {!disabledSearch && <Row xs="3">
                                 
-                                {Object.entries(searchObject).map(([name, data], index) => (<> { 
+                                {Object.entries(searchObject).map(([name, data], index) => (<Col div className="serch-outer" > { 
                                  data.type === "select" ? (
                                     <>
                                         <Input
@@ -33,7 +33,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                             value={data?.value}
                                             placeholder={data?.placeholder}
                                             >
-                                                <option value="">Reward Type</option>
+                                                <option value="">{data?.placeholder}</option>
                                                 {data.option.map(option => (
                                                     <option value={option[data.optionName]}>{option[data.optionKey]}</option>
                                                 ))}
@@ -41,7 +41,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                     </>
                                 ) : (
                                     <>
-                                    <i key={index} className="fa fa-search" aria-hidden="true"></i>
+                                    {data.type !== "date" && <i key={index} className="fa fa-search" aria-hidden="true"></i>}
                                         <Input
                                             key ={name}     
                                             name={name}
@@ -52,7 +52,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                             />
                                     </>
                                 
-                                )}</>)
+                                )}</Col>)
                                 )}
                                 {/* <Input name="search"
                                     onChange={handleSearch}
@@ -63,7 +63,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                     name="Filter"
                                 />
 
-                            </div>}
+                            </Row>}
                         </Col>
                         <Col className=" text-md-right left-col-sec">
                             <div className="dealer_name">Dealer Group : {dealerGroupObject?.dealerGroupName}

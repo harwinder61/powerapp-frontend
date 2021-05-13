@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import PaginationComponent from "react-reactstrap-pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getrewardlist } from "../../store/common/commonSlice";
+import { getmemberShip } from "../../store/membership/membershipSlice"
+
 
 
 import Header from "../../component/header";
@@ -26,8 +29,9 @@ const MemberList = (props) => {
   const [searchObject, setSearchObject] = useState({
     CustomerName: {type: "text", placeholder: "Customer Name", value: "", },
     SocialMediaID: {type: "text", placeholder: "Social Media ID", value: "", },
-    MembershipTypeID: {type: "text", placeholder: "Membership Type ID", value: "", },
-    MemberStatus: {type: "text", placeholder: "Member Status", value: "", }
+    MembershipTypeID : {type: "select", placeholder: "Membership Type ID", value: "", option: [], optionKey: "MembershipType", optionName: "MembershipTypeID" },
+    MemberStatus : {type: "select", placeholder: "Member Status", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" },
+   
 
   })
 
@@ -35,11 +39,45 @@ const MemberList = (props) => {
   const dispatch = useDispatch();
   const member = useSelector(({ member }) => member.member);
   const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
-
+  const commonDetail = useSelector(({ common }) => common.commonDetail);
+  const memberShip = useSelector(({ memberShip }) => memberShip.memberShip);
+    
   useEffect(() => {
     dispatch(loadingStatus(true));
     dispatch(getmember(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
   }, [dispatch, selectedPage, searchObject, dealerGroupObject]);
+
+  useEffect(() => {
+    dispatch(getrewardlist("member_status"));
+    dispatch(getmemberShip(3));
+
+
+}, [dispatch]);
+
+  useEffect(() => {
+    setSearchObject((prevState) => ({
+      ...prevState,
+      MemberStatus: {
+        ...prevState.MemberStatus,
+        option: commonDetail.Data,
+      }
+    }));
+    
+  }, [commonDetail]);
+
+  useEffect(() => {
+    setSearchObject((prevState) => ({
+      ...prevState,
+      MembershipTypeID: {
+        ...prevState.MembershipTypeID,
+        option: memberShip.Data,
+      }
+    }));
+    
+  }, [memberShip]);
+
+
+  
 
   useEffect(() => {
     setMemberList(member?.Data?.Items)

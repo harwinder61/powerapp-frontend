@@ -22,7 +22,8 @@ const RewardTransactionHistory = (props) => {
   
   const [searchObject, setSearchObject] = useState({
     "CustomerID": {type: "text", placeholder: "Customer ID", value: "", },
-    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" }
+    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" },
+    "TransactionDate": {type: "date", placeholder: "Transaction Date", value: "" },
   })
 
 

@@ -28,7 +28,10 @@ const CouponList = (props) => {
   const [searchObject, setSearchObject] = useState({
     "DealerNumber": {type: "text", placeholder: "Dealer Number", value: "", },
     "CouponDescription": {type: "text", placeholder: "Coupon Description", value: "", },
-    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" }
+    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" },
+    "EffectiveFromDate": {type: "date", placeholder: "Effective From Date", value: "" },
+    "EffectiveToDate": {type: "date", placeholder: "EffectiveToDate", value: "" },
+  
   })
   const commonDetail = useSelector(({ common }) => common.commonDetail);
 
