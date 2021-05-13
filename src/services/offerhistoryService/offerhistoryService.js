@@ -3,8 +3,12 @@ import axios from 'axios';
 class offerhistoryService {
 	sdk = { auth0Manage: null };
 
-	getOfferhistoryList = (fieldName, selectedPage, searchText) => {
-		const url = `${process.env.REACT_APP_API}api/coupon/get-coupon-transactions?dealGroupID=${fieldName}&page=${selectedPage}&CouponCode=${searchText}`;
+	getOfferhistoryList = async (fieldName, selectedPage, searchText) => {
+		let url = `${process.env.REACT_APP_API}api/coupon/get-coupon-transactions?dealGroupID=${fieldName}&page=${selectedPage}&CouponCode=${searchText?.CouponCode?.value}`;
+		if(searchText?.CustomerID?.value !== "") {
+			 url = url.concat(`&CustomerID=${Number.parseInt(searchText?.CustomerID?.value)}`)
+		}
+		
 		return axios
 			.get(url)
 

@@ -3,8 +3,8 @@ import axios from 'axios';
 class CouponService {
 	sdk = { auth0Manage: null };
 
-	getCouponList = (dealGroupID, dealerNumber, selectedPage, searchText, sortObject) => {
-		const url = `${process.env.REACT_APP_API}api/coupon/get-coupons?DealGroupID=${dealGroupID}&dealerNumber=${dealerNumber}&page=${selectedPage}&CouponDescription=${searchText}&SortColumn=${sortObject?.SortColumn}&SortDirection=${sortObject?.SortDirection ? "asc" : "desc"}`;
+	getCouponList = (dealGroupID, selectedPage, searchObject, sortObject) => {
+		const url = `${process.env.REACT_APP_API}api/coupon/get-coupons?DealGroupID=${dealGroupID}&page=${selectedPage}&CouponDescription=${searchObject?.CouponDescription.value}&RewardType=${searchObject?.RewardType.value}&DealerNumber=${searchObject?.DealerNumber.value}&SortColumn=${sortObject?.SortColumn}&SortDirection=${sortObject?.SortDirection ? "asc" : "desc"}`;
 		return axios
 			.get(url)
 

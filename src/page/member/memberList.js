@@ -23,28 +23,48 @@ const MemberList = (props) => {
   // const variable decare
   const [memberList, setMemberList] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
-  const [searchText, setSearchText] = useState("")
+  const [searchObject, setSearchObject] = useState({
+    CustomerName: {type: "text", placeholder: "Customer Name", value: "", },
+    SocialMediaID: {type: "text", placeholder: "Social Media ID", value: "", },
+    MembershipTypeID: {type: "text", placeholder: "Membership Type ID", value: "", },
+    MemberStatus: {type: "text", placeholder: "Member Status", value: "", }
+
+  })
+
+
   const dispatch = useDispatch();
   const member = useSelector(({ member }) => member.member);
   const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getmember(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
-  }, [dispatch, selectedPage, searchText, dealerGroupObject]);
+    dispatch(getmember(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
+  }, [dispatch, selectedPage, searchObject, dealerGroupObject]);
 
   useEffect(() => {
     setMemberList(member?.Data?.Items)
   }, [member]);
 
   const handleSubmit = () => {
-    dispatch(getmember(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
+    dispatch(getmember(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
   }
 
   const handleSelected = (selectedPage) => {
     setSelectPage(selectedPage)
   }
 
+  const handleSearchFunction = async (e) => {
+    const text = e.target.value
+      await setSelectPage(1)
+      await setSearchObject((prevState) => ({
+        ...prevState,
+        [e.target.name]: {
+          ...prevState[e.target.name],
+          value: text,
+        }
+      }));
+    }
+  
 
   return (
     <>
@@ -56,11 +76,10 @@ const MemberList = (props) => {
             path="/add-member"
             pathName="Add Member"
             handleSubmit={handleSubmit}
-            handleSearch={async (e) => {
-              await setSelectPage(1)
-              await setSearchText(e.target.value)
-              // setMemberList(member?.Data?.Items.filter(iteam => iteam.Contact_FullName.includes(e.target.value.toUpperCase())))
-            }}
+            searchObject={searchObject}
+            handleSearch={(e) =>
+              handleSearchFunction(e)
+            }
           />
 
           <Row className="table-row-outer">
@@ -106,7 +125,7 @@ const MemberList = (props) => {
               </Table>
 
               <PaginationComponent
-                totalItems={member?.Data?.TotalSize}
+                totalItems={member?.Data?.TotalSize ? member?.Data?.TotalSize : 0}
                 defaultActivePage={selectedPage}
                 pageSize={10}
                 onSelect={handleSelected}

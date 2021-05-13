@@ -3,8 +3,11 @@ import axios from 'axios';
 class RewardTransactionHistory {
 	sdk = { auth0Manage: null };
 
-	getRewardTransactionHistoryList = (dealGroupID, selectedPage) => {
-		const url = `${process.env.REACT_APP_API}api/Coupon/get-reward-points-log?dealGroupID=${dealGroupID}&page=${selectedPage}`;
+	getRewardTransactionHistoryList = (dealGroupID, selectedPage, searchObject) => {
+		let url = `${process.env.REACT_APP_API}api/Coupon/get-reward-points-log?dealGroupID=${dealGroupID}&RewardType=${searchObject?.RewardType?.value}&page=${selectedPage}`;
+		if(searchObject?.CustomerID?.value !== "") {
+			url = url.concat(`&CustomerID=${Number.parseInt(searchObject?.CustomerID?.value)}`)
+	   }
 		return axios
 			.get(url)
 

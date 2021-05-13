@@ -21,7 +21,11 @@ const OfferhistoryList = (props) => {
   const [offerhistoryList, setOfferhistoryList] = useState([])
   const dispatch = useDispatch();
   const [selectedPage, setSelectPage] = useState(1)
-  const [searchText, setSearchText] = useState("")
+  const [searchObject, setSearchObject] = useState({
+    CouponCode: {type: "text", placeholder: "Coupon Code", value: "", },
+    CustomerID: {type: "text", placeholder: "CustomerID", value: "", },
+  })
+
 
 
   //const coupon = useSelector(({ coupon }) => coupon.coupon);
@@ -31,21 +35,33 @@ const OfferhistoryList = (props) => {
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getofferhistory(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
-  }, [dispatch, selectedPage, searchText, dealerGroupObject]);
+    dispatch(getofferhistory(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
+  }, [dispatch, selectedPage, searchObject, dealerGroupObject]);
 
   useEffect(() => {
     setOfferhistoryList(offerhistory?.Data?.Items)
   }, [offerhistory]);
 
   const handleSubmit = () => {
-    dispatch(getofferhistory(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
+    dispatch(getofferhistory(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
   }
 
   const handleSelected = (selectedPage) => {
     setSelectPage(selectedPage)
   }
 
+  const handleSearchFunction = async (e) => {
+    const text = e.target.value
+      await setSelectPage(1)
+      await setSearchObject((prevState) => ({
+        ...prevState,
+        [e.target.name]: {
+          ...prevState[e.target.name],
+          value: text,
+        }
+      }));
+    }
+  
 
   return (
     <>
@@ -57,10 +73,10 @@ const OfferhistoryList = (props) => {
             path="/add-coupontransaction"
             pathName="Add Coupon Transactions"
             handleSubmit={handleSubmit}
-            handleSearch={async (e) => {
-              await setSelectPage(1)
-              await setSearchText(e.target.value)
-            }}
+            searchObject={searchObject}
+            handleSearch={(e) =>
+              handleSearchFunction(e)
+            }
           />
           <Row className="table-row-outer">
             <Col>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import PaginationComponent from "react-reactstrap-pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getrewardlist } from "../../store/common/commonSlice"
 
 import Header from "../../component/header";
 
@@ -20,33 +21,77 @@ import Header from "../../component/header";
 const CouponList = (props) => {
   const [couponList, setCouponList] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
-  const [searchText, setSearchText] = useState("")
   const [sortObject, setSortObject] = useState({
     SortColumn: "EffectiveFromDate",
     SortDirection: true
   })
+  const [searchObject, setSearchObject] = useState({
+    "DealerNumber": {type: "text", placeholder: "Dealer Number", value: "", },
+    "CouponDescription": {type: "text", placeholder: "Coupon Description", value: "", },
+    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" }
+  })
+  const commonDetail = useSelector(({ common }) => common.commonDetail);
+
+  
 
   const dispatch = useDispatch();
   const coupon = useSelector(({ coupon }) => coupon.coupon);
   const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
+  useEffect(() => {
+    dispatch(getrewardlist("reward_type"));
+
+}, [dispatch]);
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    // console.log('sortObject', sortObject)
-    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, "DLR0001", selectedPage, searchText, sortObject));
-  }, [dispatch, selectedPage, searchText, dealerGroupObject, sortObject]);
+    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, selectedPage, searchObject, sortObject));
+  }, [dispatch, selectedPage, searchObject, dealerGroupObject, sortObject]);
 
   useEffect(() => {
     setCouponList(coupon?.Data?.Items)
   }, [coupon]);
 
+  useEffect(() => {
+    setSearchObject((prevState) => ({
+      ...prevState,
+      RewardType: {
+        ...prevState.RewardType,
+        option: commonDetail.Data,
+      }
+    }));
+    
+  }, [commonDetail]);
+
+
+  
+
   const handleSubmit = () => {
-    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, "DLR0001", selectedPage, searchText));
+    dispatch(getcoupon(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
   }
 
   const handleSelected = (selectedPage) => {
     setSelectPage(selectedPage)
+  }
+
+  const handleSort = (fieldName) => {
+    setSortObject({
+      SortColumn: fieldName,
+      SortDirection: sortObject.SortColumn !== fieldName  ? true : !sortObject.SortDirection
+    })
+  }
+
+
+const handleSearchFunction = async (e) => {
+  const text = e.target.value
+    await setSelectPage(1)
+    await setSearchObject((prevState) => ({
+      ...prevState,
+      [e.target.name]: {
+        ...prevState[e.target.name],
+        value: text,
+      }
+    }));
   }
 
   return (
@@ -59,10 +104,10 @@ const CouponList = (props) => {
             path="/add-coupon"
             pathName="Add Coupon"
             handleSubmit={handleSubmit}
-            handleSearch={async (e) => {
-              await setSelectPage(1)
-              await setSearchText(e.target.value)
-            }}
+            searchObject={searchObject}
+            handleSearch={(e) =>
+              handleSearchFunction(e)
+            }
           />
           <Row className="table-row-outer">
             <Col>
@@ -70,19 +115,13 @@ const CouponList = (props) => {
                 <thead>
                   <tr>
                     <th>Offers/Coupons/Promos</th>
-                    <th>Coupon Description</th>
+                    <th>Coupon Description <i onClick={() => handleSort("CouponDescription")} className="fa fa-sort float-right" /></th>
                     <th>Terms and conditions</th>
-                    <th>Reward Type</th>
+                    <th>Reward Type <i onClick={() => handleSort("RewardType")} className="fa fa-sort float-right" /></th>
                     <th>AI Recommendation Number</th>
-                    <th>Effective From <i onClick={() => setSortObject({
-                      SortColumn: "EffectiveFromDate",
-                      SortDirection: sortObject.SortColumn !== "EffectiveFromDate"  ? true : !sortObject.SortDirection
-                    })} className="fa fa-sort float-right" /></th>
-                    <th>Effective   To <i onClick={() => setSortObject({
-                      SortColumn: "EffectiveToDate",
-                      SortDirection: sortObject.SortColumn !== "EffectiveToDate"  ? true : !sortObject.SortDirection
-                    })} className="fa fa-sort float-right" /></th>
-                    <th>Dealer Number</th>
+                    <th>Effective From <i onClick={() => handleSort("EffectiveFromDate")} className="fa fa-sort float-right" /></th>
+                    <th>Effective   To <i onClick={() => handleSort("EffectiveToDate")} className="fa fa-sort float-right" /></th>
+                    <th>Dealer Number<i onClick={() => handleSort("DealerNumber")} className="fa fa-sort float-right" /></th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -111,7 +150,7 @@ const CouponList = (props) => {
                 </tbody>
               </Table>
               <PaginationComponent
-                totalItems={coupon?.Data?.TotalSize}
+                totalItems={coupon?.Data?.TotalSize ? coupon?.Data?.TotalSize : 0}
                 defaultActivePage={selectedPage}
                 pageSize={10}
                 onSelect={handleSelected}

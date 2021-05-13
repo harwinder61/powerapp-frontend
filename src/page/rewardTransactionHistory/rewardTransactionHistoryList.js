@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import PaginationComponent from "react-reactstrap-pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getrewardlist } from "../../store/common/commonSlice"
 
 import Header from "../../component/header";
 
@@ -18,29 +19,63 @@ import Header from "../../component/header";
 const RewardTransactionHistory = (props) => {
   const [rewardTransactionHistoryList, setRewardTransactionHistoryList] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
-  const [searchText, setSearchText] = useState("")
+  
+  const [searchObject, setSearchObject] = useState({
+    "CustomerID": {type: "text", placeholder: "Customer ID", value: "", },
+    "RewardType": {type: "select", placeholder: "Reward Type", value: "", option: [], optionKey: "FieldDescription", optionName: "FieldValue" }
+  })
+
 
   const dispatch = useDispatch();
   const rewardTransactionHistory = useSelector(({ rewardTransactionHistory }) => rewardTransactionHistory.rewardTransactionHistory);
   const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
+  const commonDetail = useSelector(({ common }) => common.commonDetail);
+
+  useEffect(() => {
+    dispatch(getrewardlist("reward_type"));
+
+}, [dispatch]);
+
+useEffect(() => {
+  setSearchObject((prevState) => ({
+    ...prevState,
+    RewardType: {
+      ...prevState.RewardType,
+      option: commonDetail.Data,
+    }
+  }));
+  
+}, [commonDetail]);
 
 
   useEffect(() => {
     dispatch(loadingStatus(true));
-    dispatch(getRewardTransactionHistory(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
-  }, [dispatch, selectedPage, searchText, dealerGroupObject]);
+    dispatch(getRewardTransactionHistory(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
+  }, [dispatch, selectedPage, searchObject, dealerGroupObject]);
 
   useEffect(() => {
     setRewardTransactionHistoryList(rewardTransactionHistory?.Data?.Items)
   }, [rewardTransactionHistory]);
 
   const handleSubmit = () => {
-    dispatch(getRewardTransactionHistory(dealerGroupObject?.dealerGroupId, selectedPage, searchText));
+    dispatch(getRewardTransactionHistory(dealerGroupObject?.dealerGroupId, selectedPage, searchObject));
   }
 
   const handleSelected = (selectedPage) => {
     setSelectPage(selectedPage)
   }
+
+  const handleSearchFunction = async (e) => {
+    const text = e.target.value
+      await setSelectPage(1)
+      await setSearchObject((prevState) => ({
+        ...prevState,
+        [e.target.name]: {
+          ...prevState[e.target.name],
+          value: text,
+        }
+      }));
+    }
 
   return (
     <>
@@ -52,10 +87,10 @@ const RewardTransactionHistory = (props) => {
             path="/add-reward"
             pathName="Add Rewards Transaction"
             handleSubmit={handleSubmit}
-            handleSearch={async (e) => {
-              await setSelectPage(1)
-              await setSearchText(e.target.value)
-            }}
+            searchObject={searchObject}
+            handleSearch={(e) =>
+              handleSearchFunction(e)
+            }
           />
           <Row className="table-row-outer">
             <Col>

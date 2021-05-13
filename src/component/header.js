@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 // import 
 
-const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId }) => {
+const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject }) => {
     let history = useHistory()
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
@@ -21,10 +21,42 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
 
                             {headerLabel}
                             {!disabledSearch && <div className="serch-outer">
-                                <i className="fa fa-search" aria-hidden="true"></i>
-                                <Input name="search"
+                                
+                                {Object.entries(searchObject).map(([name, data], index) => (<> { 
+                                 data.type === "select" ? (
+                                    <>
+                                        <Input
+                                            key ={name}     
+                                            name={name}
+                                            type={data.type}
+                                            onChange={handleSearch}
+                                            value={data?.value}
+                                            placeholder={data?.placeholder}
+                                            >
+                                                <option value="">Reward Type</option>
+                                                {data.option.map(option => (
+                                                    <option value={option[data.optionName]}>{option[data.optionKey]}</option>
+                                                ))}
+                                        </Input>
+                                    </>
+                                ) : (
+                                    <>
+                                    <i key={index} className="fa fa-search" aria-hidden="true"></i>
+                                        <Input
+                                            key ={name}     
+                                            name={name}
+                                            type={data.type}
+                                            onChange={handleSearch}
+                                            value={data?.value}
+                                            placeholder={data?.placeholder}
+                                            />
+                                    </>
+                                
+                                )}</>)
+                                )}
+                                {/* <Input name="search"
                                     onChange={handleSearch}
-                                    placeholder="" />
+                                    placeholder="" /> */}
                                 <InputButton className="temp_button"
                                     type="button"
                                     onClick={handleSubmit}
@@ -68,7 +100,8 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
 Header.defaultProps = {
     enableSearch: true,
     disabledSearch: false,
-    showId: null
+    showId: null,
+    searchObject: {}
 }
 
 export default Header
