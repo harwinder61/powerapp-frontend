@@ -114,11 +114,11 @@ useEffect(() => {
                       <td>{iteam.CustomerID}</td>
                       <td>{iteam.ContactFullName}</td>
                       <td>{iteam.SocialMediaId}</td>
-                      <td>{iteam.RewardType}</td>
+                      <td>{iteam.RewardTypeFieldDescription}</td>
                       <td>{iteam.RewardPoints}</td>
-                      <td>{iteam.OperationType}</td>
-                      <td>{moment(iteam.RegistrationDate).format('MM/DD/YYYY')}</td>
-                      <td>{moment(iteam.TransactionDate).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.OperationalTypeFieldDescription}</td>
+                      <td>{iteam.RegistrationDate !== "" ? moment(iteam.RegistrationDate).format('MM/DD/YYYY')  : '01/01/1900'}</td>
+                      <td>{iteam.TransactionDate !== "" ?  moment(iteam.TransactionDate).format('MM/DD/YYYY')  : '01/01/1900' }</td>
                     </tr>
 
                   )): (<tr><td colSpan={9}>No records found.</td></tr>)}

@@ -136,8 +136,8 @@ const handleSearchFunction = async (e) => {
                       <td>{iteam.CouponTermsConditions}</td>
                       <td>{iteam.FieldDescription}</td>
                       <td>{iteam.pointsMultiplier}</td>
-                      <td>{moment(iteam.EffectiveFromDate).format('MM/DD/YYYY')}</td>
-                      <td>{moment(iteam.EffectiveToDate).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.EffectiveFromDate !== "" ? moment(iteam.EffectiveFromDate).format('MM/DD/YYYY') : '01/01/1900'}</td>
+                      <td>{iteam.EffectiveToDate !== "" ? moment(iteam.EffectiveToDate).format('MM/DD/YYYY'): '01/01/1900'}</td>
                       <td>{iteam.DealerId}</td>
                       <td>
                         <Link to={`/update-coupon/${iteam?.CouponCodeId}`}>

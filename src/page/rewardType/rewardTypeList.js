@@ -95,8 +95,8 @@ const RewardTypeList = (props) => {
                       <td >{iteam.FieldDefinitionsFieldDescription}</td>
                       <td >{rewardTypeDetail?.DealerOptionsId === iteam.DealerOptionsId ? (<InputText name="RewardAmount" value={iteam.RewardAmount} type="text" required />) : iteam.RewardAmount}</td>
                       <td >{rewardTypeDetail?.DealerOptionsId === iteam.DealerOptionsId ? (<InputText name="RewardUnit" value={iteam.RewardUnit} type="select" required option={rewardUnitList}/>) : iteam.RewardUnit}</td>
-                      <td >{moment(iteam.CreatedDate).format('MM/DD/YYYY')}</td>
-                      <td >{moment(iteam.LastUpdatedDate).format('MM/DD/YYYY')}</td>
+                      <td >{iteam.CreatedDate !== "" ? moment(iteam.CreatedDate).format('MM/DD/YYYY')  : '01/01/1900' }</td>
+                      <td >{iteam.LastUpdatedDate !== "" ? moment(iteam.LastUpdatedDate).format('MM/DD/YYYY')  : '01/01/1900'}</td>
 
                       <td>
                         {rewardTypeDetail?.DealerOptionsId === iteam.DealerOptionsId ? <InputButton color="primary" disabled={loading} name="Update"/> : <Button color="link" onClick={() => setRewardTypeDetail(iteam)}>

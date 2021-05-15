@@ -101,10 +101,10 @@ const OfferhistoryList = (props) => {
                       <td>{iteam.CouponCode}</td>
                       <td>{iteam.CustomerId}</td>
                       <td>{iteam.ContactFullName}</td>
-                      <td>{moment(iteam.TransactionDate).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.TransactionDate !== "" ? moment(iteam.TransactionDate).format('MM/DD/YYYY') : '01/01/1900'}</td>
                       <td>{iteam.TransactionAmount}</td>
                       <td>{iteam.FieldDescription}</td>
-                      <td>{moment(iteam.create_date).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.create_date !== "" ? moment(iteam.create_date).format('MM/DD/YYYY') : '01/01/1900'}</td>
                     </tr>
 
                   )): (<tr><td colSpan={9}>No records found.</td></tr>)}

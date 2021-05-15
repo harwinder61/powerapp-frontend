@@ -79,11 +79,13 @@ td.left_align {
 	text-align: center;
 }
 
-// .temp_button {
-// 	float: right !important;
-// 	margin-right: -35% !important;
-// 	margin-top: 35px !important;
-// }
+.filter-button {
+	max-width: 235px !important;
+	margin-left: 15px !important;
+	// float: right !important;
+	// margin-right: -35% !important;
+	// margin-top: 35px !important;
+}
 
 // .dealer_name {
 // 	float: right;
@@ -318,16 +320,16 @@ ul.sidemenu {
 .serch-outer {
 	display: flex;
 	margin-top: 15px;
-	position: relative;
+	position: absolute;
 	input {
 		width: 300px;
 		padding-left: 30px;
-		margin-right: 24px;
+		// margin-right: 24px;
 	}
 	select {
 		width: 300px;
 		padding-left: 30px;
-		margin-right: 24px;
+		// margin-right: 24px;
 	}
 	button.temp_button.btn.btn-secondary {
 		margin: 0 !important;
@@ -338,7 +340,7 @@ ul.sidemenu {
 		max-width: 100px !important;
 	}
 	i.fa.fa-search {
-		position: relative;
+		position: absolute;
 		left: 20px;
 		top: 11px;
 	}

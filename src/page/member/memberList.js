@@ -142,7 +142,7 @@ const MemberList = (props) => {
                       <td>{iteam.CustomerId}</td>
                       <td>{iteam.ContactFullName}</td>
                       <td>{iteam.SocialMediaId}</td>
-                      <td>{moment(iteam.create_date).format('MM/DD/YYYY')}</td>
+                      <td>{iteam.create_date !== "" ? moment(iteam.create_date).format('MM/DD/YYYY')  : '01/01/1900'}</td>
                       <td>{iteam.MembershipType}</td>
                       <td>{iteam.PointsYtd}</td>
                       <td>{iteam.PointsLifetime}</td>

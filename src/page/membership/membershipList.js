@@ -86,8 +86,8 @@ const MembershipList = (props) => {
                       <td >{iteam.DiscountUnit}</td>
                       <td className="left_align">{iteam.PointsMultipler}</td>
                       <td >{iteam.MembershipBenefits}</td>
-                      <td className="left_align">{moment(iteam.CreatedDate).format('MM/DD/YYYY')}</td>
-                      <td className="left_align">{moment(iteam.ValidUntilDate).format('MM/DD/YYYY')}</td>
+                      <td className="left_align">{iteam.CreatedDate !== "" ? moment(iteam.CreatedDate).format('MM/DD/YYYY') : '01/01/1900'}</td>
+                      <td className="left_align">{iteam.ValidUntilDate !== "" ? moment(iteam.ValidUntilDate).format('MM/DD/YYYY') : '01/01/1900' }</td>
 
                       <td>
                         <Link to={`/update-membership/${iteam?.MembershipTypeID}`}>
