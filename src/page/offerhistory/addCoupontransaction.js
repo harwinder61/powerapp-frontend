@@ -65,7 +65,7 @@ const AddCoupontransaction = (props) => {
                 <Container fluid={true}>
 
                     <Header
-                        headerLabel={addOfferhistoryId ? "Edit  Coupon Transaction" : "Add Coupon Transaction"}
+                        headerLabel={addOfferhistoryId ? "Edit  Coupon / Voucher Transaction" : "Add Coupon / Voucher Transaction"}
                         enableSearch={false}
                         showId={addOfferhistoryId}
                     />
@@ -89,7 +89,7 @@ const AddCoupontransaction = (props) => {
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="couponCode" sm={2}>* Coupon Code</Label>
+                                    <Label for="couponCode" sm={2}>* Coupon / Voucher Code</Label>
                                     <Col sm={10}>
                                         <InputText name="couponCode" type="text" required />
                                     </Col>

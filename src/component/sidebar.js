@@ -23,8 +23,8 @@ const SideBar = () => {
 			<ul className="sidemenu">
 				<li><Link to="/membership">Membership Types</Link></li>
 				<li><Link to="/members">Members</Link></li>
-				<li><Link to="/coupons">Offers,Coupons and Promo</Link></li>
-				<li><Link to="/offers">Offers,Coupons and Promo History</Link></li>
+				<li><Link to="/coupons">Coupons and Vouchers</Link></li>
+				<li><Link to="/offers">Coupons and Vouchers History</Link></li>
 				<li><Link to="/reward">Reward Transaction History</Link></li>
 				<li><Link to="/reward-type">Reward Type</Link></li>
 				<li><Link to="/user">Users</Link></li>

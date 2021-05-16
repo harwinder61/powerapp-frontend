@@ -74,7 +74,7 @@ const OfferhistoryList = (props) => {
           <Header
             headerLabel="Offers, Coupons and Promos History"
             path="/add-coupontransaction"
-            pathName="Add Coupon Transactions"
+            pathName="Add Coupon / Voucher Transaction"
             handleSubmit={handleSubmit}
             searchObject={searchObject}
             handleSearch={(e) =>
@@ -86,7 +86,7 @@ const OfferhistoryList = (props) => {
               <Table borderless>
                 <thead>
                   <tr>
-                    <th>Offers/Coupons/Promos</th>
+                    <th>Coupons/Vouchers</th>
                     <th>Customer Number</th>
                     <th>Customer Name</th>
                     <th>Transaction Date</th>

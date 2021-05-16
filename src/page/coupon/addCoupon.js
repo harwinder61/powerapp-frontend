@@ -75,7 +75,7 @@ const AddCoupon = (props) => {
                 <Container fluid={true}>
 
                     <Header
-                        headerLabel={couponId ? "Edit Coupon" : "Add Coupon"}
+                        headerLabel={couponId ? "Edit Coupon / Voucher" : "Add Coupon / Voucher"}
                         enableSearch={false}
                         showId={couponId}
                     />
@@ -83,28 +83,28 @@ const AddCoupon = (props) => {
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
                                 <FormGroup row>
-                                    <Label for="couponCode" sm={2}>* Coupon Code</Label>
+                                    <Label for="couponCode" sm={2}>* Coupon / Voucher Code</Label>
                                     <Col sm={10}>
                                         <InputText name="couponCode" value={couponDetail?.CouponCode} type="text" required />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="name" sm={2}>Coupon Description</Label>
+                                    <Label for="name" sm={2}>Coupon / Voucher Description</Label>
                                     <Col sm={10}>
                                         <InputText name="couponDescription" value={couponDetail?.CouponDescription} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="name" sm={2}>Coupon Recommedations</Label>
+                                    <Label for="name" sm={2}>Coupon / Voucher  Recommedations</Label>
                                     <Col sm={10}>
                                         <InputText name="couponRecommedations" value={couponDetail?.CouponRecommendations} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="name" sm={2}>Coupon terms conditions</Label>
+                                    <Label for="name" sm={2}>Coupon / Voucher terms conditions</Label>
                                     <Col sm={10}>
                                         <InputText name="couponTermsCondituins" value={couponDetail?.CouponTermsConditions} type="text" />
                                     </Col>

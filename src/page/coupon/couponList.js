@@ -103,9 +103,9 @@ const handleSearchFunction = async (e) => {
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
           <Header
-            headerLabel="Coupon Codes"
+            headerLabel="Coupon or Voucher Codes"
             path="/add-coupon"
-            pathName="Add Coupon"
+            pathName="Add Coupon or Voucher"
             handleSubmit={handleSubmit}
             searchObject={searchObject}
             handleSearch={(e) =>
@@ -117,7 +117,7 @@ const handleSearchFunction = async (e) => {
               <Table borderless>
                 <thead>
                   <tr>
-                    <th>Offers/Coupons/Promos</th>
+                    <th>Coupons/Vouchers</th>
                     <th>Coupon Description <i onClick={() => handleSort("CouponDescription")} className="fa fa-sort float-right" /></th>
                     <th>Terms and conditions</th>
                     <th>Reward Type <i onClick={() => handleSort("RewardType")} className="fa fa-sort float-right" /></th>
