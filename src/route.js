@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import Login from "./page/login";
-import Dashboard from "./page/dashboard";
 import offerhistoryList from "./page/offerhistory/offerhistoryList"
 import CouponList from "./page/coupon/couponList"
 import AddCoupon from "./page/coupon/addCoupon"
@@ -18,6 +17,8 @@ import ProtectedRoute from './utils/protectedRoute';
 import AddMemberShip from "./page/membership/addMembership"
 import Setting from "./page/setting/setting"
 import RewardType from "./page/rewardType/rewardTypeList"
+import userList from "./page/user/userList"
+import AddUser from "./page/user/addUser"
 const DefaultContainer = () => {
     const auth = useSelector(({ auth }) => auth);
 
@@ -41,8 +42,13 @@ const DefaultContainer = () => {
             <ProtectedRoute exact path="/reward" Component={RewardTransactionHistory} />
             <ProtectedRoute exact path="/add-reward" Component={AddRewardTransactionHistory} />
             <ProtectedRoute exact path="/reward-type" title="Reward Type" Component={RewardType} />
-            <ProtectedRoute exact path="/user" title="Users" Component={Dashboard} />
+            <ProtectedRoute exact path="/user" title="Users" Component={userList} />
+            <ProtectedRoute exact path="/add-user"  Component={AddUser} />
+            <ProtectedRoute exact path="/update-user/:id" Component={AddUser} />
+            
             <ProtectedRoute exact path="/setting"  Component={Setting} />
+
+            
 
         </>
     )

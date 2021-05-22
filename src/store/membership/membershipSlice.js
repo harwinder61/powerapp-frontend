@@ -41,7 +41,7 @@ export const addMemberShip = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/membership")
 			}
-			dispatch(getmemberShip())
+			// dispatch(getmemberShip())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
@@ -60,7 +60,7 @@ export const updateMemberShip = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/membership")
 			}
-			dispatch(getmemberShip())
+			// dispatch(getmemberShip())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))

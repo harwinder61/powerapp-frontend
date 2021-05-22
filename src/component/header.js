@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 // import 
 
-const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject }) => {
+const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName }) => {
     let history = useHistory()
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
@@ -66,8 +66,9 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                             </Row>}
                         </Col>
                         <Col className=" text-md-right left-col-sec">
-                            <div className="dealer_name">Dealer Group : {dealerGroupObject?.dealerGroupName}
-         </div>
+                           {showDealerName && <div className="dealer_name">Dealer Group : {dealerGroupObject?.dealerGroupName}
+                                            </div>
+                            }
 
                             <InputButton className="temp_button"
                                 type="button"
@@ -101,7 +102,8 @@ Header.defaultProps = {
     enableSearch: true,
     disabledSearch: false,
     showId: null,
-    searchObject: {}
+    searchObject: {},
+    showDealerName: true
 }
 
 export default Header

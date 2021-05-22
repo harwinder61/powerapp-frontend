@@ -118,7 +118,7 @@ const handleSearchFunction = async (e) => {
                 <thead>
                   <tr>
                     <th>Coupons/Vouchers</th>
-                    <th>Coupon Description <i onClick={() => handleSort("CouponDescription")} className="fa fa-sort float-right" /></th>
+                    <th>Description <i onClick={() => handleSort("CouponDescription")} className="fa fa-sort float-right" /></th>
                     <th>Terms and conditions</th>
                     <th>Reward Type <i onClick={() => handleSort("RewardType")} className="fa fa-sort float-right" /></th>
                     <th>AI Recommendation Number</th>

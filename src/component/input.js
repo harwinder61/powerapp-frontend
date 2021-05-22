@@ -1,12 +1,13 @@
 import { AvField } from 'availity-reactstrap-validation';
 
-const InputText = ({ name, value, type, required, option, disabled, optionName, optionValue  }) => {
+const InputText = ({ name, value, type, required, option, disabled, optionName, optionValue, placeholder  }) => {
     if (type === "text")
         return (
             <AvField id={name} name={name} value={value} type={type} required={required} disabled={disabled} />
         )
     else if (type === "select") return (
         <AvField id={name} name={name} value={value} type={type} required={required} disabled={disabled} >
+            <option key={0} value="">Select {placeholder}</option>
             {option?.map((iteam) => (
                 <option key={optionValue !== "" ? iteam[optionValue] : iteam.value} value={optionValue !== "" ? iteam[optionValue] : iteam.value}>{optionValue !== "" ? iteam[optionName] : iteam.name}</option>
             ))}
@@ -27,6 +28,7 @@ InputText.defaultProps = {
 	optionKey: "",
     optionValue: "",
 	optionName: "",
+    placeholder: "",
     option: []
 }
 

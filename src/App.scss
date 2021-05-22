@@ -57,9 +57,18 @@ td.left_align {
 				border-bottom: 2px solid #eceeef;
 				white-space: nowrap;
 				font-size: 12px;
+				padding-right: 30px;
+				position: relative;
+				// width: 200px;
 			}
 		}
 	}
+}
+
+i.fa.fa-sort.float-right {
+	position: absolute;
+	top: 41%;
+	right: 8px;
 }
 
 .sidebar {
@@ -320,7 +329,7 @@ ul.sidemenu {
 .serch-outer {
 	display: flex;
 	margin-top: 15px;
-	position: absolute;
+	// position: absolute;
 	input {
 		width: 300px;
 		padding-left: 30px;
