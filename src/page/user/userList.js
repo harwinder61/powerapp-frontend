@@ -100,6 +100,7 @@ const handleSearchFunction = async (e) => {
                     <th>email</th>
                     <th>Deal Group Id</th>
                     <th>Role</th>
+                    <th>Postal Code</th>
         <th>Action</th>
                   </tr>
                 </thead>
@@ -110,12 +111,17 @@ const handleSearchFunction = async (e) => {
                       <td>{iteam.Email}</td>
                       <td>{iteam.DealGroupID}</td>
                       <td>{iteam.UserRole}</td>
+                      <td>{iteam.PostalCode}</td>
                       <td>
                         <Link to={`/update-user/${iteam?.UserID}`}>
                           <FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i>
                         </Link>
+                        <Link to={`/update-user-password/${iteam?.UserID}`}>
+                          <FontAwesomeIcon icon={["fas", "lock"]} /> <i className="fas fa-pencil-alt"></i>
+                        </Link>
+                      
                       </td>
-
+                      
                     </tr>
 
                   )): (<tr><td colSpan={9}>No records found.</td></tr>)}

@@ -36,8 +36,9 @@ const AddUser = (props) => {
                 "middleName": values?.MiddleName,
                 "lastName": values?.LastName,
                 "email": values?.Email,
-                "userRole": values?.userRole,
-                "postalCode": values?.postalCode
+                "password": values?.Password,
+                 "userRole": values?.userRole,
+                 "postalCode": values?.postalCode
             }, history));
         } else {
             dispatch(addUser({
@@ -48,8 +49,8 @@ const AddUser = (props) => {
                 "lastName": values?.LastName,
                 "email": values?.Email,
                 "password": values?.Password,
-                "userRole": values?.userRole,
-                "postalCode": values?.postalCode
+                 "userRole": values?.userRole,
+                 "postalCode": values?.postalCode
             
             }, history));
         }
@@ -111,12 +112,12 @@ const AddUser = (props) => {
                                     </Col>
                                 </FormGroup>
 
-                                {!params?.id && <FormGroup row>
+                                <FormGroup row>
                                     <Label for="Password" sm={2}>* Password</Label>
                                     <Col sm={10}>
                                         <InputText name="Password" value={memberDetail?.Password} type="password" required />
                                     </Col>
-                                </FormGroup>}
+                                </FormGroup>
 
 
 

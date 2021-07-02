@@ -59,7 +59,7 @@ const MemberList = (props) => {
       ...prevState,
       MemberStatus: {
         ...prevState.MemberStatus,
-        option: commonDetail.Data,
+        option: commonDetail?.Data,
       }
     }));
     
@@ -70,7 +70,7 @@ const MemberList = (props) => {
       ...prevState,
       MembershipTypeID: {
         ...prevState.MembershipTypeID,
-        option: memberShip.Data,
+        option: memberShip?.Data,
       }
     }));
     

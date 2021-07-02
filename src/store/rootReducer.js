@@ -9,6 +9,8 @@ import offerhistory from './offerhistory/offerhistorySlice';
 import rewardTransactionHistory from './rewardTransactionHistory/rewardTransactionHistorySlice'
 import rewardType from './rewardType/rewardTypeSlice'
 import user from './user/userSlice'
+import consumerWallet from './consumerWallet/consumerWalletSlice'
+
 const createReducer = asyncReducers => (state, action) => {
 	const combinedReducer = combineReducers({
 		auth,
@@ -20,7 +22,8 @@ const createReducer = asyncReducers => (state, action) => {
 		offerhistory,
 		rewardTransactionHistory,
 		rewardType,
-		user
+		user,
+		consumerWallet
 	});
 
 	/*

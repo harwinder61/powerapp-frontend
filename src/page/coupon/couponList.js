@@ -20,6 +20,7 @@ import Header from "../../component/header";
  */
 const CouponList = (props) => {
   const [couponList, setCouponList] = useState([])
+  const [activeTr ,setActiveTr] = useState("")
   const [selectedPage, setSelectPage] = useState(1)
   const [sortObject, setSortObject] = useState({
     SortColumn: "EffectiveFromDate",
@@ -60,7 +61,7 @@ const CouponList = (props) => {
       ...prevState,
       RewardType: {
         ...prevState.RewardType,
-        option: commonDetail.Data,
+        option: commonDetail?.Data,
       }
     }));
     
@@ -128,22 +129,30 @@ const handleSearchFunction = async (e) => {
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody
+                //  onPointerLeave={()=>setActiveTr("")}
+                 >
                 {coupon?.Status ? couponList?.map((iteam, index) => (
-                    <tr key={index}>
-                      <td>{iteam.CouponCode}</td>
-                      <td>{iteam.CouponDescription}</td>
-                      <td>{iteam.CouponTermsConditions}</td>
-                      <td>{iteam.FieldDescription}</td>
-                      <td>{iteam.pointsMultiplier}</td>
-                      <td>{iteam.EffectiveFromDate !== "" ? moment(iteam.EffectiveFromDate).format('MM/DD/YYYY') : '01/01/1900'}</td>
-                      <td>{iteam.EffectiveToDate !== "" ? moment(iteam.EffectiveToDate).format('MM/DD/YYYY'): '01/01/1900'}</td>
-                      <td>{iteam.DealerId}</td>
-                      <td>
+                    <tr key={index} className={activeTr === index? "active-tr" : "default-tr"} 
+                    // onPointerEnter={}
+                    >
+                      <td><span>{iteam.CouponCode}</span></td>
+                      <td><span>{iteam.CouponDescription}</span></td>
+                      <td><span>{iteam.CouponTermsConditions}</span></td>
+                      <td><span>{iteam.FieldDescription}</span></td>
+                      <td><span>{iteam.pointsMultiplier}</span></td>
+                      <td><span>{iteam.EffectiveFromDate !== "" ? moment(iteam.EffectiveFromDate).format('MM/DD/YYYY') : '01/01/1900'}</span></td>
+                      <td><span>{iteam.EffectiveToDate !== "" ? moment(iteam.EffectiveToDate).format('MM/DD/YYYY'): '01/01/1900'}</span></td>
+                      <td><span>{iteam.DealerId}</span></td>
+                      <td><span>
                         <Link to={`/update-coupon/${iteam?.CouponCodeId}`}>
                           <FontAwesomeIcon icon={["fas", "pen"]} /> <i className="fas fa-pencil-alt"></i>
                         </Link>
-                      </td>
+                        {activeTr === index ? (<Link  onClick={()=>setActiveTr("")}><FontAwesomeIcon size="lg" icon={["fas", "angle-up"]} /></Link>
+                        ) : (
+                        <Link  onClick={()=>setActiveTr(index)}><FontAwesomeIcon icon={["fas", "angle-down"]} size="lg" /></Link>
+                        )}
+                      </span></td>
 
                     </tr>
 

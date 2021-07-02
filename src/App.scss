@@ -10,6 +10,11 @@ td.left_align {
 	text-align: right;
 }
 
+.default-tr td span {
+	display: block;
+	height: 50px;
+	overflow: hidden;
+}
 .login-wrapper {
 	display: flex;
 	align-items: center;
@@ -310,7 +315,7 @@ ul.sidemenu {
 	min-height: 50vh;
 	display: flex;
 	flex-direction: column;
-	li:last-child {
+	.last-li {
 		margin-top: auto;
 		display: flex;
 		justify-content: space-between;
@@ -319,6 +324,9 @@ ul.sidemenu {
 		padding-left: 10px;
 		padding-right: 5px;
 		font-size: 13px;
+	}
+	.li-bold {
+		font-weight: 700;
 	}
 }
 

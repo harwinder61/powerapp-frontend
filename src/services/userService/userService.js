@@ -18,6 +18,13 @@ class UserService {
 
 	};
 
+	getUserByEmail = (Email) => {
+		const url = `${process.env.REACT_APP_API}api/users/get-user-by-email?Email=${Email}`;
+		return axios
+			.get(url)
+
+	};
+
 
 	addUser = (param) => {
 		return axios

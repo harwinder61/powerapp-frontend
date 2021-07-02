@@ -27,9 +27,7 @@ const SideBar = () => {
 				<li><Link to="/offers">Coupons and Vouchers History</Link></li>
 				<li><Link to="/reward">Reward Transaction History</Link></li>
 				<li><Link to="/reward-type">Reward Type</Link></li>
-				<li><Link to="/user">Users</Link></li>
-				<li><Link to="/setting">Setting</Link></li>
-				<li > {auth?.email}
+				<li className="last-li"> {auth?.email}
 					<Button
 						color="primary log-out"
 						onClick={() => {
@@ -40,7 +38,13 @@ const SideBar = () => {
 						Log out
 				</Button>
 				</li>
-
+				{auth?.roleNmuber === 1 && <> <li className="li-bold"><Link to="/user">Users</Link></li>
+				<li className="li-bold"><Link to="/setting">Setting</Link></li>
+				<li className="li-bold"><Link to="/consumer-wallet">Consumer Wallet</Link></li>
+				
+				
+				</>}
+				
 
 			</ul>
 		</div>

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import authService from '../../services/authService';
 import { loadingStatus } from '../global/globalSlice';
-
+import userService from '../../services/userService';
 
 export const setSession = access_token => {
 	if (access_token) {
@@ -28,6 +28,10 @@ export const authLogin = (param, history) => async dispatch => {
 				toast.error(res.data.Message)
 			} else {
 				await setSession(res?.data?.Data?.id_token)
+				await userService.getUserByEmail(param?.username).then( async result => {
+				dispatch(authRoleNmuberSuccess(result?.data?.Data[0]?.UserRole))
+				})
+				
 				dispatch(authEmailSuccess(param?.username))
 				dispatch(authSuccess(res?.data));
 				await history.push("/coupons")
@@ -55,7 +59,8 @@ export const authLogout = (param, history) => async dispatch => {
 const initialState = {
 	success: false,
 	userData: null,
-	email: null
+	email: null,
+	roleNmuber: null,
 };
 
 const authSlice = createSlice({
@@ -71,6 +76,10 @@ const authSlice = createSlice({
 		authEmailSuccess: (state, action) => {
 			state.email = action.payload
 		},
+		authRoleNmuberSuccess: (state, action) => {
+			state.roleNmuber = action.payload
+		},
+		
 		authError: (state, action) => {
 			state.success = false;
 			state.userData = null;
@@ -79,6 +88,6 @@ const authSlice = createSlice({
 	extraReducers: {}
 });
 
-export const { authSuccess, authError, authEmailSuccess } = authSlice.actions;
+export const { authSuccess, authError, authEmailSuccess, authRoleNmuberSuccess } = authSlice.actions;
 
 export default authSlice.reducer;

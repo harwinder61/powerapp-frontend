@@ -19,6 +19,10 @@ import Setting from "./page/setting/setting"
 import RewardType from "./page/rewardType/rewardTypeList"
 import userList from "./page/user/userList"
 import AddUser from "./page/user/addUser"
+import ChangePassword from "./page/user/changePassword"
+
+import ConsumerWallet from "./page/consumerWallet/consumerWalletList"
+import CouponWallet from "./page/couponWallet/couponWalletList"
 const DefaultContainer = () => {
     const auth = useSelector(({ auth }) => auth);
 
@@ -45,9 +49,11 @@ const DefaultContainer = () => {
             <ProtectedRoute exact path="/user" title="Users" Component={userList} />
             <ProtectedRoute exact path="/add-user"  Component={AddUser} />
             <ProtectedRoute exact path="/update-user/:id" Component={AddUser} />
-            
+            <ProtectedRoute exact path="/update-user-password/:id" Component={ChangePassword} />
+            <ProtectedRoute exact path="/consumer-wallet"  Component={ConsumerWallet} />            
             <ProtectedRoute exact path="/setting"  Component={Setting} />
-
+            <ProtectedRoute exact path="/coupon-wallet"  Component={CouponWallet} />            
+        
             
 
         </>

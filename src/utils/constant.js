@@ -15,7 +15,7 @@ const delearGroupType = [{
     value: 100001
 }, {
     name: "External User",
-    value: 99998
+    value: 999998
 }, {
     name: "Al Group",
     value: 999999
@@ -29,5 +29,18 @@ const rewardUnitList = [{
     value: "Amount"
 }]
 
+const userRoleList = [{
+    name: "SystemAdmin",
+    value: 1
+}, {
+    name: "Admin",
+    value: 2
+}, {
+    name: "User",
+    value: 3
+}, {
+    name: "External User",
+    value: 7
+}]
 
-export { delearGroupType, rewardUnitList }
+export { delearGroupType, rewardUnitList, userRoleList }

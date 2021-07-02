@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 // import 
 
-const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName }) => {
+const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName, showAddBuuton }) => {
     let history = useHistory()
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
@@ -34,7 +34,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                             placeholder={data?.placeholder}
                                             >
                                                 <option value="">{data?.placeholder}</option>
-                                                {data.option.map(option => (
+                                                {data?.option?.map(option => (
                                                     <option value={option[data.optionName]}>{option[data.optionKey]}</option>
                                                 ))}
                                         </Input>
@@ -70,11 +70,11 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                             </div>
                             }
 
-                            <InputButton className="temp_button"
+                           {showAddBuuton &&  <InputButton className="temp_button"
                                 type="button"
                                 name={pathName}
                                 onClick={() => history.push(path)}
-                            />
+                            />}
                         </Col>
 
                     </Row>
@@ -103,7 +103,8 @@ Header.defaultProps = {
     disabledSearch: false,
     showId: null,
     searchObject: {},
-    showDealerName: true
+    showDealerName: true,
+    showAddBuuton: true
 }
 
 export default Header
