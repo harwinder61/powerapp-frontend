@@ -41,7 +41,7 @@ const SideBar = () => {
 				{auth?.roleNmuber === 1 && <> <li className="li-bold"><Link to="/user">Users</Link></li>
 				<li className="li-bold"><Link to="/setting">Setting</Link></li>
 				<li className="li-bold"><Link to="/consumer-wallet">Consumer Wallet</Link></li>
-				
+				<li className="li-bold"><Link to="/add-coupon-wallet">Add Coupon wallet</Link></li>		
 				
 				</>}
 				

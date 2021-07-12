@@ -23,8 +23,22 @@ class ConsumerWalletService {
 		return axios
 			.get(url)
 	};
+	getDealerInfo = (dealerNumber,dealerGroupId) => {
+		let url = `${process.env.REACT_APP_API}api//dealer/get-dealer-info?DealGroupID=${dealerGroupId}&DealerNumber=${dealerNumber}`;
+		return axios.get(url);
+	};
 
 	
+	addTenderCoupon = (param) => {
+		return axios
+			.post(`${process.env.REACT_APP_API}api/couponwallet/tender-coupon`, param)
+	}
+
+	addCouponWallet = (param) => {
+		return axios
+			.post(`${process.env.REACT_APP_API}api/couponwallet/add-coupon-to-wallet`, param)
+	}
+
 	// getUserById = (UserID) => {
 	// 	const url = `${process.env.REACT_APP_API}api/users/get-user-by-userid?UserID=${UserID}`;
 	// 	return axios

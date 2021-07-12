@@ -23,6 +23,9 @@ import ChangePassword from "./page/user/changePassword"
 
 import ConsumerWallet from "./page/consumerWallet/consumerWalletList"
 import CouponWallet from "./page/couponWallet/couponWalletList"
+import AddTenderCoupon from "./page/couponWallet/addTenderCoupon"
+import AddCouponWallet from "./page/couponWallet/addCouponWallet"
+
 const DefaultContainer = () => {
     const auth = useSelector(({ auth }) => auth);
 
@@ -53,7 +56,8 @@ const DefaultContainer = () => {
             <ProtectedRoute exact path="/consumer-wallet"  Component={ConsumerWallet} />            
             <ProtectedRoute exact path="/setting"  Component={Setting} />
             <ProtectedRoute exact path="/coupon-wallet"  Component={CouponWallet} />            
-        
+            <ProtectedRoute exact path="/add-tender-coupon"  Component={AddTenderCoupon} />            
+            <ProtectedRoute exact path="/add-coupon-wallet"  Component={AddCouponWallet} />
             
 
         </>
