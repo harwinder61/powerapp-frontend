@@ -129,13 +129,9 @@ const handleSearchFunction = async (e) => {
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody
-                //  onPointerLeave={()=>setActiveTr("")}
-                 >
+                <tbody>
                 {coupon?.Status ? couponList?.map((iteam, index) => (
-                    <tr key={index} className={activeTr === index? "active-tr" : "default-tr"} 
-                    // onPointerEnter={}
-                    >
+                    <tr key={index} className={activeTr === index? "active-tr" : "default-tr"} >
                       <td><span>{iteam.CouponCode}</span></td>
                       <td><span>{iteam.CouponDescription}</span></td>
                       <td><span>{iteam.CouponTermsConditions}</span></td>

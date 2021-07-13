@@ -11,6 +11,7 @@ import userService from '../../services/userService';
  */
 
 export const setSession = access_token => {
+	console.log("ssssssssssss", access_token)
 	if (access_token) {
 		localStorage.setItem('access_token', access_token);
 		axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
@@ -19,8 +20,6 @@ export const setSession = access_token => {
 		delete axios.defaults.headers.common.Authorization;
 	}
 };
-
-
 
 export const authLogin = (param, history) => async dispatch => {
 	dispatch(loadingStatus(true))
@@ -36,7 +35,7 @@ export const authLogin = (param, history) => async dispatch => {
 				dispatch(authRoleNmuberSuccess(result?.data?.Data[0]?.UserRole))
 				})
 				
-				dispatch(authEmailSuccess(param?.username))
+				dispatch(authEmailSuccess({email: param?.username, password: param?.password}))
 				dispatch(authSuccess(res?.data));
 				await history.push("/coupons")
 			}
@@ -52,6 +51,21 @@ export const authLogin = (param, history) => async dispatch => {
 };
 
 
+export const authRefreshLogin = (param,) => async dispatch => {
+	return authService
+		.authLogin(param)
+		.then(async res => {
+			if (res.data.ExceptionError) {
+				setSession(null)
+				toast.error(res.data.Message)
+			} else {
+				await setSession(res?.data?.Data?.id_token)
+			}
+
+		})
+};
+
+
 export const authLogout = (param, history) => async dispatch => {
 	setSession(null)
 	localStorage.clear()
@@ -64,6 +78,7 @@ const initialState = {
 	success: false,
 	userData: null,
 	email: null,
+	password: null,
 	roleNmuber: null,
 };
 
@@ -78,7 +93,8 @@ const authSlice = createSlice({
 
 		},
 		authEmailSuccess: (state, action) => {
-			state.email = action.payload
+			state.email = action.payload?.email
+			state.password = action.payload?.password
 		},
 		authRoleNmuberSuccess: (state, action) => {
 			state.roleNmuber = action.payload

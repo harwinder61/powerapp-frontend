@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import {  addtendercoupon } from "../../store/consumerWallet/consumerWalletSlice";
 import { loadingStatus } from "../../store/global/globalSlice";
+import {  getOperationType } from "../../store/common/commonSlice"
 
 import { useHistory } from "react-router"
 import InputText from "../../component/input"
@@ -21,9 +22,10 @@ const AddTenderCoupon = (props) => {
     let history = useHistory()
     const dispatch = useDispatch();
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
+    const operationType = useSelector(({ common }) => common.operationType);
 
     const loading = useSelector(({ global }) => global.loading);
-    const memberDetail = {};
+    const tenderCouponDetail = useSelector(({ consumerWallet }) => consumerWallet.tenderCouponResult);;
    
 
 
@@ -32,11 +34,11 @@ const AddTenderCoupon = (props) => {
         dispatch(loadingStatus(true));
         
             dispatch(addtendercoupon({
-                "walletId": values?.walletId,
+                "walletId": values?.WalletId,
                 "dealGroupID": dealerGroupObject?.dealerGroupId,
                 "dealerNumber": values?.DealerNumber,
-                "couponCodeId": 0,
-                "customerId": 0,
+                "couponCodeId": tenderCouponDetail?.CouponCodeId,
+                "customerId": tenderCouponDetail?.CustomerId,
                 "socialMediaId": values?.SocialMediaId,
                 "phoneNumber": values?.PhoneNumber,
                 "vin": values?.Vin,
@@ -45,6 +47,11 @@ const AddTenderCoupon = (props) => {
             }, history));
         
     }
+
+    useEffect(() => {
+        dispatch(getOperationType("operational_type"))
+    }, [dispatch]);
+
 
 
     return (
@@ -60,63 +67,57 @@ const AddTenderCoupon = (props) => {
                             <AvForm onValidSubmit={handleValidSubmit} >
 
                                 <FormGroup row>
-                                    <Label for="walletId" sm={2}>* Wallet Id</Label>
+                                    <Label for="WalletId" sm={2}>* Wallet Id</Label>
                                     <Col sm={10}>
-                                        <InputText name="walletId" value={memberDetail?.walletId} type="text" required/>
+                                        <InputText name="WalletId" value={tenderCouponDetail?.WalletId} disabled type="text" required/>
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="DealerNumber" sm={2}>Dealer Number</Label>
+                                    <Label for="DealerNumber" sm={2}>* Dealer Number</Label>
                                     <Col sm={10}>
-                                        <InputText name="DealerNumber" value={memberDetail?.DealerNumber} type="text" />
+                                        <InputText name="DealerNumber" value={tenderCouponDetail?.DealerNumber} disabled type="text" required/>
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="SocialMediaId" sm={2}>* Social Media Id</Label>
+                                    <Label for="SocialMediaId" sm={2}> Social Media Id</Label>
                                     <Col sm={10}>
-                                        <InputText name="SocialMediaId" value={memberDetail?.SocialMediaId} type="text" required/>
+                                        <InputText name="SocialMediaId" value={tenderCouponDetail?.SocialMediaId} type="text" />
                                     </Col>
                                 </FormGroup>
 
 
 
                                 <FormGroup row>
-                                    <Label for="PhoneNumber" sm={2}>* Phone Number</Label>
+                                    <Label for="PhoneNumber" sm={2}>Phone Number</Label>
                                     <Col sm={10}>
-                                        <InputText name="PhoneNumber" value={memberDetail?.PhoneNumber} type="text" required/>
+                                        <InputText name="PhoneNumber" value={tenderCouponDetail?.PhoneNumber} type="text"/>
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="Vin" sm={2}>* Vin</Label>
                                     <Col sm={10}>
-                                        <InputText name="Vin" value={memberDetail?.Vin} type="text" required/>
+                                        <InputText name="Vin" value={tenderCouponDetail?.Vin} type="text" disabled required/>
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="TransactionAmount" sm={2}>* Transaction Amount</Label>
                                     <Col sm={10}>
-                                        <InputText name="TransactionAmount" value={memberDetail?.TransactionAmount} type="yext" required />
-                                    </Col>
-                                </FormGroup>
-
-
-
-
-                                <FormGroup row>
-                                    <Label for="OperationalType" sm={2}>* Operational Type</Label>
-                                    <Col sm={10}>
-                                        <InputText name="OperationalType" placeholder="Operational Type" value={memberDetail?.OperationalType} required />
+                                        <InputText name="TransactionAmount" value={tenderCouponDetail?.TransactionAmount} type="yext" required />
                                     </Col>
                                 </FormGroup>
 
                                 
-
+                                <FormGroup row>
+                                    <Label for="OperationalType" sm={2}>* Operational Type</Label>
+                                    <Col sm={10}>
+                                        <InputText name="OperationalType" placeholder="Operational Type" type="select" option={operationType?.Data} optionValue="FieldValue" optionName="FieldDescription" required />
+                                    </Col>
+                                </FormGroup>
                                 <InputButton color="primary" disabled={loading}>Submit</InputButton>
-
                             </AvForm>
 
                         </Col>

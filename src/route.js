@@ -1,4 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
+import React, { useEffect} from 'react';
+import { useCallback } from 'react'
+
 import Login from "./page/login";
 import offerhistoryList from "./page/offerhistory/offerhistoryList"
 import CouponList from "./page/coupon/couponList"
@@ -11,7 +14,7 @@ import RewardTransactionHistory from "./page/rewardTransactionHistory/rewardTran
 import AddRewardTransactionHistory from "./page/rewardTransactionHistory/addRewardTransactionHistory";
 import SideBar from './component/sidebar';
 import LoadingOverlay from 'react-loading-overlay';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import RequireAuthLogin from "./utils/requireAuthLogin";
 import ProtectedRoute from './utils/protectedRoute';
 import AddMemberShip from "./page/membership/addMembership"
@@ -20,6 +23,7 @@ import RewardType from "./page/rewardType/rewardTypeList"
 import userList from "./page/user/userList"
 import AddUser from "./page/user/addUser"
 import ChangePassword from "./page/user/changePassword"
+import { authRefreshLogin } from "./store/auth/authSlice"
 
 import ConsumerWallet from "./page/consumerWallet/consumerWalletList"
 import CouponWallet from "./page/couponWallet/couponWalletList"
@@ -28,6 +32,23 @@ import AddCouponWallet from "./page/couponWallet/addCouponWallet"
 
 const DefaultContainer = () => {
     const auth = useSelector(({ auth }) => auth);
+      const dispatch = useDispatch();
+    
+      const loadData = useCallback(()  => {
+        dispatch(authRefreshLogin({
+    			"username": auth?.email,
+    			"password": auth?.password,
+    			"grant_type": 'refresh',
+    			"refresh_token": process.env.REACT_APP_REFRESH_TOKEN
+    		}));
+      }, [dispatch, auth])
+      
+    
+      useEffect(() => {
+        loadData()
+        setInterval(loadData, 30 * 60 * 1000);
+    }, [loadData]);
+      
 
 
     return (

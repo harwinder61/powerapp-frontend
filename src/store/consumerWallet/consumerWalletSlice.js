@@ -41,6 +41,11 @@ export const setSearchValue = (search) => async dispatch => {
 
 };
 
+export const setTenderCouponValue = (search) => async dispatch => {
+	return dispatch(setTenderCouponResult(search));
+
+};
+
 const callAPi =async (response, dealerGroupId) => {
 	const resultData = await Promise.all(
 		 response.map( async (list) => {
@@ -68,7 +73,6 @@ export const addtendercoupon = (param, history) => async dispatch => {
 			}
 			dispatch(loadingStatus(false))
 
-			// dispatch(getcoupon())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
@@ -101,6 +105,7 @@ const initialState = {
 	consumerWallet: null,
 	consumerSpecificWallet: null,
 	searchObject: null,
+	tenderCouponResult: null,
 	dealerList:[]
 };
 
@@ -129,6 +134,11 @@ const consumerWalletSlice = createSlice({
 			state.success = true;
 			state.searchObject = action.payload
 		},
+		setTenderCouponResult: (state, action) => {
+			state.success = true;
+			state.tenderCouponResult = action.payload
+		},
+		
 		setDealerObject: (state, action) => {
 			state.success = true;
 			state.dealerList = action.payload
@@ -137,6 +147,6 @@ const consumerWalletSlice = createSlice({
 	extraReducers: {}
 });
 
-export const { consumerWalletSuccess, consumerWalletError, consumerSpecificWalletSuccess, consumerSpecificWalletError, setSearchObject, setDealerObject } = consumerWalletSlice.actions;
+export const { consumerWalletSuccess, consumerWalletError, consumerSpecificWalletSuccess, consumerSpecificWalletError, setSearchObject, setTenderCouponResult, setDealerObject } = consumerWalletSlice.actions;
 
 export default consumerWalletSlice.reducer;

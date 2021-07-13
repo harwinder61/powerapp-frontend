@@ -95,7 +95,6 @@ const AddRewardTransactionHistory = (props) => {
                                     <Label for="name" sm={2}>* Operation Type</Label>
                                     <Col sm={10}>
                                         <InputText name="operationType" type="select" option={operationType?.Data} optionValue="FieldValue" optionName="FieldDescription" />
-
                                     </Col>
                                 </FormGroup>
 

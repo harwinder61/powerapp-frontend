@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table } from 'reactstrap';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getConsumerSpecificWallet } from "../../store/consumerWallet/consumerWalletSlice"
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getConsumerSpecificWallet, setTenderCouponValue } from "../../store/consumerWallet/consumerWalletSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationComponent from "react-reactstrap-pagination";
@@ -59,10 +59,8 @@ const CouponWallet = (props) => {
             headerLabel="Coupon Wallet"
             handleSubmit={handleSubmit}
             searchObject={searchObject}
-            path="/add-tender-coupon"
-            pathName="Add Tender Coupon"
-            
-          />
+            showAddBuuton={false}
+           />
           <Row className="table-row-outer">
             <Col>
               <Table borderless>
@@ -84,7 +82,7 @@ const CouponWallet = (props) => {
                       <td><span>{searchObject.SocialMediaId}</span></td>
                       <td><span>{searchObject.PhoneNumber? searchObject.PhoneNumber : "N/A"}</span></td>
                       <td><span>{searchObject.Vin? searchObject.Vin : "N/A"}</span></td>
-                    </tr>
+                       </tr>
                   }
 
 
@@ -105,24 +103,29 @@ const CouponWallet = (props) => {
                     <th>Effective From</th>
                     <th>Effective   To</th>
                     <th>Dealer Name</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 
-              <tbody
-              //  onPointerLeave={()=>setActiveTr("")}
-               >
+              <tbody>
                 {consumerWallet?.Status ? consumerWalletList?.map((iteam, index) => (
-                   <tr key={index} className="default-tr" 
-                  //  onPointerEnter={()=>setActiveTr(index)}
-                   >
+                   <tr key={index} className="default-tr">
                       <td><span>{iteam.CouponCode}</span></td>
                       <td><span>{iteam.CouponDescription}</span></td>
                       <td><span>{iteam.CouponTermsConditions}</span></td>
                       <td><span>{iteam.EffectiveFromDate !== "" ? moment(iteam.EffectiveFromDate).format('MM/DD/YYYY') : '01/01/1900'}</span></td>
                       <td><span>{iteam.EffectiveToDate !== "" ? moment(iteam.EffectiveToDate).format('MM/DD/YYYY'): '01/01/1900'}</span></td>
-                      {/* <td><span>{getDealer(iteam?.DealerNumber)}</span></td> */}
                   
                       <td><span>{dealerList.findIndex(i => i.DealerNumber  ===  iteam?.DealerNumber ) !== 1 ? dealerList[dealerList.findIndex(i => i.DealerNumber  ===  iteam?.DealerNumber )]?.DealerName  :"NA"}</span></td>
+                      <td>
+                        <span>
+                          <Link to={`/add-tender-coupon`} onClick={() => dispatch(setTenderCouponValue(iteam))}>
+                            <FontAwesomeIcon icon={["fas", "plus"]} /> <i className="fas fa-pencil-alt"></i>
+                          </Link>
+                      
+                        </span>
+                      </td>
+                   
                     </tr>
 
                   )): (<tr><td colSpan={9}>No records found.</td></tr>)}

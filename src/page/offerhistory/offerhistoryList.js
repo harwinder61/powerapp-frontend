@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table } from 'reactstrap';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getofferhistory } from "../../store/offerhistory/offerhistorySlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';

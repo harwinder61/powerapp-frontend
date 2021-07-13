@@ -57,9 +57,7 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                 
                                 )}</Col>)
                                 )}
-                                {/* <Input name="search"
-                                    onChange={handleSearch}
-                                    placeholder="" /> */}
+                                
                                 <InputButton className="temp_button filter-button "
                                     type="button"
                                     onClick={handleSubmit}
