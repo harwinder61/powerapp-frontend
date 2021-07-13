@@ -3,8 +3,11 @@ import InputButton from "./button"
 import { useHistory } from "react-router"
 import { useSelector } from 'react-redux';
 
-// import 
-
+/**
+ * Define header component
+ * @param {*} param0 
+ * @returns html
+ */
 const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName, showAddBuuton }) => {
     let history = useHistory()
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);

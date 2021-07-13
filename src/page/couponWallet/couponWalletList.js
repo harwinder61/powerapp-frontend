@@ -14,7 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the coupon list
+ * Component for dispaly the coupon wallet list
  * @param {*} props 
  * @returns 
  */
@@ -23,18 +23,6 @@ import Header from "../../component/header";
 const CouponWallet = (props) => {
   const [consumerWalletList, setConsumerWallet] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
-  // const [activeTr ,setActiveTr] = useState("")
-
-  // const [searchObject, setSearchObject] = useState({
-  //   "SocialMediaId": {type: "text", placeholder: "Social Media Id", value: "", },
-  //   "PhoneNumber": {type: "text", placeholder: "Phone Number", value: "", },
-  //   "CustomerId": {type: "text", placeholder: "Customer Id", value: "", },
-  //   "Vin": {type: "text", placeholder: "Vin", value: "", },
-   
-  //   // "UserType": {type: "select", placeholder: "User Type", value: "", option: userTypeList, optionKey: "FieldDescription", optionName: "FieldValue" },
-
-  // })
-
   const dispatch = useDispatch();
   const consumerWallet = useSelector(({ consumerWallet }) => consumerWallet.consumerSpecificWallet);
   const searchObject = useSelector(({ consumerWallet }) => consumerWallet.searchObject);
@@ -60,20 +48,6 @@ const CouponWallet = (props) => {
     setSelectPage(selectedPage)
   }
 
-
-
-// const handleSearchFunction = async (e) => {
-//   const text = e.target.value
-//     await setSelectPage(1)
-//     await setSearchObject((prevState) => ({
-//       ...prevState,
-//       [e.target.name]: {
-//         ...prevState[e.target.name],
-//         value: text,
-//       }
-//     }));
-//   }
-
   return (
     <>
 
@@ -88,9 +62,6 @@ const CouponWallet = (props) => {
             path="/add-tender-coupon"
             pathName="Add Tender Coupon"
             
-            // handleSearch={(e) =>
-            //   handleSearchFunction(e)
-            // }
           />
           <Row className="table-row-outer">
             <Col>
@@ -105,9 +76,7 @@ const CouponWallet = (props) => {
                   </tr>
                 </thead>
                 
-              <tbody
-              //  onPointerLeave={()=>setActiveTr("")}
-               >
+              <tbody>
                 {searchObject &&
                    <tr className="default-tr" >
                       <td><span>{ `${consumerWalletList[0]?.FirstName} ${consumerWalletList[0]?.LastName}` }</span></td>

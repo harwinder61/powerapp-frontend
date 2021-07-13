@@ -8,7 +8,6 @@ export const getmember = (dealGroupID, selectedPage, searchText) => async dispat
 		.getMemberList(dealGroupID, selectedPage, searchText)
 		.then(res => {
 			dispatch(loadingStatus(false))
-			// dispatch(memberDetailSuccess(null))
 			return dispatch(memberSuccess(res?.data));
 		})
 		.catch(error => {
@@ -47,7 +46,6 @@ export const addMember = (param, history, id, value) => async dispatch => {
 		})
 		.catch(error => {
 			console.log(error?.response)
-			// toast.info(res.data.Message)
 			dispatch(loadingStatus(false))
 
 		});

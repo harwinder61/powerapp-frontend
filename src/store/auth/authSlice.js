@@ -6,6 +6,10 @@ import authService from '../../services/authService';
 import { loadingStatus } from '../global/globalSlice';
 import userService from '../../services/userService';
 
+/**
+ * define all auth action to access auth store
+ */
+
 export const setSession = access_token => {
 	if (access_token) {
 		localStorage.setItem('access_token', access_token);

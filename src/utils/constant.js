@@ -1,3 +1,7 @@
+/**
+ * Define all constant value
+ */
+
 const delearGroupType = [{
     name: "HGregg",
     value: 1
@@ -43,4 +47,12 @@ const userRoleList = [{
     value: 7
 }]
 
-export { delearGroupType, rewardUnitList, userRoleList }
+const userTypeList =[{
+    FieldDescription: "Internal",
+    optionName: "Internal",
+  },{
+    FieldDescription: "External",
+    optionName: "External",
+  }]
+
+export { delearGroupType, rewardUnitList, userRoleList, userTypeList }

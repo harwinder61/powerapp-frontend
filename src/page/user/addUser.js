@@ -10,8 +10,13 @@ import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
-import { delearGroupType } from "../../utils/constant"
-import { userRoleList } from "../../utils/constant"
+import { delearGroupType, userRoleList } from "../../utils/constant"
+
+/**
+ * Component for add user
+ * @param {*} props 
+ * @returns 
+ */
 
 const AddUser = (props) => {
     const { match: { params } } = props

@@ -11,6 +11,11 @@ import rewardType from './rewardType/rewardTypeSlice'
 import user from './user/userSlice'
 import consumerWallet from './consumerWallet/consumerWalletSlice'
 
+/**
+ * Define Root reducer
+ * @param {*} asyncReducers 
+ * @returns reducer
+ */
 const createReducer = asyncReducers => (state, action) => {
 	const combinedReducer = combineReducers({
 		auth,

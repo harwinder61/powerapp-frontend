@@ -15,7 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the coupon list
+ * Component for dispaly the consumer wallet list
  * @param {*} props 
  * @returns 
  */
@@ -24,16 +24,12 @@ import Header from "../../component/header";
 const ConsumerWallet = (props) => {
   const [consumerWalletList, setConsumerWallet] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
-  // const [activeTr ,setActiveTr] = useState("")
 
   const [searchObject, setSearchObject] = useState({
     "SocialMediaId": {type: "text", placeholder: "Social Media Id", value: "", },
     "PhoneNumber": {type: "text", placeholder: "Phone Number", value: "", },
     "CustomerId": {type: "text", placeholder: "Customer Id", value: "", },
     "Vin": {type: "text", placeholder: "Vin", value: "", },
-   
-    // "UserType": {type: "select", placeholder: "User Type", value: "", option: userTypeList, optionKey: "FieldDescription", optionName: "FieldValue" },
-
   })
 
   const dispatch = useDispatch();
@@ -46,23 +42,6 @@ const ConsumerWallet = (props) => {
   }, [dispatch, selectedPage, searchObject, dealerGroupObject]);
 
   useEffect(() => {
-    // let list = []
-    // consumerWallet && consumerWallet?.Data?.Items?.map(iteam => {
-    //   if(list.findIndex(x => x.SocialMediaId === iteam.SocialMediaId && x.PhoneNumber === iteam.PhoneNumber && x.CustomerId === iteam.CustomerId && x.vin === iteam.vin ) !== -1){
-    //     list[list.findIndex(x => x.SocialMediaId === iteam.SocialMediaId && x.PhoneNumber === iteam.PhoneNumber && x.CustomerId === iteam.CustomerId && x.vin === iteam.vin)].count +=1
-    //   } else {
-    //     list.push({
-    //       CustomerName: iteam?.CustomerName,
-    //       SocialMediaId: iteam?.SocialMediaId,
-    //       PhoneNumber: iteam?.PhoneNumber,
-    //       CustomerId: iteam?.CustomerId,
-    //       Vin: iteam?.Vin,
-    //       count: 1
-    //     })
-    //   }
-    //   return true
-    // })
-
     setConsumerWallet(consumerWallet?.Data?.Items)
   }, [consumerWallet]);
 
@@ -93,13 +72,15 @@ const handleSearchFunction = async (e) => {
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
           <Header
-            showAddBuuton={false}
+            showAddBuuton={true}
             headerLabel="Customer Wallet"
             handleSubmit={handleSubmit}
             searchObject={searchObject}
             handleSearch={(e) =>
               handleSearchFunction(e)
             }
+            path="/add-coupon-wallet"
+            pathName="Add Coupon Wallet"
           />
           <Row className="table-row-outer">
             <Col>
@@ -116,12 +97,9 @@ const handleSearchFunction = async (e) => {
                   </tr>
                 </thead>
                 
-              <tbody
-              //  onPointerLeave={()=>setActiveTr("")}
-               >
+              <tbody>
                 {consumerWallet?.Status ? consumerWalletList?.map((iteam, index) => (
                    <tr key={index} className="default-tr" 
-                  //  onPointerEnter={()=>setActiveTr(index)}
                    >
                       <td><span>{iteam.CustomerId ? `${iteam.FirstName} ${iteam.LastName}` : "N/A"}</span></td>
                       <td><span>{iteam.CustomerId || "N/A"}</span></td>
@@ -130,17 +108,14 @@ const handleSearchFunction = async (e) => {
                       <td><span>{iteam.Vin? iteam.Vin : "N/A"}</span></td>
                       <td><span>{ iteam.CouponCount || "N/A"}</span></td>
                       
-                      <td><span>
-                      <Link to={`/coupon-wallet`} onClick={() => dispatch(setSearchValue(iteam))}>
-                          <FontAwesomeIcon icon={["fas", "plus"]} /> <i className="fas fa-pencil-alt"></i>
-                        </Link>
-                       
-
-                        {/* {activeTr === index ? (<Link  onClick={()=>setActiveTr("")}><FontAwesomeIcon  size="lg"icon={["fas", "angle-up"]} /></Link>
-                        ) : (
-                        <Link  onClick={()=>setActiveTr(index)}><FontAwesomeIcon icon={["fas", "plus"]} size="lg" /></Link>
-                        )} */}
-                      </span></td>
+                      <td>
+                        <span>
+                          <Link to={`/coupon-wallet`} onClick={() => dispatch(setSearchValue(iteam))}>
+                            <FontAwesomeIcon icon={["fas", "plus"]} /> <i className="fas fa-pencil-alt"></i>
+                          </Link>
+                      
+                        </span>
+                      </td>
 
                     </tr>
 

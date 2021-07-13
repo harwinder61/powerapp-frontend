@@ -12,6 +12,12 @@ import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
+/**
+ * Component for add coupon transaction
+ * @param {*} props 
+ * @returns 
+ */
+
 
 const AddCoupontransaction = (props) => {
     const { match: { params } } = props
@@ -24,21 +30,6 @@ const AddCoupontransaction = (props) => {
 
     const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
-        if (addOfferhistoryId) {
-            // dispatch(updateCoupon({
-            //     "coupon_code_id": couponId,
-            //     "coupon_code": values?.couponCode,
-            //     "coupon_description": values?.couponDescription,
-            //     "coupon_terms": values?.couponTermsCondituins,
-            //     "reward_type": values?.rewardType,
-            //     "coupon_recommendations": values?.couponRecommedations,
-            //     "effective_from_date": values?.effectiveFrom,
-            //     "effective_to_date": values?.effectiveto,
-            //     "DealGroupID": values?.dealerGroup,
-            //     "DealerNumber": values?.DealerNumber,
-            //     "image_location": values?.imageLocation
-            // }, history));
-        } else {
             dispatch(addOfferhistory({
 
 
@@ -52,7 +43,7 @@ const AddCoupontransaction = (props) => {
                 "transactionDate": moment.utc(),
 
             }, history));
-        }
+        
     }
 
     useEffect(() => {

@@ -65,6 +65,11 @@ const DefaultContainer = () => {
 
 }
 
+/**
+ * Define the rounting 
+ * @returns Route
+ */
+
 const Routers = () => {
     const loading = useSelector(({ global }) => global.loading);
     return (

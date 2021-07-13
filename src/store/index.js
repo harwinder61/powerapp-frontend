@@ -11,9 +11,7 @@ import {
 	REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-
 const middlewares = [];
-
 const { logger } = require(`redux-logger`);
 
 const persistConfig = {
@@ -22,12 +20,20 @@ const persistConfig = {
 	storage,
 }
 
-
+/**
+ * Define logger 
+ */
 middlewares.push(logger);
 
+/**
+ * Define persisting the store value 
+ */
 const persistedReducer = persistReducer(persistConfig, createReducer())
 
 
+/**
+ * Define store 
+ */
 const store = configureStore({
 	reducer: persistedReducer,
 	middleware: getDefaultMiddleware =>

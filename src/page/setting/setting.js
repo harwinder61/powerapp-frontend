@@ -9,7 +9,12 @@ import InputButton from "../../component/button"
 import Header from "../../component/header";
 import { delearGroupType } from "../../utils/constant"
 
-const AddMemberShip = (props) => {
+/**
+ * Component for change dealer group
+ * @param {*} props 
+ * @returns 
+ */
+const Setting = (props) => {
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     const dispatch = useDispatch();
@@ -53,4 +58,4 @@ const AddMemberShip = (props) => {
     )
 }
 
-export default AddMemberShip
+export default Setting

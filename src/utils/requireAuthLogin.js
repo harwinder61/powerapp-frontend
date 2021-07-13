@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 
+/**
+ * Define HOC for route for check auth check
+ * @param {*} ComposedComponent 
+ * @returns 
+ */
 const RequireAuthLogin = (ComposedComponent) => {
   class RequireAuthLogin extends Component {
     static propTypes = {

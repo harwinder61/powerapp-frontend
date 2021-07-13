@@ -3,6 +3,9 @@ import ConsumerWalletService from '../../services/consumerWalletService';
 import { loadingStatus } from '../global/globalSlice';
 import { toast } from 'react-toastify';
 
+/**
+ * define all action to access consumer store
+ */
 
 export const getConsumerWallet = (selectedPage, searchText, dealerGroupId) => async dispatch => {
 	return ConsumerWalletService
@@ -63,6 +66,8 @@ export const addtendercoupon = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/consumer-wallet")
 			}
+			dispatch(loadingStatus(false))
+
 			// dispatch(getcoupon())
 		})
 		.catch(error => {
@@ -83,7 +88,6 @@ export const addCouponWallet = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/consumer-wallet")
 			}
-			// dispatch(getcoupon())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))

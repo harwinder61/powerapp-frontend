@@ -23,7 +23,6 @@ import Header from "../../component/header";
  */
 const MemberList = (props) => {
 
-  // const variable decare
   const [memberList, setMemberList] = useState([])
   const [selectedPage, setSelectPage] = useState(1)
   const [searchObject, setSearchObject] = useState({

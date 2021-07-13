@@ -1,5 +1,10 @@
 import { Input } from 'reactstrap';
 
+/**
+ * Define reactstrap input  component
+ * @param {*} param0 
+ * @returns html
+ */
 const InputReactStrapText = ({ name, value, type, required, option, disabled, optionName, optionValue  }) => {
     if (type === "text")
         return (

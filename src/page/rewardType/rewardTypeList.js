@@ -14,13 +14,12 @@ import InputButton from "../../component/button"
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the member list
+ * Component for dispaly the rewad type list
  * @param {*} props 
  * @returns 
  */
 const RewardTypeList = (props) => {
 
-  // const variable decare
   const [selectedPage, setSelectPage] = useState(1)
   const [rewardTypeDetail, setRewardTypeDetail] = useState(null)
   const dispatch = useDispatch();
@@ -33,11 +32,6 @@ const RewardTypeList = (props) => {
     setRewardTypeDetail(null)
     dispatch(getRewardType(dealerGroupObject?.dealerGroupId, selectedPage ));
   }, [dispatch, dealerGroupObject, selectedPage]);
-
-  // useEffect(() => {
-  //   setRewardTypeList(rewardType?.Data)
-  // }, [rewardType]);
-
 
   const handleSelected = (selectedPage) => {
     setSelectPage(selectedPage)

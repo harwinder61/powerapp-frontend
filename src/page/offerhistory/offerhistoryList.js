@@ -13,7 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the coupon list
+ * Component for dispaly the offer history list
  * @param {*} props 
  * @returns 
  */
@@ -29,9 +29,6 @@ const OfferhistoryList = (props) => {
   
   })
 
-
-
-  //const coupon = useSelector(({ coupon }) => coupon.coupon);
   const offerhistory = useSelector(({ offerhistory }) => offerhistory.offerhistory);
 
   const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);

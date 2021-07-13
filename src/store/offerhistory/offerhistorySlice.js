@@ -62,7 +62,6 @@ export const updateOfferhistory = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/offerhistorys")
 			}
-			// dispatch(getofferhistory())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))

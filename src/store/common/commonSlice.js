@@ -3,6 +3,8 @@ import commonService from '../../services/commonService';
 import { loadingStatus } from '../global/globalSlice';
 import { toast } from 'react-toastify';
 
+
+
 export const getrewardlist = (fieldName) => async dispatch => {
 	return commonService
 		.getRewardList(fieldName)

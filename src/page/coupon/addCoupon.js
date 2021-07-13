@@ -12,6 +12,11 @@ import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
+/**
+ * Component for add coupon
+ * @param {*} props 
+ * @returns 
+ */
 
 const AddCoupon = (props) => {
     const { match: { params } } = props

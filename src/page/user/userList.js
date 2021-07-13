@@ -8,23 +8,14 @@ import { loadingStatus } from "../../store/global/globalSlice"
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationComponent from "react-reactstrap-pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { userTypeList } from "../../utils/constant"
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the coupon list
+ * Component for dispaly the user list
  * @param {*} props 
  * @returns 
  */
-
-const userTypeList =[{
-  FieldDescription: "Internal",
-  optionName: "Internal",
-},{
-  FieldDescription: "External",
-  optionName: "External",
-}]
-
 
 const UserList = (props) => {
   const [userList, setUserList] = useState([])
@@ -40,10 +31,6 @@ const UserList = (props) => {
 
   const dispatch = useDispatch();
   const user = useSelector(({ user }) => user.user);
-
-//   useEffect(() => {
-//     dispatch(getrewardlist("reward_type"));
-// }, [dispatch]);
 
   useEffect(() => {
     dispatch(loadingStatus(true));

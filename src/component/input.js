@@ -1,5 +1,11 @@
 import { AvField } from 'availity-reactstrap-validation';
 
+/**
+ * Define input component
+ * @param {*} param0 
+ * @returns html
+ */
+
 const InputText = ({ name, value, type, required, option, disabled, optionName, optionValue, placeholder  }) => {
     if (type === "text")
         return (

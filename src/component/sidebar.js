@@ -8,7 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authLogout } from "../store/auth/authSlice"
 import { useHistory } from "react-router"
 
-
+/**
+ * Define side menu component
+ * @returns html
+ */
 const SideBar = () => {
 	const dispatch = useDispatch();
 	const auth = useSelector(({ auth }) => auth);
@@ -41,8 +44,6 @@ const SideBar = () => {
 				{auth?.roleNmuber === 1 && <> <li className="li-bold"><Link to="/user">Users</Link></li>
 				<li className="li-bold"><Link to="/setting">Setting</Link></li>
 				<li className="li-bold"><Link to="/consumer-wallet">Consumer Wallet</Link></li>
-				<li className="li-bold"><Link to="/add-coupon-wallet">Add Coupon wallet</Link></li>		
-				
 				</>}
 				
 

@@ -16,7 +16,6 @@ import Header from "../../component/header";
  */
 const MembershipList = (props) => {
 
-  // const variable decare
   const [search, setSearch] = useState("")
   const [membershipList, setMemberShipList] = useState([])
   const dispatch = useDispatch();

@@ -12,6 +12,11 @@ import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
+/**
+ * Component for add reward transaction history
+ * @param {*} props 
+ * @returns 
+ */
 
 const AddRewardTransactionHistory = (props) => {
     let history = useHistory()

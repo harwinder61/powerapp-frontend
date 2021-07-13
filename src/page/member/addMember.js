@@ -14,7 +14,13 @@ import InputButton from "../../component/button"
 import Header from "../../component/header";
 import { delearGroupType } from "../../utils/constant"
 
-const AddMemberShip = (props) => {
+/**
+ * Component for add member
+ * @param {*} props 
+ * @returns 
+ */
+
+const AddMember = (props) => {
     const { match: { params } } = props
     let history = useHistory()
     const dispatch = useDispatch();
@@ -135,4 +141,4 @@ const AddMemberShip = (props) => {
     )
 }
 
-export default AddMemberShip
+export default AddMember

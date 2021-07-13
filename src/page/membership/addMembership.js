@@ -13,6 +13,11 @@ import InputButton from "../../component/button"
 import Header from "../../component/header";
 
 
+/**
+ * Component for add member ship
+ * @param {*} props 
+ * @returns 
+ */
 
 const AddMemberShip = (props) => {
     const { match: { params } } = props
@@ -54,7 +59,6 @@ const AddMemberShip = (props) => {
     }
 
     useEffect(() => {
-        // const discount_unit = dispatch(getrewardlist("discount_unit"));
         if (memberId) {
             dispatch(getmemberShipById(Number.parseInt(memberId)));
         } else {

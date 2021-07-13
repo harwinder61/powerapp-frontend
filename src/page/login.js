@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authLogin } from "../store/auth/authSlice"
 import { useHistory } from "react-router"
 
+/**
+ * Component for login
+ * @returns 
+ */
 const Login = () => {
 	let history = useHistory()
 	const dispatch = useDispatch();

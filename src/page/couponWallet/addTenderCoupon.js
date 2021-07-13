@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
@@ -11,14 +11,18 @@ import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
+/**
+ * Component for add tender coupon
+ * @param {*} props 
+ * @returns 
+ */
+
 const AddTenderCoupon = (props) => {
-    const { match: { params } } = props
     let history = useHistory()
     const dispatch = useDispatch();
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     const loading = useSelector(({ global }) => global.loading);
-    // const [memberId] = React.useState(params?.id);
     const memberDetail = {};
    
 
@@ -28,7 +32,7 @@ const AddTenderCoupon = (props) => {
         dispatch(loadingStatus(true));
         
             dispatch(addtendercoupon({
-                "walletId": 0,
+                "walletId": values?.walletId,
                 "dealGroupID": dealerGroupObject?.dealerGroupId,
                 "dealerNumber": values?.DealerNumber,
                 "couponCodeId": 0,
@@ -42,12 +46,6 @@ const AddTenderCoupon = (props) => {
         
     }
 
-    // useEffect(() => {
-    //     if (memberId) {
-    //         dispatch(getuserById(Number.parseInt(memberId)));
-    //     }
-    // }, [dispatch, memberId]);
-
 
     return (
         <>
@@ -60,6 +58,13 @@ const AddTenderCoupon = (props) => {
                     <Row className="table-row-outer">
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
+
+                                <FormGroup row>
+                                    <Label for="walletId" sm={2}>* Wallet Id</Label>
+                                    <Col sm={10}>
+                                        <InputText name="walletId" value={memberDetail?.walletId} type="text" required/>
+                                    </Col>
+                                </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="DealerNumber" sm={2}>Dealer Number</Label>

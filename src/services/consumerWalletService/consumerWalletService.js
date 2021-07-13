@@ -39,32 +39,7 @@ class ConsumerWalletService {
 			.post(`${process.env.REACT_APP_API}api/couponwallet/add-coupon-to-wallet`, param)
 	}
 
-	// getUserById = (UserID) => {
-	// 	const url = `${process.env.REACT_APP_API}api/users/get-user-by-userid?UserID=${UserID}`;
-	// 	return axios
-	// 		.get(url)
-
-	// };
-
-	// getUserByEmail = (Email) => {
-	// 	const url = `${process.env.REACT_APP_API}api/users/get-user-by-email?Email=${Email}`;
-	// 	return axios
-	// 		.get(url)
-
-	// };
-
-
-	// addUser = (param) => {
-	// 	return axios
-	// 		.post(`${process.env.REACT_APP_API}api/users/add-user`, param)
-	// }
-
-	// updateUser = (param) => {
-	// 	return axios
-	// 		.post(`${process.env.REACT_APP_API}api/users/update-user`, param)
-	// }
-
-
+	
 }
 
 const instance = new ConsumerWalletService();

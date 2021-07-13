@@ -13,6 +13,11 @@ import Header from "../../component/header";
 import { delearGroupType } from "../../utils/constant"
 import { userRoleList } from "../../utils/constant"
 
+/**
+ * Component for Add User
+ * @param {*} props 
+ * @returns 
+ */
 const AddUser = (props) => {
     const { match: { params } } = props
     let history = useHistory()

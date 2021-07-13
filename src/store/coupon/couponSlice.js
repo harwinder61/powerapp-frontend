@@ -43,7 +43,6 @@ export const addCoupon = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/coupons")
 			}
-			// dispatch(getcoupon())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))
@@ -61,7 +60,6 @@ export const updateCoupon = (param, history) => async dispatch => {
 				toast.info(res.data.Message)
 				history.push("/coupons")
 			}
-			// dispatch(getcoupon())
 		})
 		.catch(error => {
 			dispatch(loadingStatus(false))

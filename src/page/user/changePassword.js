@@ -11,6 +11,12 @@ import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
 
+/**
+ * Component for change password
+ * @param {*} props 
+ * @returns 
+ */
+
 const ChangePassword = (props) => {
     const { match: { params } } = props
     let history = useHistory()

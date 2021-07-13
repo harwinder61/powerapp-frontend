@@ -12,7 +12,7 @@ import { getrewardlist } from "../../store/common/commonSlice"
 import Header from "../../component/header";
 
 /**
- * Component for dispaly the coupon list
+ * Component for dispaly the reward transaction history
  * @param {*} props 
  * @returns 
  */

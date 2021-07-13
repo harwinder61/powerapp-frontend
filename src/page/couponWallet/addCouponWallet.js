@@ -13,15 +13,18 @@ import Header from "../../component/header";
 
 import moment from 'moment';
 
+/**
+ * Component for add coupon wallet
+ * @param {*} props 
+ * @returns 
+ */
 
 const AddCouponWallet = (props) => {
-    // const { match: { params } } = props
     let history = useHistory()
     const dispatch = useDispatch();
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     const loading = useSelector(({ global }) => global.loading);
-    // const [memberId] = React.useState(params?.id);
     const memberDetail = {};
    
 
@@ -49,13 +52,6 @@ const AddCouponWallet = (props) => {
         
     }
 
-    // useEffect(() => {
-    //     if (memberId) {
-    //         dispatch(getuserById(Number.parseInt(memberId)));
-    //     }
-    // }, [dispatch, memberId]);
-
-
     return (
         <>
             <div className=" dashboard-container w-100">
@@ -69,74 +65,75 @@ const AddCouponWallet = (props) => {
                             <AvForm onValidSubmit={handleValidSubmit} >
 
                                 <FormGroup row>
-                                    <Label for="DealerNumber" sm={2}>Dealer Number</Label>
+                                    <Label for="CouponCodeId" sm={2}>* Coupon / Voucher Code</Label>
                                     <Col sm={10}>
-                                        <InputText name="DealerNumber" value={memberDetail?.DealerNumber} type="text" />
-                                    </Col>
-                                </FormGroup>
-<FormGroup row>
-                                    <Label for="CouponCodeId" sm={2}>Coupon Code Id</Label>
-                                    <Col sm={10}>
-                                        <InputText name="CouponCodeId" value={memberDetail?.CouponCodeId} type="text" />
-                                    </Col>
-                                </FormGroup>
-
-
-                                <FormGroup row>
-                                    <Label for="SocialMediaId" sm={2}>* Social Media Id</Label>
-                                    <Col sm={10}>
-                                        <InputText name="SocialMediaId" value={memberDetail?.SocialMediaId} type="text" required/>
-                                    </Col>
-                                </FormGroup>
-
-
-
-                                <FormGroup row>
-                                    <Label for="PhoneNumber" sm={2}>* Phone Number</Label>
-                                    <Col sm={10}>
-                                        <InputText name="PhoneNumber" value={memberDetail?.PhoneNumber} type="text" required/>
+                                        <InputText name="CouponCodeId" value={memberDetail?.CouponCodeId} type="text" required/>
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="Vin" sm={2}>* Vin</Label>
+                                    <Label for="DealerNumber" sm={2}>* Dealer Number</Label>
                                     <Col sm={10}>
-                                        <InputText name="Vin" value={memberDetail?.Vin} type="text" required/>
+                                        <InputText name="DealerNumber" value={memberDetail?.DealerNumber} type="text" required  />
+                                    </Col>
+                                </FormGroup>
+                                
+
+                                <FormGroup row>
+                                    <Label for="SocialMediaId" sm={2}> Social Media Id</Label>
+                                    <Col sm={10}>
+                                        <InputText name="SocialMediaId" value={memberDetail?.SocialMediaId} type="text" />
+                                    </Col>
+                                </FormGroup>
+
+
+
+                                <FormGroup row>
+                                    <Label for="PhoneNumber" sm={2}> Phone Number</Label>
+                                    <Col sm={10}>
+                                        <InputText name="PhoneNumber" value={memberDetail?.PhoneNumber} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="Title" sm={2}>* Title</Label>
+                                    <Label for="Vin" sm={2}> Vin</Label>
                                     <Col sm={10}>
-                                        <InputText name="Title" value={memberDetail?.Title} type="yext" required />
+                                        <InputText name="Vin" value={memberDetail?.Vin} type="text" />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="FirstName" sm={2}>* First Name</Label>
+                                    <Label for="Title" sm={2}>Title</Label>
                                     <Col sm={10}>
-                                        <InputText name="FirstName" placeholder="First Name" value={memberDetail?.FirstName} required />
+                                        <InputText name="Title" value={memberDetail?.Title} type="text"  />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="MiddleName" sm={2}>* Middle Name</Label>
+                                    <Label for="FirstName" sm={2}> First Name</Label>
                                     <Col sm={10}>
-                                        <InputText name="MiddleName" placeholder="First Name" value={memberDetail?.MiddleName} required />
+                                        <InputText name="FirstName" placeholder="First Name" value={memberDetail?.FirstName}  />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="LastName" sm={2}>* Last Name</Label>
+                                    <Label for="MiddleName" sm={2}> Middle Name</Label>
                                     <Col sm={10}>
-                                        <InputText name="LastName" placeholder="First Name" value={memberDetail?.LastName} required />
+                                        <InputText name="MiddleName" placeholder="First Name" value={memberDetail?.MiddleName}  />
                                     </Col>
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="IssueDate" sm={2}>Issue Date</Label>
+                                    <Label for="LastName" sm={2}> Last Name</Label>
                                     <Col sm={10}>
-                                        <InputText name="IssueDate" type="date" />
+                                        <InputText name="LastName" placeholder="First Name" value={memberDetail?.LastName}  />
+                                    </Col>
+                                </FormGroup>
+
+                                <FormGroup row>
+                                    <Label for="IssueDate" sm={2}>* Issue Date</Label>
+                                    <Col sm={10}>
+                                        <InputText name="IssueDate" type="date" required />
                                     </Col>
                                 </FormGroup>
                                 
