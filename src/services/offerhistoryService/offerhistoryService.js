@@ -4,7 +4,7 @@ class offerhistoryService {
 	sdk = { auth0Manage: null };
 
 	getOfferhistoryList = async (fieldName, selectedPage, searchText) => {
-		let url = `${process.env.REACT_APP_API}api/coupon/get-coupon-transactions?dealGroupID=${fieldName}&page=${selectedPage}&CouponCode=${searchText?.CouponCode?.value}`;
+		let url = `${process.env.REACT_APP_API}api/coupon/get-coupon-transactions?dealGroupID=${searchText?.dealGroupID?.value ? searchText?.dealGroupID?.value : fieldName}&page=${selectedPage}&CouponCode=${searchText?.CouponCode?.value}`;
 		if(searchText?.CustomerID?.value !== "") {
 			 url = url.concat(`&CustomerID=${Number.parseInt(searchText?.CustomerID?.value)}`)
 		}

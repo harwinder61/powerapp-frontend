@@ -77,7 +77,7 @@ const CouponWallet = (props) => {
               <tbody>
                 {searchObject &&
                    <tr className="default-tr" >
-                      <td><span>{ `${consumerWalletList[0]?.FirstName} ${consumerWalletList[0]?.LastName}` }</span></td>
+                      <td><span>{consumerWalletList.length > 0 ? `${consumerWalletList[0]?.FirstName} ${consumerWalletList[0]?.LastName}` : '' }</span></td>
                       <td><span>{searchObject.CustomerId || "N/A"}</span></td>
                       <td><span>{searchObject.SocialMediaId}</span></td>
                       <td><span>{searchObject.PhoneNumber? searchObject.PhoneNumber : "N/A"}</span></td>

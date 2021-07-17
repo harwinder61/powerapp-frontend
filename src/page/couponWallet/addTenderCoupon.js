@@ -34,14 +34,14 @@ const AddTenderCoupon = (props) => {
         dispatch(loadingStatus(true));
         
             dispatch(addtendercoupon({
-                "walletId": values?.WalletId,
+                "walletId": tenderCouponDetail?.WalletId,
                 "dealGroupID": dealerGroupObject?.dealerGroupId,
-                "dealerNumber": values?.DealerNumber,
+                "dealerNumber": tenderCouponDetail?.DealerNumber,
                 "couponCodeId": tenderCouponDetail?.CouponCodeId,
                 "customerId": tenderCouponDetail?.CustomerId,
-                "socialMediaId": values?.SocialMediaId,
-                "phoneNumber": values?.PhoneNumber,
-                "vin": values?.Vin,
+                "socialMediaId": tenderCouponDetail?.SocialMediaId,
+                "phoneNumber": tenderCouponDetail?.PhoneNumber,
+                "vin": tenderCouponDetail?.Vin,
                 "transactionAmount":values?.TransactionAmount,
                 "operationalType": values?.OperationalType
             }, history));
@@ -66,42 +66,6 @@ const AddTenderCoupon = (props) => {
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
 
-                                <FormGroup row>
-                                    <Label for="WalletId" sm={2}>* Wallet Id</Label>
-                                    <Col sm={10}>
-                                        <InputText name="WalletId" value={tenderCouponDetail?.WalletId} disabled type="text" required/>
-                                    </Col>
-                                </FormGroup>
-
-                                <FormGroup row>
-                                    <Label for="DealerNumber" sm={2}>* Dealer Number</Label>
-                                    <Col sm={10}>
-                                        <InputText name="DealerNumber" value={tenderCouponDetail?.DealerNumber} disabled type="text" required/>
-                                    </Col>
-                                </FormGroup>
-
-                                <FormGroup row>
-                                    <Label for="SocialMediaId" sm={2}> Social Media Id</Label>
-                                    <Col sm={10}>
-                                        <InputText name="SocialMediaId" value={tenderCouponDetail?.SocialMediaId} type="text" />
-                                    </Col>
-                                </FormGroup>
-
-
-
-                                <FormGroup row>
-                                    <Label for="PhoneNumber" sm={2}>Phone Number</Label>
-                                    <Col sm={10}>
-                                        <InputText name="PhoneNumber" value={tenderCouponDetail?.PhoneNumber} type="text"/>
-                                    </Col>
-                                </FormGroup>
-
-                                <FormGroup row>
-                                    <Label for="Vin" sm={2}>* Vin</Label>
-                                    <Col sm={10}>
-                                        <InputText name="Vin" value={tenderCouponDetail?.Vin} type="text" disabled required/>
-                                    </Col>
-                                </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="TransactionAmount" sm={2}>* Transaction Amount</Label>

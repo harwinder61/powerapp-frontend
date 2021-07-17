@@ -11,6 +11,8 @@ import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
+import { delearGroupType } from "../../utils/constant"
+
 
 /**
  * Component for add coupon
@@ -41,7 +43,7 @@ const AddCoupon = (props) => {
                 "couponRecommendations": values?.couponRecommedations,
                 "EffectiveFromDate": values?.effectiveFrom,
                 "effectiveToDate": values?.effectiveto,
-                "dealGroupID": dealerGroupObject?.dealerGroupId ? dealerGroupObject?.dealerGroupId :  couponDetail?.DealGroupID,
+                "dealGroupID": values?.dealGroupID,
                 "dealerNumber": 'DLR0001',
                 "imageLocation": values?.imageLocation
             }, history));
@@ -54,7 +56,7 @@ const AddCoupon = (props) => {
                 "couponRecommendations": values?.couponRecommedations,
                 "EffectiveFromDate": values?.effectiveFrom,
                 "effectiveToDate": values?.effectiveto,
-                "dealGroupID": dealerGroupObject?.dealerGroupId ? dealerGroupObject?.dealerGroupId :  1,
+                "dealGroupID": values?.dealGroupID,
                 "dealerNumber": 'DLR0001',
                 "imageLocation": values?.imageLocation
             }, history));
@@ -116,11 +118,13 @@ const AddCoupon = (props) => {
                                 </FormGroup>
 
                                 <FormGroup row>
-                                    <Label for="name" sm={2}>* Dealer Group</Label>
+                                    <Label for="name" sm={2}>* Dealer Number</Label>
                                     <Col sm={10}>
-                                        <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
+                                    <InputText name="dealGroupID" value={dealerGroupObject?.dealerGroupId} isDealer type="select" option={delearGroupType} />
+                                    
+                                        {/* <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
                                         <InputText name="DealerNumber" value={couponDetail?.DealGroupID} type="hidden" />
-                                        <InputText name="dealerGroup" value={couponDetail?.DealGroupID} type="hidden" />
+                                        <InputText name="dealerGroup" value={couponDetail?.DealGroupID} type="hidden" /> */}
                                     </Col>
                                 </FormGroup>
 

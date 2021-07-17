@@ -9,7 +9,7 @@ import PaginationComponent from "react-reactstrap-pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "../../component/header";
-
+import { delearGroupType } from "../../utils/constant"
 /**
  * Component for dispaly the offer history list
  * @param {*} props 
@@ -22,6 +22,7 @@ const OfferhistoryList = (props) => {
   const [searchObject, setSearchObject] = useState({
     CouponCode: {type: "text", placeholder: "Coupon Code", value: "", },
     CustomerID: {type: "text", placeholder: "CustomerID", value: "", },
+    dealGroupID: {type: "select", placeholder: "Dealer Group", value: "", option: delearGroupType, optionKey: "name", optionName: "value" },
     "TransactionFromDate": {type: "date", placeholder: "Transaction From Date", value: "" },
     "TransactionToDate": {type: "date", placeholder: "Transaction To Date", value: "" },
   
