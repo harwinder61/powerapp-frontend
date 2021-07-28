@@ -4,14 +4,13 @@ import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCoupon, getcouponById, updateCoupon } from "../../store/coupon/couponSlice"
-import { getrewardlist } from "../../store/common/commonSlice"
+import { getrewardlist, getDealerInfolist } from "../../store/common/commonSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
-import { delearGroupType } from "../../utils/constant"
 
 
 /**
@@ -27,8 +26,9 @@ const AddCoupon = (props) => {
     const loading = useSelector(({ global }) => global.loading);
     const [couponId] = React.useState(params?.id);
     const couponDetail = useSelector(({ coupon }) => coupon.couponDetail);
-    const commonDetail = useSelector(({ common }) => common.commonDetail);
+    const dealerInfoList = useSelector(({ common }) => common.dealerInfoList);
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
+    const commonDetail = useSelector(({ common }) => common.commonDetail);
 
 
     const handleValidSubmit = (event, values) => {
@@ -43,8 +43,8 @@ const AddCoupon = (props) => {
                 "couponRecommendations": values?.couponRecommedations,
                 "EffectiveFromDate": values?.effectiveFrom,
                 "effectiveToDate": values?.effectiveto,
-                "dealGroupID": values?.dealGroupID,
-                "dealerNumber": 'DLR0001',
+                "dealGroupID": dealerGroupObject?.dealerGroupId,
+                "dealerNumber": values?.DealerNumber,
                 "imageLocation": values?.imageLocation
             }, history));
         } else {
@@ -56,8 +56,8 @@ const AddCoupon = (props) => {
                 "couponRecommendations": values?.couponRecommedations,
                 "EffectiveFromDate": values?.effectiveFrom,
                 "effectiveToDate": values?.effectiveto,
-                "dealGroupID": values?.dealGroupID,
-                "dealerNumber": 'DLR0001',
+                "dealGroupID": dealerGroupObject?.dealerGroupId,
+                "dealerNumber": values?.DealerNumber,
                 "imageLocation": values?.imageLocation
             }, history));
         }
@@ -66,8 +66,6 @@ const AddCoupon = (props) => {
     useEffect(() => {
         if (couponId) {
             dispatch(getcouponById(Number.parseInt(couponId)));
-        } else {
-            dispatch(getcouponById(""));
         }
     }, [dispatch, couponId]);
 
@@ -75,6 +73,12 @@ const AddCoupon = (props) => {
         dispatch(getrewardlist("reward_type"));
 
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getDealerInfolist(dealerGroupObject?.dealerGroupId));
+
+    }, [dispatch, dealerGroupObject]);
+
 
     return (
         <>
@@ -116,11 +120,20 @@ const AddCoupon = (props) => {
                                         <InputText name="couponTermsCondituins" value={couponDetail?.CouponTermsConditions} type="text" />
                                     </Col>
                                 </FormGroup>
+{/* 
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>* Dealer Group Name</Label>
+                                    <Col sm={10}>
+                                    <InputText name="dealGroupID" value={dealerGroupObject?.dealerGroupName} disabled  />
+                                    
+                                    </Col>
+                                </FormGroup> */}
+
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Dealer Number</Label>
                                     <Col sm={10}>
-                                    <InputText name="dealGroupID" value={dealerGroupObject?.dealerGroupId} isDealer type="select" option={delearGroupType} />
+                                    <InputText name="DealerNumber" value={couponDetail?.DealerId} type="select" option={dealerInfoList?.Data} isDealer optionValue="DealerNumber" optionName="DealerName" />
                                     
                                         {/* <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
                                         <InputText name="DealerNumber" value={couponDetail?.DealGroupID} type="hidden" />

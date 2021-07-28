@@ -105,6 +105,7 @@ const initialState = {
 	consumerWallet: null,
 	consumerSpecificWallet: null,
 	searchObject: null,
+	couponDataObject: null,
 	tenderCouponResult: null,
 	dealerList:[]
 };
@@ -134,6 +135,10 @@ const consumerWalletSlice = createSlice({
 			state.success = true;
 			state.searchObject = action.payload
 		},
+		setAddCouponObject: (state, action) => {
+			state.success = true;
+			state.couponDataObject = action.payload
+		},
 		setTenderCouponResult: (state, action) => {
 			state.success = true;
 			state.tenderCouponResult = action.payload
@@ -147,6 +152,6 @@ const consumerWalletSlice = createSlice({
 	extraReducers: {}
 });
 
-export const { consumerWalletSuccess, consumerWalletError, consumerSpecificWalletSuccess, consumerSpecificWalletError, setSearchObject, setTenderCouponResult, setDealerObject } = consumerWalletSlice.actions;
+export const { consumerWalletSuccess, consumerWalletError, consumerSpecificWalletSuccess, setAddCouponObject, consumerSpecificWalletError, setSearchObject, setTenderCouponResult, setDealerObject } = consumerWalletSlice.actions;
 
 export default consumerWalletSlice.reducer;

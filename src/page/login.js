@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import sitelogo from '../Logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, FormGroup, Label, Col } from 'reactstrap';
@@ -6,6 +6,8 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { authLogin } from "../store/auth/authSlice"
+import { loadingStatus } from '../store/global/globalSlice';
+
 import { useHistory } from "react-router"
 
 /**
@@ -19,6 +21,8 @@ const Login = () => {
 
 
 	const handleSubmit = (event, values) => {
+		dispatch(loadingStatus(true));
+
 		dispatch(authLogin({
 			"username": values.email,
 			"password": values.password,
@@ -26,6 +30,10 @@ const Login = () => {
 			"refresh_token": process.env.REACT_APP_REFRESH_TOKEN
 		}, history));
 	}
+	// useEffect(() => {
+	// 	dispatch(loadingStatus(false));
+	//   }, [dispatch]);
+
 	return (
 		<>
 			<div className="container col-md-5">

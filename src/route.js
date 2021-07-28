@@ -103,7 +103,7 @@ const Routers = () => {
             >
             </LoadingOverlay>
 
-            <Router basename="/powerapp">
+            <Router>
                 <Switch>
                     <Route exact path="/" component={RequireAuthLogin(Login)} />
                     <Route exact component={DefaultContainer} />

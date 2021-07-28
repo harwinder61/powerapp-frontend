@@ -9,8 +9,12 @@ class CommonService {
 			.get(url)
 
 	};
+	getDealerInfoList = (DealGroupID) => {
+		const url = `${process.env.REACT_APP_API}api/dealer/get-dealer-info-all?DealGroupID=${DealGroupID}`;
+		return axios
+			.get(url)
 
-
+	};
 }
 
 const instance = new CommonService();

@@ -63,6 +63,17 @@ const handleSearchFunction = async (e) => {
       }
     }));
   }
+  const dataObject = {
+    FirstName: '',
+    MiddleName: '', 
+    LastName: '',
+    Title:  '', 
+    Vin:  '',
+    PhoneNumber:  '',
+    SocialMediaId: '',
+    CouponCodeId: '',
+    DealerNumber: ''
+  }
 
   return (
     <>
@@ -70,15 +81,17 @@ const handleSearchFunction = async (e) => {
       <div className=" dashboard-container w-100">
         <Container fluid={true}>
           <Header
-            showAddBuuton={true}
             headerLabel="Customer Wallet"
             handleSubmit={handleSubmit}
             searchObject={searchObject}
             handleSearch={(e) =>
               handleSearchFunction(e)
             }
+            showAddBuuton={false}
+            showAddButonDisptach
+            dataObject={dataObject}
             path="/add-coupon-wallet"
-            pathName="Add Coupon Wallet"
+            pathName="Add Coupon to Wallet"
           />
           <Row className="table-row-outer">
             <Col>
@@ -99,7 +112,7 @@ const handleSearchFunction = async (e) => {
                 {consumerWallet?.Status ? consumerWalletList?.map((iteam, index) => (
                    <tr key={index} className="default-tr" 
                    >
-                      <td><span>{iteam.CustomerId ? `${iteam.FirstName} ${iteam.LastName}` : "N/A"}</span></td>
+                      <td><span>{`${iteam.FirstName} ${iteam.LastName}` }</span></td>
                       <td><span>{iteam.CustomerId || "N/A"}</span></td>
                       <td><span>{iteam.SocialMediaId}</span></td>
                       <td><span>{iteam.PhoneNumber? iteam.PhoneNumber : "N/A"}</span></td>

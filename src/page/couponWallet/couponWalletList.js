@@ -48,6 +48,18 @@ const CouponWallet = (props) => {
     setSelectPage(selectedPage)
   }
 
+  const dataObject = {
+    FirstName: consumerWalletList?.length > 0 ? consumerWalletList[0]?.FirstName  :'',
+    MiddleName : consumerWalletList?.length > 0 ? consumerWalletList[0]?.MiddleName : '', 
+    LastName: consumerWalletList?.length > 0 ?  consumerWalletList[0]?.LastName : '',
+    Title: searchObject?.Title || '', 
+    Vin: searchObject?.Vin || '',
+    PhoneNumber: searchObject?.PhoneNumber || '',
+    SocialMediaId: searchObject.SocialMediaId || '',
+    CouponCodeId: '',
+    DealerNumber: ''
+  }
+
   return (
     <>
 
@@ -60,6 +72,10 @@ const CouponWallet = (props) => {
             handleSubmit={handleSubmit}
             searchObject={searchObject}
             showAddBuuton={false}
+            showAddButonDisptach
+            dataObject={dataObject}
+            path="/add-coupon-wallet"
+            pathName="Add Coupon to Wallet"
            />
           <Row className="table-row-outer">
             <Col>
@@ -77,7 +93,7 @@ const CouponWallet = (props) => {
               <tbody>
                 {searchObject &&
                    <tr className="default-tr" >
-                      <td><span>{consumerWalletList.length > 0 ? `${consumerWalletList[0]?.FirstName} ${consumerWalletList[0]?.LastName}` : '' }</span></td>
+                      <td><span>{consumerWalletList?.length > 0 ? `${consumerWalletList[0]?.FirstName} ${consumerWalletList[0]?.LastName}` : '' }</span></td>
                       <td><span>{searchObject.CustomerId || "N/A"}</span></td>
                       <td><span>{searchObject.SocialMediaId}</span></td>
                       <td><span>{searchObject.PhoneNumber? searchObject.PhoneNumber : "N/A"}</span></td>
@@ -103,7 +119,7 @@ const CouponWallet = (props) => {
                     <th>Effective From</th>
                     <th>Effective   To</th>
                     <th>Dealer Name</th>
-                    <th>Action</th>
+                    <th>Tender</th>
                   </tr>
                 </thead>
                 

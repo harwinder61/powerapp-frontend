@@ -4,13 +4,13 @@ class CouponService {
 	sdk = { auth0Manage: null };
 
 	getCouponList = (dealGroupID, selectedPage, searchObject, sortObject) => {
-		let url = `${process.env.REACT_APP_API}api/coupon/get-coupons?DealGroupID=${dealGroupID}&page=${selectedPage}&CouponDescription=${searchObject?.CouponDescription.value}&RewardType=${searchObject?.RewardType.value}&DealerNumber=${searchObject?.DealerNumber.value}&SortColumn=${sortObject?.SortColumn}&SortDirection=${sortObject?.SortDirection ? "asc" : "desc"}`;
+		let url = `${process.env.REACT_APP_API}api/coupon/get-coupons?DealGroupID=${dealGroupID}&page=${selectedPage}&CouponDescription=${searchObject?.CouponDescription?.value || ''}&RewardType=${searchObject?.RewardType?.value || ''}&DealerNumber=${searchObject?.DealerNumber?.value || ''}&SortColumn=${sortObject?.SortColumn}&SortDirection=${sortObject?.SortDirection ? "asc" : "desc"}`;
 		if(searchObject?.EffectiveFromDate?.value !== "") {
-			url = url.concat(`&EffectiveFromDate=${searchObject?.EffectiveFromDate?.value}`)
+			url = url.concat(`&EffectiveFromDate=${searchObject?.EffectiveFromDate?.value || ''}`)
 			   }
 	
 			if(searchObject?.EffectiveToDate?.value !== "") {
-			url = url.concat(`&EffectiveToDate=${searchObject?.EffectiveToDate?.value}`)
+			url = url.concat(`&EffectiveToDate=${searchObject?.EffectiveToDate?.value || ''}`)
 				}
 		return axios
 			.get(url)

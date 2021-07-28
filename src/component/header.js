@@ -1,21 +1,23 @@
 import { Row, Col, Input } from 'reactstrap';
 import InputButton from "./button"
 import { useHistory } from "react-router"
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setAddCouponObject } from "../store/consumerWallet/consumerWalletSlice"
 /**
  * Define header component
  * @param {*} param0 
  * @returns html
  */
-const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName, showAddBuuton }) => {
+const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enableSearch, disabledSearch, showId, searchObject, showDealerName, showAddBuuton, showAddButonDisptach, dataObject }) => {
     let history = useHistory()
+    const dispatch = useDispatch();
+
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     return (
         <>
             <Row>
-                <Col className="text-right py-2 main-header">Aclaro PowerApp</Col>
+                <Col className="text-right py-2 main-header">SAM Coupons</Col>
             </Row>
             {enableSearch ? (
                 <div className="buttons-row">
@@ -76,6 +78,13 @@ const Header = ({ pathName, path, handleSubmit, handleSearch, headerLabel, enabl
                                 name={pathName}
                                 onClick={() => history.push(path)}
                             />}
+                            {showAddButonDisptach &&  <InputButton className="temp_button"
+                                type="button"
+                                name={pathName}
+                                onClick={() => {
+                                    dispatch( setAddCouponObject(dataObject))
+                                    history.push(path)}}
+                            />}
                         </Col>
 
                     </Row>
@@ -105,7 +114,9 @@ Header.defaultProps = {
     showId: null,
     searchObject: {},
     showDealerName: true,
-    showAddBuuton: true
+    showAddBuuton: true,
+    showAddButonDisptach: false,
+    dataObject: null
 }
 
 export default Header

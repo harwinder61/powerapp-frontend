@@ -15,7 +15,7 @@ const InputText = ({ name, value, type, required, option, disabled, optionName, 
         <AvField id={name} name={name} value={value} type={type} required={required} disabled={disabled} >
             <option key={0} value="">Select {placeholder}</option>
             {option?.map((iteam) => (
-                <option key={optionValue !== "" ? iteam[optionValue] : iteam.value} value={optionValue !== "" ? iteam[optionValue] : iteam.value}>{optionValue !== "" ? iteam[optionName] : `${iteam.name} ${isDealer ? `(${iteam.value})` : '' }`}</option>
+                <option key={optionValue !== "" ? iteam[optionValue] : iteam.value} value={optionValue !== "" ? iteam[optionValue] : iteam.value}>{optionValue !== "" ? `${iteam[optionName]} ${isDealer ? `(${iteam[optionValue]})` :''}` : `${iteam.name} ${isDealer ? `(${iteam.value})` : '' }`}</option>
             ))}
         </AvField>
     )

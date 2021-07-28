@@ -4,14 +4,13 @@ import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOfferhistory } from "../../store/offerhistory/offerhistorySlice"
-import { getrewardlist } from "../../store/common/commonSlice"
+import { getrewardlist, getDealerInfolist } from "../../store/common/commonSlice"
 import { loadingStatus } from "../../store/global/globalSlice"
 import moment from 'moment';
 import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
-import { delearGroupType } from "../../utils/constant"
 
 /**
  * Component for add coupon transaction
@@ -28,14 +27,22 @@ const AddCoupontransaction = (props) => {
     const [addOfferhistoryId] = React.useState(params?.id);
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
     const commonDetail = useSelector(({ common }) => common.commonDetail);
+    const dealerInfoList = useSelector(({ common }) => common.dealerInfoList);
 
+    useEffect(() => {
+        dispatch(getDealerInfolist(dealerGroupObject?.dealerGroupId));
+
+    }, [dispatch, dealerGroupObject]);
+
+
+    
     const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
             dispatch(addOfferhistory({
 
 
-                "dealGroupID": values?.DealerNumber ,
-                "dealerNumber": "DLR0001",
+                "dealGroupID": values?.dealGroupID ,
+                "dealerNumber": values?.DealerNumber,
                 "couponCode": values?.couponCode,
                 "legacyCustomerNumber": values?.legacyCustomerNumber,
                 "customerID": values?.customerID,
@@ -88,16 +95,17 @@ const AddCoupontransaction = (props) => {
                                 </FormGroup>
 
                                 {/* <FormGroup row>
-                                    <Label for="name" sm={2}>* Dealer Group</Label>
+                                    <Label for="name" sm={2}>* Dealer Group Name</Label>
                                     <Col sm={10}>
-                                        <InputText name="dealerGroup" value={dealerGroupObject?.dealerGroupName} disabled type="text" required />
+                                    <InputText name="dealGroupID" value={dealerGroupObject?.dealerGroupName} disabled  />
                                     </Col>
                                 </FormGroup> */}
+
 
                                 <FormGroup row>
                                     <Label for="name" sm={2}>* Dealer Number</Label>
                                     <Col sm={10}>
-                                    <InputText name="DealerNumber" value={dealerGroupObject?.dealerGroupId} isDealer type="select" option={delearGroupType} />
+                                    <InputText name="DealerNumber" value={dealerGroupObject?.dealerGroupId} type="select" option={dealerInfoList?.Data} isDealer optionValue="DealerNumber" optionName="DealerName" />
                                     
                                         {/* <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
                                         <InputText name="DealerNumber" value={couponDetail?.DealGroupID} type="hidden" />

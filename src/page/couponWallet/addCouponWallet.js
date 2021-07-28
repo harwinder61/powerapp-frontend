@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormGroup, Label, Container, Row, Col } from 'reactstrap';
 import { AvForm } from 'availity-reactstrap-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import {  addCouponWallet } from "../../store/consumerWallet/consumerWalletSlice";
 import { loadingStatus } from "../../store/global/globalSlice";
+import { getDealerInfolist } from "../../store/common/commonSlice"
 
 import { useHistory } from "react-router"
 import InputText from "../../component/input"
 import InputButton from "../../component/button"
 import Header from "../../component/header";
+import { getcoupon } from "../../store/coupon/couponSlice"
 
 import moment from 'moment';
 
@@ -25,14 +27,25 @@ const AddCouponWallet = (props) => {
     const dealerGroupObject = useSelector(({ common }) => common.dealerGroup);
 
     const loading = useSelector(({ global }) => global.loading);
-    const memberDetail = {};
-   
+    const memberDetail = useSelector(({ consumerWallet }) => consumerWallet.couponDataObject);;
+    const dealerInfoList = useSelector(({ common }) => common.dealerInfoList);
+    const coupon = useSelector(({ coupon }) => coupon.coupon);
 
+    useEffect(() => {
+        dispatch(getDealerInfolist(dealerGroupObject?.dealerGroupId));
+
+    }, [dispatch, dealerGroupObject]);
+
+    useEffect(() => {
+        if(dealerInfoList?.Data[0]?.DealerNumber !== "") {
+        dispatch(getcoupon(dealerGroupObject?.dealerGroupId,1, {"DealerNumber": {type: "text", placeholder: "Dealer Number", value: dealerInfoList?.Data[0]?.DealerNumber, }}    ));
+    }
+
+    }, [dispatch, dealerGroupObject, dealerInfoList]);
 
 
     const handleValidSubmit = (event, values) => {
         dispatch(loadingStatus(true));
-        
             dispatch(addCouponWallet({
             
                 "dealGroupID": dealerGroupObject?.dealerGroupId,
@@ -63,21 +76,27 @@ const AddCouponWallet = (props) => {
                     <Row className="table-row-outer">
                         <Col>
                             <AvForm onValidSubmit={handleValidSubmit} >
+                            <FormGroup row>
+                                    <Label for="name" sm={2}>* Dealer Number</Label>
+                                    <Col sm={10}>
+                                    <InputText name="DealerNumber" required type="select" option={dealerInfoList?.Data} isDealer optionValue="DealerNumber" optionName="DealerName" />
+                                    
+                                        {/* <InputText name="dealerGrouplabel" value={dealerGroupObject?.dealerGroupName} disabled type="text" />
+                                        <InputText name="DealerNumber" value={couponDetail?.DealGroupID} type="hidden" />
+                                        <InputText name="dealerGroup" value={couponDetail?.DealGroupID} type="hidden" /> */}
+                                    </Col>
+                                </FormGroup>
 
                                 <FormGroup row>
                                     <Label for="CouponCodeId" sm={2}>* Coupon / Voucher Code</Label>
                                     <Col sm={10}>
-                                        <InputText name="CouponCodeId" value={memberDetail?.CouponCodeId} type="text" required/>
+                                        <InputText name="DealerNumber" required type="select" option={coupon?.Data?.Items}  optionValue="CouponCode" optionName="CouponCode" />
+                                    
+                                        {/* <InputText name="CouponCodeId" value={memberDetail?.CouponCodeId} type="text" required/> */}
                                     </Col>
                                 </FormGroup>
 
-                                <FormGroup row>
-                                    <Label for="DealerNumber" sm={2}>* Dealer Number</Label>
-                                    <Col sm={10}>
-                                        <InputText name="DealerNumber" value={memberDetail?.DealerNumber} type="text" required  />
-                                    </Col>
-                                </FormGroup>
-                                
+                               
 
                                 <FormGroup row>
                                     <Label for="SocialMediaId" sm={2}> Social Media Id</Label>

@@ -54,12 +54,27 @@ export const updateDealerGroupState = (groupId, name) => async dispatch => {
 	}));
 };
 
+export const getDealerInfolist = (DealGroupID) => async dispatch => {
+	return commonService
+		.getDealerInfoList(DealGroupID)
+		.then(res => {
+			dispatch(loadingStatus(false))
+			return dispatch(dealerInfoListSuccess(res?.data));
+		})
+		.catch(error => {
+			dispatch(loadingStatus(false))
+			return dispatch(dealerInfoListError(error));
+		});
+};
+
+
 const initialState = {
 	success: false,
 	common: null,
 	commonDetail: null,
 	rewardType: null,
 	operationType: null,
+	dealerInfoList: null,
 	dealerGroup: {
 		dealerGroupId: 3,
 		dealerGroupName: "Jones Group"
@@ -87,7 +102,14 @@ const commonSlice = createSlice({
 			state.success = false;
 			state.commonDetail = null;
 		},
-
+		dealerInfoListSuccess: (state, action) => {
+			state.success = true;
+			state.dealerInfoList = action.payload
+		},
+		dealerInfoListError: (state, action) => {
+			state.success = false;
+			state.dealerInfoList = null;
+		},
 		rewardTypeSuccess: (state, action) => {
 			state.success = true;
 			state.rewardType = action.payload
@@ -114,6 +136,6 @@ const commonSlice = createSlice({
 	extraReducers: {}
 });
 
-export const { commonSuccess, commonError, commonDetailSuccess, commonDetailError, rewardTypeSuccess, rewardTypeError, operationTypeSuccess, operationTypeError, dealerGroupSuccess } = commonSlice.actions;
+export const { commonSuccess, commonError, commonDetailSuccess, dealerInfoListSuccess,dealerInfoListError, commonDetailError, rewardTypeSuccess, rewardTypeError, operationTypeSuccess, operationTypeError, dealerGroupSuccess } = commonSlice.actions;
 
 export default commonSlice.reducer;
